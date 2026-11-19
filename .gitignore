@@ -12,3 +12,14 @@ out/
 # Logs and OS files
 *.log
 .DS_Store
+
+# Build / test artifacts
+*.tsbuildinfo
+next-env.d.ts
+test-results/
+playwright-report/
+
+# Local tooling
+.claude/
+.pw-browsers/
+.pw-profile/
