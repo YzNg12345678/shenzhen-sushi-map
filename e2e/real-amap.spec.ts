@@ -2,8 +2,42 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 
-const SHOTS = process.env.SHOT_DIR ?? "docs/screenshots";
+const SHOTS = process.env.SHOT_DIR ?? "artifacts/screenshots";
+const REPORT_DIR = process.env.REPORT_DIR ?? "artifacts/report";
 fs.mkdirSync(SHOTS, { recursive: true });
+fs.mkdirSync(REPORT_DIR, { recursive: true });
+
+// 控制台/页面错误采集：产品错误必须为 0；第三方（高德等）可预期噪音单独归类并写入报告，不隐藏。
+type Diag = { test: string; kind: string; text: string; url: string; class: "product" | "third-party" };
+const diags: Diag[] = [];
+const THIRD_PARTY = /(amap\.com|autonavi\.com|alicdn\.com|alipay)/i;
+// 第三方 URL 的查询串（含 auth_key 等）一律脱敏后再入报告。
+const redact = (t: string) => t.replace(/\?[^\s"']*/g, "?[REDACTED]");
+function watch(page: Page, testName: string, expectedAbort = false) {
+  const push = (kind: string, text: string, url: string) => {
+    const third = THIRD_PARTY.test(url) || THIRD_PARTY.test(text);
+    diags.push({ test: testName, kind, text: redact(text).slice(0, 300), url: redact(url), class: third ? "third-party" : "product" });
+  };
+  page.on("pageerror", (e) => push("pageerror", e.message, page.url()));
+  page.on("console", (m) => {
+    if (m.type() === "error") push("console.error", m.text(), m.location().url || page.url());
+  });
+  page.on("requestfailed", (r) => {
+    if (expectedAbort && THIRD_PARTY.test(r.url())) return; // 故意中断的高德请求
+    push("requestfailed", `${r.failure()?.errorText ?? ""} ${r.url()}`, r.url());
+  });
+}
+const productErrors = (testName: string) => diags.filter((d) => d.test === testName && d.class === "product");
+test.afterAll(() => {
+  const summary = {
+    generatedAt: new Date().toISOString(),
+    total: diags.length,
+    product: diags.filter((d) => d.class === "product").length,
+    thirdParty: diags.filter((d) => d.class === "third-party").length,
+    entries: diags,
+  };
+  fs.writeFileSync(path.join(REPORT_DIR, "console-errors.json"), JSON.stringify(summary, null, 2));
+});
 const shot = (page: Page, name: string) => page.screenshot({ path: path.join(SHOTS, `${name}.png`), fullPage: false });
 // 顶部导航链接：品牌链接“深圳寿司地图”也含“寿司地图”，必须限定在主导航内并精确匹配。
 const nav = (page: Page, name: string) => page.getByRole("navigation", { name: "主导航" }).getByRole("link", { name, exact: true });
@@ -35,8 +69,7 @@ async function assertCardFacts(cards: Locator): Promise<number> {
 }
 
 test("真实高德：选店→详情→护照→刷新→导出→清空→导入", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("pageerror", (e) => errors.push(e.message));
+  watch(page, "main-flow");
 
   // 1. 首页 + 地图 + 真实检索
   await page.goto("/");
@@ -114,6 +147,10 @@ test("真实高德：选店→详情→护照→刷新→导出→清空→导�
   await page.getByRole("button", { name: "☆ 收藏" }).click();
   await page.getByRole("button", { name: "标记去过" }).click();
   await page.getByLabel("复访意愿").selectOption("yes");
+  await page.reload();
+  await expect(page.getByRole("heading", { level: 1, name: firstName, exact: true })).toBeVisible();
+  await expect(page.getByLabel("流派", { exact: true })).toHaveValue("测试流派");
+  await expect(page.getByLabel("复访意愿")).toHaveValue("yes");
   await shot(page, "04-shop-detail");
 
   // 5. 护照
@@ -199,10 +236,11 @@ test("真实高德：选店→详情→护照→刷新→导出→清空→导�
   await nav(page, "寿司地图").click();
   await waitPois(page);
 
-  expect(errors).toEqual([]);
+  expect(productErrors("main-flow")).toEqual([]);
 });
 
 test("地图加载失败可恢复且不白屏", async ({ page }) => {
+  watch(page, "error-state", true);
   await page.route("https://webapi.amap.com/**", (r) => r.abort());
   await page.goto("/map");
   await expect(page.getByRole("heading", { name: "深圳寿司地图" })).toBeVisible();
@@ -216,8 +254,7 @@ test.describe("移动端截图", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 
   test("首页/推荐/地图/详情", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
+    watch(page, "mobile-flow");
     const toggle = async (name: "列表" | "地图") => {
       await page.getByRole("group", { name: "手机端视图切换" }).getByRole("button", { name: new RegExp(`^${name}`) }).click();
     };
@@ -248,6 +285,6 @@ test.describe("移动端截图", () => {
     await expect(page.getByRole("heading", { level: 1, name, exact: true })).toBeVisible();
     await shot(page, "mobile-04-detail");
 
-    expect(errors).toEqual([]);
+    expect(productErrors("mobile-flow")).toEqual([]);
   });
 });

@@ -56,7 +56,7 @@ pnpm exec playwright install chromium   # 首次
 E2E_BASE_URL=http://127.0.0.1:3417 pnpm e2e
 ```
 
-覆盖：首页加载、创建地图、真实检索深圳寿司店、场景推荐、详情、写入护照、刷新保留、导出、坏文件导入被拒、二次确认清空、导入恢复。截图写入 `docs/screenshots/`（不含凭据）。
+覆盖：首页加载、创建地图、真实检索深圳寿司店、场景推荐、详情、写入护照、刷新保留、导出、坏文件导入被拒、二次确认清空、导入恢复。截图写入 `artifacts/screenshots/`（不含凭据）；console/page error 报告写入 `artifacts/report/console-errors.json`（URL 查询串已脱敏，产品错误须为 0）。
 
 ## 数据备份与恢复
 
@@ -70,3 +70,12 @@ E2E_BASE_URL=http://127.0.0.1:3417 pnpm e2e
 
 - `docs/mvp-plan.md`、`docs/source-review.md`：方案与来源审查
 - `docs/amap-config.md`：高德凭据配置
+
+## 隐私与已知限制
+
+- 个人数据只存在本机浏览器 localStorage，不上传任何服务；唯一外部请求是高德 JS API（地图与 POI 检索）。
+- 环境变量名：`NEXT_PUBLIC_AMAP_JS_KEY=<你的 JS Key>`、`NEXT_PUBLIC_AMAP_SECURITY_JS_CODE=<你的安全密钥>`；真实值只放 `.env.local`。
+- 因为 JS Key 会内联到前端，必须在高德控制台设置域名/来源白名单。
+- 店铺事实完全来自高德实时检索，检索上限内的结果可能不全；缺失字段显示“未知/待补充”。
+- 清缓存/换浏览器会丢失数据，请用“数据管理”定期导出。
+- E2E 依赖真实高德网络与额度；若端口 3417 已被占用，请用 `PORT` 与 `E2E_BASE_URL` 指定其他端口。
