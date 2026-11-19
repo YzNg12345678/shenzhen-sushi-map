@@ -89,6 +89,18 @@ export function writeReplace(storage: StorageLike, next: unknown, isClear: boole
   return { ok: true, data: checked.data };
 }
 
+/** 访问 localStorage 本身可能抛 SecurityError（如 Safari 禁用存储）；此时返回一个读写都失败的存储，由既有错误态呈现。 */
+function safeStorage(): Storage {
+  try {
+    return window.localStorage;
+  } catch {
+    const fail = () => {
+      throw new Error("浏览器禁止访问本地存储");
+    };
+    return { getItem: fail, setItem: fail, removeItem: fail, clear: fail, key: fail, length: 0 } as unknown as Storage;
+  }
+}
+
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<AppData>(emptyData);
   const [ready, setReady] = useState(false);
@@ -97,7 +109,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const lockedRef = useRef(false);
 
   useEffect(() => {
-    const l = loadFromStorage(localStorage);
+    const l = loadFromStorage(safeStorage());
     dataRef.current = l.data;
     lockedRef.current = l.locked;
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -109,14 +121,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const commit = useCallback((next: AppData) => {
     dataRef.current = next;
     setData(next);
-    const r = writeCommit(localStorage, next, lockedRef.current);
+    const r = writeCommit(safeStorage(), next, lockedRef.current);
     if (r.skipped) return;
     setPersistError(r.ok ? null : r.error);
   }, []);
 
   /** 整体替换：先写存储，失败则保持现有数据不变。 */
   const replace = useCallback((next: AppData, isClear = false): boolean => {
-    const r = writeReplace(localStorage, next, isClear, lockedRef.current);
+    const r = writeReplace(safeStorage(), next, isClear, lockedRef.current);
     if (!r.ok) {
       setPersistError(r.error);
       return false;

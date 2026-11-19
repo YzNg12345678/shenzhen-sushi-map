@@ -22,8 +22,11 @@ export default function Home() {
   const budgetRef = useRef<HTMLInputElement>(null);
   const sceneRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const budgetInvalid = scene === "budget" && !(budgetNum > 0);
+  const focusBudget = useRef(false);
   useEffect(() => {
-    if (scene === "budget") budgetRef.current?.focus();
+    // 仅鼠标/触屏点选“指定预算”时聚焦输入框；方向键切换时不抢焦点，以免无法继续选后面的场景。
+    if (scene === "budget" && focusBudget.current) budgetRef.current?.focus();
+    focusBudget.current = false;
   }, [scene]);
   const onSceneKey = (e: React.KeyboardEvent, i: number) => {
     const n = SCENES.length;
@@ -70,7 +73,7 @@ export default function Home() {
               aria-checked={scene === s.id}
               tabIndex={scene === s.id || (scene === null && i === 0) ? 0 : -1}
               onKeyDown={(e) => onSceneKey(e, i)}
-              onClick={() => setScene(s.id)}
+              onClick={() => { focusBudget.current = true; setScene(s.id); }}
             >
               <strong>{s.label}</strong>
               <span>{s.hint}</span>

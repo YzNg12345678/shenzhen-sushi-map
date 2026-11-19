@@ -96,7 +96,20 @@ export default function DataPage() {
         {!confirmClear ? (
           <button ref={clearBtn} className="btn btn-danger" onClick={() => { setClearErr(""); setConfirmClear(true); }}>清空所有个人数据…</button>
         ) : (
-          <div role="alertdialog" aria-label="确认清空" className="confirm">
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-label="确认清空"
+            className="confirm"
+            onKeyDown={(e) => {
+              if (e.key === "Escape") { setConfirmClear(false); return; }
+              if (e.key !== "Tab") return;
+              const btns = Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>("button"));
+              const first = btns[0], last = btns[btns.length - 1];
+              if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+              else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+            }}
+          >
             <p><strong>确定要清空吗？</strong>将删除 {summary(data)}。</p>
             <div className="actions">
               <button className="btn btn-danger" onClick={() => {

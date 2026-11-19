@@ -29,11 +29,12 @@ export default function MapPage() {
   };
 
   const districts = useMemo(() => [...new Set(pois.map((p) => p.district).filter((d): d is string => Boolean(d)))].sort(), [pois]);
+  const activeDistrict = districts.includes(district) ? district : "";
   const list = useMemo(() => {
     const cap = Number(maxCost);
     let l = pois.filter((p) => {
       const n = data.notes[p.id];
-      if (district && p.district !== district) return false;
+      if (activeDistrict && p.district !== activeDistrict) return false;
       if (cap > 0 && (p.cost === undefined || p.cost > cap)) return false;
       if (onlyFav && !n?.favorite) return false;
       if (onlyVisited && !n?.visited) return false;
@@ -42,7 +43,7 @@ export default function MapPage() {
     if (sort === "rating") l = [...l].sort((a, b) => (b.rating ?? -1) - (a.rating ?? -1));
     if (sort === "cost") l = [...l].sort((a, b) => (a.cost ?? Infinity) - (b.cost ?? Infinity));
     return l;
-  }, [pois, district, maxCost, onlyFav, onlyVisited, sort, data.notes]);
+  }, [pois, activeDistrict, maxCost, onlyFav, onlyVisited, sort, data.notes]);
 
   return (
     <div className="page">
@@ -65,7 +66,7 @@ export default function MapPage() {
       <div className="filters filters-local" role="group" aria-label="本地筛选（不重新检索）">
         <div className="field">
           <label htmlFor="district">区域</label>
-          <select id="district" value={district} onChange={(e) => setDistrict(e.target.value)}>
+          <select id="district" value={activeDistrict} onChange={(e) => setDistrict(e.target.value)}>
             <option value="">全部区域</option>
             {districts.map((d) => <option key={d}>{d}</option>)}
           </select>

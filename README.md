@@ -56,7 +56,7 @@ pnpm exec playwright install chromium   # 首次
 E2E_BASE_URL=http://127.0.0.1:3417 pnpm e2e
 ```
 
-覆盖：首页加载、创建地图、真实检索深圳寿司店、场景推荐、详情、写入护照、刷新保留、导出、坏文件导入被拒、二次确认清空、导入恢复。截图写入 `artifacts/screenshots/`（不含凭据）；console/page error 报告写入 `artifacts/report/console-errors.json`（URL 查询串已脱敏，产品错误须为 0）。
+3 个场景：主流程、地图脚本失败与重试恢复、移动端。覆盖：首页加载、创建地图、真实检索深圳寿司店、场景推荐、详情、写入护照、刷新保留、导出、坏文件导入被拒、二次确认清空、导入恢复。截图写入 `artifacts/screenshots/`（不含凭据）；console/page error 报告写入 `artifacts/report/console-errors.json`（URL 查询串已脱敏，产品错误须为 0）。
 
 ## 数据备份与恢复
 

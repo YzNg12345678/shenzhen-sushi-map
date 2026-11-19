@@ -8,7 +8,7 @@ fs.mkdirSync(SHOTS, { recursive: true });
 fs.mkdirSync(REPORT_DIR, { recursive: true });
 
 // 控制台/页面错误采集：产品错误必须为 0；第三方（高德等）可预期噪音单独归类并写入报告，不隐藏。
-type Diag = { test: string; kind: string; text: string; url: string; class: "product" | "third-party" };
+type Diag = { test: string; kind: string; text: string; url: string; class: "product" | "third-party" | "navigation-abort" | "third-party-unexpected" };
 const diags: Diag[] = [];
 const THIRD_PARTY = /(amap\.com|autonavi\.com|alicdn\.com|alipay)/i;
 // 第三方 URL 的查询串（含 auth_key 等）一律脱敏后再入报告。
@@ -16,24 +16,32 @@ const redact = (t: string) => t.replace(/\?[^\s"']*/g, "?[REDACTED]");
 function watch(page: Page, testName: string, expectedAbort = false) {
   const push = (kind: string, text: string, url: string) => {
     const third = THIRD_PARTY.test(url) || THIRD_PARTY.test(text);
-    diags.push({ test: testName, kind, text: redact(text).slice(0, 300), url: redact(url), class: third ? "third-party" : "product" });
+    // 仅“高德瓦片请求被浏览器取消（ERR_ABORTED，地图平移/缩放时的正常现象）”算可预期噪音；其余第三方错误按未预期处理并使测试失败。
+    // ERR_ABORTED 是浏览器主动取消（页面跳转/地图平移时的在途请求、预取），不是服务端或代码错误；单独归类 navigation-abort，不计入产品错误。
+    const aborted = kind === "requestfailed" && /ERR_ABORTED/.test(text);
+    const cls = aborted ? "navigation-abort" : !third ? "product" : "third-party-unexpected";
+    diags.push({ test: testName, kind, text: redact(text).slice(0, 300), url: redact(url), class: cls });
   };
   page.on("pageerror", (e) => push("pageerror", e.message, page.url()));
   page.on("console", (m) => {
-    if (m.type() === "error") push("console.error", m.text(), m.location().url || page.url());
+    if (m.type() === "error" && !(expectedAbort && /ERR_FAILED/.test(m.text()))) push("console.error", m.text(), m.location().url || page.url());
+  });
+  page.on("response", (r) => {
+    if (r.status() >= 400) push("http-" + r.status(), `${r.request().method()} ${r.url()}`, r.url());
   });
   page.on("requestfailed", (r) => {
-    if (expectedAbort && THIRD_PARTY.test(r.url())) return; // 故意中断的高德请求
+    if (expectedAbort && /webapi\.amap\.com\/maps/.test(r.url())) return; // 本测试故意拦截的高德脚本请求
     push("requestfailed", `${r.failure()?.errorText ?? ""} ${r.url()}`, r.url());
   });
 }
-const productErrors = (testName: string) => diags.filter((d) => d.test === testName && d.class === "product");
+const productErrors = (testName: string) => diags.filter((d) => d.test === testName && d.class !== "navigation-abort");
 test.afterAll(() => {
   const summary = {
     generatedAt: new Date().toISOString(),
     total: diags.length,
     product: diags.filter((d) => d.class === "product").length,
-    thirdParty: diags.filter((d) => d.class === "third-party").length,
+    thirdPartyUnexpected: diags.filter((d) => d.class === "third-party-unexpected").length,
+    navigationAbort: diags.filter((d) => d.class === "navigation-abort").length,
     entries: diags,
   };
   fs.writeFileSync(path.join(REPORT_DIR, "console-errors.json"), JSON.stringify(summary, null, 2));
@@ -151,6 +159,13 @@ test("真实高德：选店→详情→护照→刷新→导出→清空→导�
   await expect(page.getByRole("heading", { level: 1, name: firstName, exact: true })).toBeVisible();
   await expect(page.getByLabel("流派", { exact: true })).toHaveValue("测试流派");
   await expect(page.getByLabel("复访意愿")).toHaveValue("yes");
+  await expect(page.getByRole("button", { name: "★ 已收藏" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: "✓ 去过" })).toHaveAttribute("aria-pressed", "true");
+  await page.getByLabel("私人备注").fill("E2E 私人笔记");
+  await page.reload();
+  await expect(page.getByLabel("私人备注")).toHaveValue("E2E 私人笔记");
+  await expect(page.getByTestId("pin").first()).toBeAttached({ timeout: 30_000 });
+  await page.waitForTimeout(4000); // 等底图瓦片绘制完成再截图
   await shot(page, "04-shop-detail");
 
   // 5. 护照
@@ -209,6 +224,10 @@ test("真实高德：选店→详情→护照→刷新→导出→清空→导�
   const exported = JSON.parse(fs.readFileSync(file, "utf8"));
   expect(exported.schemaVersion).toBe(1);
   expect(exported.checkins).toHaveLength(1);
+  expect(JSON.stringify(exported)).toContain("E2E 私人笔记");
+  // 导出文件不得含凭据特征
+  const rawExport = fs.readFileSync(file, "utf8");
+  expect(rawExport).not.toMatch(/[0-9a-f]{32}|securityJsCode|[?&]key=/i);
   await shot(page, "08-data");
 
   const bad = path.join(process.env.TMPDIR ?? "/tmp", "sushi-bad-e2e.json");
@@ -247,6 +266,14 @@ test("地图加载失败可恢复且不白屏", async ({ page }) => {
   await expect(page.getByRole("alert").filter({ hasText: /无法加载高德地图脚本/ }).first()).toBeVisible({ timeout: 30_000 });
   await expect(page.getByRole("button", { name: "重试加载地图" })).toBeVisible();
   await expect(page.getByRole("button", { name: "重新检索" })).toBeVisible();
+  // 恢复：放开拦截后点击重试，地图与检索结果应恢复（真实高德）
+  await page.unroute("https://webapi.amap.com/**");
+  await page.getByRole("button", { name: "重试加载地图" }).click();
+  const research = page.getByRole("button", { name: "重新检索" });
+  if (await research.isVisible()) await research.click();
+  await waitPois(page);
+  await expect(page.getByTestId("pin").first()).toBeAttached({ timeout: 30_000 });
+  expect(productErrors("error-state")).toEqual([]);
 });
 
 // 移动端 390x844：稳定文件名 mobile-01..04。<=900px 有列表/地图切换，未激活的面板隐藏，截图地图前须点“地图”。
@@ -274,6 +301,8 @@ test.describe("移动端截图", () => {
     await waitPois(page);
     await toggle("地图");
     await expect(page.getByTestId("pin").first()).toBeAttached({ timeout: 30_000 });
+    await page.locator(".map-canvas").scrollIntoViewIfNeeded();
+    await page.waitForTimeout(3000);
     await shot(page, "mobile-03-map");
 
     await toggle("列表");
@@ -284,6 +313,24 @@ test.describe("移动端截图", () => {
     await firstCard(page).getByRole("link", { name: "详情与补充" }).click();
     await expect(page.getByRole("heading", { level: 1, name, exact: true })).toBeVisible();
     await shot(page, "mobile-04-detail");
+    await page.getByRole("button", { name: "☆ 收藏" }).click();
+    await page.reload();
+    await expect(page.getByRole("button", { name: "★ 已收藏" })).toBeVisible();
+    for (const route of ["/", "/map", "/passport", "/data", "/season", "/compare"]) {
+      await page.goto(route);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      expect(overflow, `${route} 横向溢出`).toBeLessThanOrEqual(1);
+    }
+    await page.goto("/data");
+    await shot(page, "mobile-05-data");
+    // 移动端写一条打卡，截图个人记录路径
+    await page.goto("/passport");
+    await page.getByRole("button", { name: "新增打卡" }).click();
+    await page.getByLabel("店名", { exact: true }).fill(name);
+    await page.getByLabel("套餐/菜单", { exact: true }).fill("移动端套餐");
+    await page.getByRole("button", { name: "保存打卡" }).click();
+    await expect(page.getByTestId("checkin")).toHaveCount(1);
+    await shot(page, "mobile-06-passport");
 
     expect(productErrors("mobile-flow")).toEqual([]);
   });

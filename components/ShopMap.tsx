@@ -20,6 +20,7 @@ const pinHtml = (label: string, hl: boolean, sel: boolean) =>
 export default function ShopMap({ pois, selectedId, highlights, onSelect, height = 520 }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
+  const fitKey = useRef("");
   const markers = useRef<Map<string, { m: any; label: string; hl: boolean }>>(new Map());
   const selectedRef = useRef(selectedId);
   const onSelectRef = useRef(onSelect);
@@ -60,6 +61,7 @@ export default function ShopMap({ pois, selectedId, highlights, onSelect, height
     return () => {
       cancelled = true;
       markerMap.clear();
+      fitKey.current = "";
       if (mapRef.current) {
         mapRef.current.destroy();
         mapRef.current = null;
@@ -89,7 +91,12 @@ export default function ShopMap({ pois, selectedId, highlights, onSelect, height
       list.push(m);
     });
     map.add(list);
-    if (list.length) map.setFitView(list, false, [60, 60, 60, 60]);
+    // 仅在店铺集合变化时重新取景；收藏等备注变化不应打断用户的平移/缩放。
+    const idKey = pois.map((p) => p.id).join(",");
+    if (list.length && fitKey.current !== idKey) {
+      fitKey.current = idKey;
+      map.setFitView(list, false, [60, 60, 60, 60]);
+    }
   }, [pois, highlights, state]);
 
   useEffect(() => {

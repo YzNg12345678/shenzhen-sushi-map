@@ -17,6 +17,12 @@ export function amapConfigured(): boolean {
 }
 
 /** 加载高德 JS API 2.0。失败后可再次调用重试。 */
+const withTimeout = <T,>(p: Promise<T>, ms: number, msg: string): Promise<T> =>
+  new Promise<T>((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error(msg)), ms);
+    p.then((v) => { clearTimeout(t); resolve(v); }, (e) => { clearTimeout(t); reject(e); });
+  });
+
 export function loadAMap(): Promise<any> {
   if (typeof window === "undefined") return Promise.reject(new Error("仅限浏览器环境"));
   if (window.AMap?.PlaceSearch) return Promise.resolve(window.AMap);
@@ -25,7 +31,7 @@ export function loadAMap(): Promise<any> {
   }
   if (loading) return loading;
   window._AMapSecurityConfig = { securityJsCode: process.env.NEXT_PUBLIC_AMAP_SECURITY_JS_CODE as string };
-  loading = new Promise((resolve, reject) => {
+  loading = withTimeout(new Promise<any>((resolve, reject) => {
     const script = document.createElement("script");
     script.src = `https://webapi.amap.com/maps?v=2.0&key=${encodeURIComponent(
       process.env.NEXT_PUBLIC_AMAP_JS_KEY as string,
@@ -37,7 +43,7 @@ export function loadAMap(): Promise<any> {
     };
     script.onerror = () => reject(new Error("无法加载高德地图脚本，请检查网络。"));
     document.head.appendChild(script);
-  }).catch((e) => {
+  }), 20_000, "加载高德地图脚本超时，请检查网络后重试。").catch((e) => {
     loading = null;
     document.querySelectorAll('script[src^="https://webapi.amap.com/maps"]').forEach((n) => n.remove());
     throw e;
@@ -94,14 +100,14 @@ function placeSearch(AMap: any, pageSize: number) {
 }
 
 function runPage(ps: any, keyword: string, page: number): Promise<{ pois: any[]; total: number }> {
-  return new Promise((resolve, reject) => {
+  return withTimeout(new Promise<{ pois: any[]; total: number }>((resolve, reject) => {
     ps.setPageIndex(page);
     ps.search(keyword, (status: string, result: any) => {
       if (status === "complete" && result?.poiList) resolve({ pois: result.poiList.pois ?? [], total: result.poiList.count ?? 0 });
       else if (status === "no_data") resolve({ pois: [], total: 0 });
       else reject(new Error(`高德 POI 搜索失败（${status}：${typeof result === "string" ? result : result?.info ?? "未知原因"}）。`));
     });
-  });
+  }), 20_000, "高德 POI 搜索超时，请重试。");
 }
 
 /** 实时检索深圳寿司店 POI（最多 3 页，每页 25 条），按 id 去重。 */
