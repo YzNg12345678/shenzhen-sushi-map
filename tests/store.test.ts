@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { STORAGE_KEY, loadFromStorage, writeCommit, writeReplace } from "@/lib/store";
+import { LEGACY_KEY, STORAGE_KEY, loadFromStorage, writeCommit, writeReplace } from "@/lib/store";
 import { emptyData } from "@/lib/types";
 
 function mem(init: Record<string, string> = {}, failSet: boolean | ((k: string) => boolean) = false) {
@@ -25,8 +25,8 @@ describe("loadFromStorage", () => {
     expect(r.locked).toBe(false);
   });
   it("有效数据被读取", () => {
-    const d = { ...emptyData(), compare: ["a"] };
-    expect(loadFromStorage(mem({ [STORAGE_KEY]: JSON.stringify(d) })).data.compare).toEqual(["a"]);
+    const d = { ...emptyData(), shops: { a: { favorite: true, visited: false, note: "x" } } };
+    expect(loadFromStorage(mem({ [STORAGE_KEY]: JSON.stringify(d) })).data.shops.a.note).toBe("x");
   });
   it("损坏数据：另存副本、原键保持不变、报错", () => {
     const s = mem({ [STORAGE_KEY]: "{broken" });
@@ -49,22 +49,30 @@ describe("loadFromStorage", () => {
     expect(r.error).toBeTruthy();
   });
   it("版本不符视为损坏而非静默迁移", () => {
-    const s = mem({ [STORAGE_KEY]: JSON.stringify({ schemaVersion: 2 }) });
+    const s = mem({ [STORAGE_KEY]: JSON.stringify({ schemaVersion: 3 }) });
     expect(loadFromStorage(s).error).toContain("schemaVersion");
+  });
+  it("新键不存在时迁移旧版数据，且不改动旧键", () => {
+    const legacy = JSON.stringify({ schemaVersion: 1, notes: { p1: { favorite: true, visited: false, privateNote: "旧备注" } } });
+    const s = mem({ [LEGACY_KEY]: legacy });
+    const r = loadFromStorage(s);
+    expect(r.data.shops["amap:p1"]).toEqual({ favorite: true, visited: false, note: "旧备注" });
+    expect(s.m.get(LEGACY_KEY)).toBe(legacy);
+    expect(s.m.has(STORAGE_KEY)).toBe(false);
   });
 });
 
 describe("writeReplace", () => {
   const BK = `${STORAGE_KEY}:before-replace`;
-  const oldData = JSON.stringify({ ...emptyData(), compare: ["old"] });
-  const next = { ...emptyData(), compare: ["new"] };
+  const oldData = JSON.stringify({ ...emptyData(), shops: { old: { favorite: true, visited: false, note: "" } } });
+  const next = { ...emptyData(), shops: { new: { favorite: true, visited: false, note: "" } } };
 
   it("成功：备份旧数据并写入新数据", () => {
     const s = mem({ [STORAGE_KEY]: oldData });
     const r = writeReplace(s, next, false, false);
     expect(r.ok).toBe(true);
     expect(s.m.get(BK)).toBe(oldData);
-    expect(JSON.parse(s.m.get(STORAGE_KEY)!).compare).toEqual(["new"]);
+    expect(Object.keys(JSON.parse(s.m.get(STORAGE_KEY)!).shops)).toEqual(["new"]);
   });
   it("成功：空存储无备份也能写入", () => {
     const s = mem();
@@ -81,7 +89,7 @@ describe("writeReplace", () => {
   });
   it("非法导入：拒绝且已存数据逐字节不变", () => {
     const s = mem({ [STORAGE_KEY]: oldData });
-    for (const bad of [null, "x", {}, { schemaVersion: 2 }, { ...emptyData(), compare: "nope" }]) {
+    for (const bad of [null, "x", {}, { schemaVersion: 3 }, { ...emptyData(), shops: "nope" }]) {
       const r = writeReplace(s, bad, false, false);
       expect(r.ok).toBe(false);
     }
@@ -125,7 +133,7 @@ describe("writeReplace", () => {
   });
   it("返回的是校验后的数据", () => {
     const r = writeReplace(mem(), next, false, false);
-    expect(r.ok && r.data.compare).toEqual(["new"]);
+    expect(r.ok && Object.keys(r.data.shops)).toEqual(["new"]);
   });
 });
 

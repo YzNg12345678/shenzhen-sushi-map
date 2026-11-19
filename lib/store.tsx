@@ -1,19 +1,19 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { searchSushi } from "./amap";
-import { appDataSchema, emptyData, emptyNote, parseBackup, type AppData, type Checkin, type Poi, type ShopNote } from "./types";
+import { catalog } from "./catalog";
+import { searchOmakase } from "./amap";
+import { appDataSchema, emptyData, parseBackup, type AppData, type Poi, type ShopState } from "./types";
 
-export const STORAGE_KEY = "shenzhen-sushi-map:v1";
+export const STORAGE_KEY = "shenzhen-omakase-map:v2";
+/** 旧版“深圳寿司地图”的存储键：仅在新键不存在时读取并迁移，不删除。 */
+export const LEGACY_KEY = "shenzhen-sushi-map:v1";
 
 interface Store {
   ready: boolean;
   data: AppData;
-  notes: (id: string) => ShopNote;
-  patchNote: (poi: Poi, patch: Partial<ShopNote>) => void;
-  saveCheckin: (c: Checkin, poi?: Poi) => void;
-  deleteCheckin: (id: string) => void;
-  toggleCompare: (poi: Poi) => { ok: boolean; message?: string };
+  /** base 为当前界面看到的状态（可能来自旧键回退），保证写入新键时不丢字段。 */
+  patch: (key: string, base: ShopState, patch: Partial<ShopState>) => void;
   replaceAll: (d: AppData) => boolean;
   clearAll: () => boolean;
   persistError: string | null;
@@ -36,7 +36,16 @@ export function loadFromStorage(storage: Pick<Storage, "getItem" | "setItem">): 
   } catch {
     return { data: emptyData(), error: "无法读取浏览器本地存储，本次修改不会被保存。", locked: true };
   }
-  if (!text) return { data: emptyData(), error: null, locked: false };
+  if (!text) {
+    try {
+      const legacy = storage.getItem(LEGACY_KEY);
+      const m = legacy ? parseBackup(legacy) : null;
+      if (m?.ok) return { data: m.data, error: null, locked: false };
+    } catch {
+      /* 旧数据不可读：按空数据启动 */
+    }
+    return { data: emptyData(), error: null, locked: false };
+  }
   const r = parseBackup(text);
   if (r.ok) return { data: r.data, error: null, locked: false };
   try {
@@ -139,42 +148,20 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return true;
   }, []);
 
-  const value = useMemo<Store>(() => {
-    const withPoi = (d: AppData, poi?: Poi): AppData => (poi ? { ...d, pois: { ...d.pois, [poi.id]: poi } } : d);
-    return {
+  const value = useMemo<Store>(
+    () => ({
       ready,
       data,
       persistError,
-      notes: (id) => data.notes[id] ?? emptyNote(),
-      patchNote: (poi, patch) => {
+      patch: (key, base, patch) => {
         const d = dataRef.current;
-        const cur = d.notes[poi.id] ?? emptyNote();
-        commit(withPoi({ ...d, notes: { ...d.notes, [poi.id]: { ...cur, ...patch } } }, poi));
-      },
-      saveCheckin: (c, poi) => {
-        const d = dataRef.current;
-        const exists = d.checkins.some((x) => x.id === c.id);
-        const checkins = exists ? d.checkins.map((x) => (x.id === c.id ? c : x)) : [...d.checkins, c];
-        commit(withPoi({ ...d, checkins }, poi));
-      },
-      deleteCheckin: (id) => {
-        const d = dataRef.current;
-        commit({ ...d, checkins: d.checkins.filter((c) => c.id !== id) });
-      },
-      toggleCompare: (poi) => {
-        const d = dataRef.current;
-        if (d.compare.includes(poi.id)) {
-          commit({ ...d, compare: d.compare.filter((x) => x !== poi.id) });
-          return { ok: true };
-        }
-        if (d.compare.length >= 3) return { ok: false, message: "最多同时比较 3 家，请先移除一家。" };
-        commit(withPoi({ ...d, compare: [...d.compare, poi.id] }, poi));
-        return { ok: true };
+        commit({ ...d, shops: { ...d.shops, [key]: { ...base, ...patch } } });
       },
       replaceAll: (d) => replace(d),
       clearAll: () => replace(emptyData(), true),
-    };
-  }, [data, ready, persistError, commit, replace]);
+    }),
+    [data, ready, persistError, commit, replace],
+  );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
@@ -191,35 +178,35 @@ interface PoiState {
   status: "loading" | "ready" | "error";
   pois: Poi[];
   error: string | null;
-  keyword: string;
-  search: (keyword: string) => void;
+  /** 部分检索失败的数量（结果可能不完整）。 */
+  failed: number;
+  reload: () => void;
 }
 
 const PoiCtx = createContext<PoiState | null>(null);
 
 export function PoiProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<Omit<PoiState, "search">>({ status: "loading", pois: [], error: null, keyword: "" });
+  const [state, setState] = useState<Omit<PoiState, "reload">>({ status: "loading", pois: [], error: null, failed: 0 });
   const seq = useRef(0);
 
-  const search = useCallback((keyword: string) => {
+  const reload = useCallback(() => {
     const my = ++seq.current;
-    setState((s) => ({ ...s, status: "loading", error: null, keyword }));
-    searchSushi(keyword)
-      .then((pois) => {
-        if (my === seq.current) setState({ status: "ready", pois, error: null, keyword });
+    setState((s) => ({ ...s, status: "loading", error: null }));
+    searchOmakase(catalog.shops)
+      .then((r) => {
+        if (my === seq.current) setState({ status: "ready", pois: r.pois, error: null, failed: r.failed });
       })
       .catch((e: unknown) => {
-        if (my === seq.current)
-          setState((s) => ({ ...s, status: "error", error: e instanceof Error ? e.message : "检索失败" }));
+        if (my === seq.current) setState((s) => ({ ...s, status: "error", error: e instanceof Error ? e.message : "检索失败" }));
       });
   }, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    search("");
-  }, [search]);
+    reload();
+  }, [reload]);
 
-  const value = useMemo(() => ({ ...state, search }), [state, search]);
+  const value = useMemo(() => ({ ...state, reload }), [state, reload]);
   return <PoiCtx.Provider value={value}>{children}</PoiCtx.Provider>;
 }
 

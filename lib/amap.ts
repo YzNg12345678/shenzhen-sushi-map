@@ -1,3 +1,4 @@
+import { nameHasAny } from "./match";
 import type { Poi } from "./types";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -110,33 +111,61 @@ function runPage(ps: any, keyword: string, page: number): Promise<{ pois: any[];
   }), 20_000, "高德 POI 搜索超时，请重试。");
 }
 
-/** 实时检索深圳寿司店 POI（最多 3 页，每页 25 条），按 id 去重。 */
-export async function searchSushi(keyword: string): Promise<Poi[]> {
-  const AMap = await loadAMap();
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** 高德对并发有限流；失败时等一会儿重试一次。 */
+async function searchKeyword(AMap: any, keyword: string, pages: number): Promise<Poi[]> {
+  try {
+    return await searchKeywordOnce(AMap, keyword, pages);
+  } catch {
+    await sleep(800);
+    return searchKeywordOnce(AMap, keyword, pages);
+  }
+}
+
+async function searchKeywordOnce(AMap: any, keyword: string, pages: number): Promise<Poi[]> {
   const ps = placeSearch(AMap, 25);
-  const kw = keyword.trim();
-  const query = /寿司|鮨|鮓|sushi|omakase/i.test(kw) ? kw : kw ? `${kw} 寿司` : "寿司";
-  const seen = new Map<string, Poi>();
-  for (let page = 1; page <= 3; page++) {
-    const { pois, total } = await runPage(ps, query, page);
+  const out: Poi[] = [];
+  for (let page = 1; page <= pages; page++) {
+    const { pois, total } = await runPage(ps, keyword, page);
     for (const raw of pois) {
       const p = mapPoi(raw);
-      if (p && !seen.has(p.id)) seen.set(p.id, p);
+      if (p) out.push(p);
     }
     if (page * 25 >= total || pois.length < 25) break;
   }
-  return [...seen.values()];
+  return out;
 }
 
-/** 按 id 拉取单个 POI 详情。 */
-export async function fetchPoiById(id: string): Promise<Poi> {
+/** 通用发现：Omakase / 板前 / 鮨 关键词，只保留名称或类型像 Omakase / 寿司的店。 */
+export const DISCOVERY_QUERIES = ["Omakase", "板前寿司", "鮨"];
+export const looksLikeOmakase = (p: Poi): boolean =>
+  /omakase|板前|鮨|鮓|おまかせ|割烹|怀石/i.test(p.name);
+
+export interface SearchResult {
+  pois: Poi[];
+  /** 失败的检索数量（部分失败时仍返回已得到的结果）。 */
+  failed: number;
+}
+
+/**
+ * 实时检索：通用发现 + 为每家已整理门店按关键词检索（只保留名称含关键词的结果），按 id 去重。
+ * 全部失败才抛错，部分失败时返回已得到的结果并给出失败数。
+ */
+export async function searchOmakase(curated: { keywords: string[] }[]): Promise<SearchResult> {
   const AMap = await loadAMap();
-  const ps = placeSearch(AMap, 1);
-  return new Promise((resolve, reject) => {
-    ps.getDetails(id, (status: string, result: any) => {
-      const p = status === "complete" ? mapPoi(result?.poiList?.pois?.[0]) : null;
-      if (p) resolve(p);
-      else reject(new Error("高德未返回该店铺详情，请回到地图重新搜索。"));
-    });
-  });
+  const jobs = [
+    ...DISCOVERY_QUERIES.map((q) => () => searchKeyword(AMap, q, 2).then((l) => l.filter(looksLikeOmakase))),
+    ...curated.map((c) => () => searchKeyword(AMap, c.keywords[0], 1).then((l) => l.filter((p) => nameHasAny(p.name, c.keywords)))),
+  ];
+  const results: PromiseSettledResult<Poi[]>[] = [];
+  for (let i = 0; i < jobs.length; i += 3) results.push(...(await Promise.allSettled(jobs.slice(i, i + 3).map((j) => j()))));
+  const failed = results.filter((r) => r.status === "rejected").length;
+  if (failed === results.length) {
+    const first = results[0] as PromiseRejectedResult;
+    throw first.reason instanceof Error ? first.reason : new Error("高德检索失败");
+  }
+  const seen = new Map<string, Poi>();
+  for (const r of results) if (r.status === "fulfilled") for (const p of r.value) if (!seen.has(p.id)) seen.set(p.id, p);
+  return { pois: [...seen.values()], failed };
 }

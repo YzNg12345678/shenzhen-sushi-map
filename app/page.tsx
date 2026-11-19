@@ -1,135 +1,121 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import SettingsDialog from "@/components/SettingsDialog";
 import ShopCard from "@/components/ShopCard";
 import ShopMap from "@/components/ShopMap";
-import PoiStatus from "@/components/PoiStatus";
-import ViewToggle from "@/components/ViewToggle";
-import { useMobileView, useTitle } from "@/components/hooks";
-import { recommend, SCENES, type SceneId } from "@/lib/recommend";
+import ShopSheet from "@/components/ShopSheet";
+import { defaultFilters, buildShops, filterShops, stateOf, type Filters, type PriceBand } from "@/lib/shops";
+import { PORTS } from "@/lib/ports";
 import { usePois, useStore } from "@/lib/store";
 
 export default function Home() {
-  useTitle("今天怎么吃");
-  const { view, setView, showMapIfMobile } = useMobileView();
-  const { pois, status } = usePois();
-  const { data } = useStore();
-  const [scene, setScene] = useState<SceneId | null>(null);
-  const [budget, setBudget] = useState("");
+  const { pois, status, error, failed, reload } = usePois();
+  const { data, patch, replaceAll, clearAll, persistError } = useStore();
+  const [f, setF] = useState<Filters>(defaultFilters);
   const [selected, setSelected] = useState<string | null>(null);
-  const budgetNum = Number(budget);
-  const budgetRef = useRef<HTMLInputElement>(null);
-  const sceneRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const budgetInvalid = scene === "budget" && !(budgetNum > 0);
-  const focusBudget = useRef(false);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const opener = useRef<HTMLElement | null>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // 高德检索期间不先展示“无位置”的整理门店，避免检索完成后列表整体重排。
+  const all = useMemo(() => (status === "loading" ? [] : buildShops(pois)), [pois, status]);
+  const shown = useMemo(() => filterShops(all, f, data.shops), [all, f, data.shops]);
+  const sel = shown.find((v) => v.key === selected) ?? all.find((v) => v.key === selected) ?? null;
+  const active = f.parents || f.crossing || f.stable || f.mine || f.price !== "any" || f.port !== "any" || f.query !== "";
+  const set = <K extends keyof Filters>(k: K, v: Filters[K]) => setF((x) => ({ ...x, [k]: v }));
+
   useEffect(() => {
-    // 仅鼠标/触屏点选“指定预算”时聚焦输入框；方向键切换时不抢焦点，以免无法继续选后面的场景。
-    if (scene === "budget" && focusBudget.current) budgetRef.current?.focus();
-    focusBudget.current = false;
-  }, [scene]);
-  const onSceneKey = (e: React.KeyboardEvent, i: number) => {
-    const n = SCENES.length;
-    let j = -1;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % n;
-    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + n) % n;
-    else if (e.key === "Home") j = 0;
-    else if (e.key === "End") j = n - 1;
-    if (j < 0) return;
-    e.preventDefault();
-    const target = SCENES[j];
-    if (!target) return;
-    setScene(target.id);
-    sceneRefs.current[j]?.focus();
-  };
-  const select = (id: string) => {
-    setSelected(id);
-    showMapIfMobile();
-  };
+    document.title = "深圳 Omakase 跨境家庭选店地图";
+  }, []);
 
-  const picks = useMemo(() => {
-    if (!scene) return null;
-    return recommend(pois, scene, { notes: data.notes, checkins: data.checkins }, budgetNum > 0 ? budgetNum : undefined);
-  }, [scene, pois, data.notes, data.checkins, budgetNum]);
-
-  const highlights = useMemo(() => Object.fromEntries((picks ?? []).map((p) => [p.poi.id, p.badge])), [picks]);
-  const sceneInfo = SCENES.find((s) => s.id === scene);
-  const mapPois = picks && picks.length ? picks.map((p) => p.poi) : pois;
+  const open = (key: string, el?: HTMLElement | null) => {
+    opener.current = el ?? (document.activeElement as HTMLElement | null);
+    setSelected(key);
+  };
+  const close = () => {
+    setSelected(null);
+    opener.current?.focus?.();
+  };
 
   return (
-    <div className={`page home-grid view-${view}`}>
-      <ViewToggle view={view} onChange={setView} />
-      <section aria-labelledby="ask" className="list-pane">
-        <h1 id="ask">今天怎么吃？</h1>
-        <p className="lead">选一个场景，从高德实时检索到的深圳寿司店里挑出最多 3 家。</p>
-        <div className="scene-grid" role="radiogroup" aria-label="用餐场景">
-          {SCENES.map((s, i) => (
-            <button
-              key={s.id}
-              ref={(el) => { sceneRefs.current[i] = el; }}
-              type="button"
-              role="radio"
-              className="scene"
-              aria-checked={scene === s.id}
-              tabIndex={scene === s.id || (scene === null && i === 0) ? 0 : -1}
-              onKeyDown={(e) => onSceneKey(e, i)}
-              onClick={() => { focusBudget.current = true; setScene(s.id); }}
-            >
-              <strong>{s.label}</strong>
-              <span>{s.hint}</span>
-            </button>
-          ))}
+    <div className="app">
+      <header className="top">
+        <h1>
+          深圳 Omakase 跨境家庭选店地图
+          <small>给常住香港、熟悉 Omakase、会带伴侣或父母来深圳的你</small>
+        </h1>
+        <button type="button" className="icon-btn" aria-label="设置与数据说明" onClick={(e) => { opener.current = e.currentTarget; dialog.current?.showModal(); }}>
+          ⚙ 设置
+        </button>
+      </header>
+      <section className="intro" aria-label="三个判断">
+        <p>每家店只回答三件事：</p>
+        <ul>
+          <li>① 稳不稳</li>
+          <li>② 带父母合不合适</li>
+          <li>③ 值不值得专程过关</li>
+        </ul>
+      </section>
+      <div className="toolbar" role="search">
+        <label className="sr-only" htmlFor="q">搜索店名、商圈、口岸</label>
+        <input id="q" className="search" type="search" placeholder="搜索店名、商圈、口岸" value={f.query} onChange={(e) => set("query", e.target.value)} />
+        <div className="chips" role="group" aria-label="筛选">
+          <button type="button" className="chip" aria-pressed={f.parents} onClick={() => set("parents", !f.parents)}>带父母 高</button>
+          <button type="button" className="chip" aria-pressed={f.crossing} onClick={() => set("crossing", !f.crossing)}>值得过关 高</button>
+          <button type="button" className="chip" aria-pressed={f.stable} onClick={() => set("stable", !f.stable)}>近期稳定 高</button>
+          <select className="chip" aria-label="人均" value={f.price} onChange={(e) => set("price", e.target.value as PriceBand)}>
+            <option value="any">人均不限</option>
+            <option value="lt300">人均 &lt;300</option>
+            <option value="300-600">人均 300–600</option>
+            <option value="gt600">人均 &gt;600</option>
+          </select>
+          <select className="chip" aria-label="口岸" value={f.port} onChange={(e) => set("port", e.target.value as Filters["port"])}>
+            <option value="any">口岸不限</option>
+            {PORTS.map((p) => <option key={p.id} value={p.id}>近{p.name}</option>)}
+          </select>
+          <button type="button" className="chip" aria-pressed={f.mine} onClick={() => set("mine", !f.mine)}>我的收藏/去过</button>
         </div>
-        {scene === "budget" && (
-          <div className="field">
-            <label htmlFor="budget">每人预算上限（元）</label>
-            <input ref={budgetRef} id="budget" type="number" min={1} inputMode="numeric" value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="例如 300" aria-invalid={budgetInvalid} aria-describedby={budgetInvalid ? "budget-err" : undefined} />
-          </div>
-        )}
-        <PoiStatus />
+      </div>
 
-        <p role="status" className="sr-only">{sceneInfo && picks && picks.length > 0 ? `已为你选出 ${picks.length} 家推荐` : ""}</p>
-        {sceneInfo && (
-          <div className="results" data-testid="results">
-            <h2>{sceneInfo.label}推荐</h2>
-            <p className="note-derived"><span className="tag tag-derived">推导</span> 规则：{sceneInfo.rule} 以下是按规则算出的建议，不是客观评价；理由只引用高德字段和你自己的记录。</p>
-            {budgetInvalid && <p className="error" id="budget-err">请先填写预算上限。</p>}
-            {status === "ready" && picks && picks.length === 0 && !(scene === "budget" && !(budgetNum > 0)) && (
-              <p className="empty">没有店铺满足条件（高德返回的字段不足时不会硬凑）。可换一个场景，或到<Link href="/map">地图页</Link>手动筛选。</p>
-            )}
-            {picks && picks.length > 0 && picks.length < 3 && <p className="muted small">满足条件的店不足 3 家，仅显示 {picks.length} 家。</p>}
-            <ol className="picks">
-              {picks?.map((p) => (
-                <li key={p.poi.id}>
-                  <ShopCard poi={p.poi} badge={`${p.badge}（推导）`} selected={selected === p.poi.id} onSelect={() => select(p.poi.id)} />
-                  <ul className="reasons">
-                    {p.reasons.map((r, i) => (
-                      <li key={i}>
-                        <span className={`tag tag-${r.source === "高德" ? "amap" : r.source === "你的记录" ? "user" : "derived"}`}>{r.source}</span> {r.text}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ol>
+      <div className="map-pane">
+        <ShopMap shops={shown} selectedKey={selected} onSelect={(k) => open(k, document.getElementById(`card-${k}`)?.querySelector("button"))} />
+      </div>
+
+      <div className="list-pane" ref={listRef}>
+        {status === "error" && (
+          <div className="alert" role="alert">
+            <p><strong>高德检索失败：</strong>{error}</p>
+            <p className="small">仍可浏览已整理的门店资料，但没有位置和高德信息。</p>
+            <button type="button" className="btn btn-primary" onClick={reload}>重新检索</button>
           </div>
         )}
-        {!sceneInfo && <p className="muted">还没选场景？也可以直接去 <Link href="/map">寿司地图</Link> 自己搜和筛。</p>}
-        {status === "ready" && pois.length > 0 && (
-          <details className="all-list">
-            <summary>查看全部 {pois.length} 家检索结果（与地图标记一一对应）</summary>
-            <div className="list-col">
-              {pois.map((p, i) => (
-                <ShopCard key={p.id} poi={p} index={i} selected={selected === p.id} onSelect={() => select(p.id)} />
-              ))}
-            </div>
-          </details>
+        {status === "ready" && failed > 0 && <p className="small warn" role="status">有 {failed} 项高德检索失败，结果可能不完整。</p>}
+        <p className="count" role="status" data-testid="count">
+          {status === "loading" ? "正在向高德检索深圳 Omakase 店…" : `共 ${shown.length} 家${active ? `（筛选前 ${all.length} 家）` : ""}`}
+        </p>
+        {status !== "loading" && shown.length === 0 && (
+          <div className="empty" data-testid="empty">
+            <p><strong>没有符合条件的店。</strong></p>
+            <p className="small">
+              {f.parents || f.crossing || f.stable
+                ? "“高”需要至少 2 篇详细正面记述，目前素材里没有店同时满足所选条件（例如没有任何店在“过关价值”上达到“高”）。可以取消一项筛选，或清除全部筛选。"
+                : "换个关键词，或放宽人均与口岸条件。"}
+            </p>
+            <button type="button" className="btn btn-primary" onClick={() => setF(defaultFilters())}>清除全部筛选</button>
+          </div>
         )}
-      </section>
-      <section aria-label="地图" id="map-pane" className="sticky-map map-pane">
-        <ShopMap pois={mapPois} highlights={highlights} selectedId={selected} onSelect={setSelected} height="calc(100vh - 140px)" />
-        <p className="muted small">地图上 ★ 为推荐店；无推荐时显示全部检索结果。</p>
-      </section>
+        <ol className="cards">
+          {shown.map((v, i) => (
+            <li key={v.key} id={`card-${v.key}`}>
+              <ShopCard v={v} index={i} state={stateOf(data.shops, v)} selected={selected === v.key} onOpen={() => open(v.key)} />
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {sel && <ShopSheet v={sel} state={stateOf(data.shops, sel)} onPatch={(p) => patch(sel.key, stateOf(data.shops, sel), p)} onClose={close} />}
+      <SettingsDialog ref={dialog} data={data} persistError={persistError} onReplace={replaceAll} onClear={clearAll} onClose={() => { dialog.current?.close(); opener.current?.focus?.(); }} />
     </div>
   );
 }

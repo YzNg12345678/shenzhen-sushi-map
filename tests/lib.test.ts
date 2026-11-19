@@ -1,252 +1,180 @@
 import { describe, expect, it } from "vitest";
-import { opensLate, parseRanges } from "@/lib/openTime";
-import { recommend } from "@/lib/recommend";
-import { buildTaste } from "@/lib/taste";
-import { FISH, fishMatches } from "@/lib/fish";
-import { emptyData, emptyNote, parseBackup, type Checkin, type Poi } from "@/lib/types";
+import { buildCatalog, catalog, type Evidence } from "@/lib/catalog";
+import { judgeAxis, judgeVerdict } from "@/lib/judge";
+import { distanceKm, portDistances, PORTS } from "@/lib/ports";
+import { buildShops, defaultFilters, filterShops, matchesCurated, stateOf } from "@/lib/shops";
+import { emptyData, parseBackup, type Poi } from "@/lib/types";
+import { looksLikeOmakase, mapPoi } from "@/lib/amap";
 
-const poi = (id: string, o: Partial<Poi> = {}): Poi => ({ id, name: `店${id}`, lng: 114, lat: 22.5, fetchedAt: "2026-01-01T00:00:00Z", ...o });
-const ctx = { notes: {}, checkins: [] };
+const poi = (id: string, o: Partial<Poi> = {}): Poi => ({ id, name: `店${id}`, lng: 114.06, lat: 22.53, type: "餐饮服务;外国餐厅;日本料理", fetchedAt: "2026-11-20T00:00:00Z", ...o });
+const notes = new Map<string, unknown>([
+  ["n1", { noteId: "n1", publishedAt: "2026-10-01" }],
+  ["n2", { noteId: "n2", publishedAt: "2026-09-01" }],
+  ["old", { noteId: "old", publishedAt: "2025-01-01" }],
+] as [string, unknown][]);
+const ev = (noteId: string, polarity: "pos" | "neg", strength: "strong" | "weak", axis: Evidence["axis"] = "stability"): Evidence => ({ noteId, axis, polarity, strength, text: "t" });
+const J = (e: Evidence[], axis: Evidence["axis"] = "stability") => judgeAxis(axis, e, notes as never, "2026-11-20");
 
-describe("openTime", () => {
-  it("解析跨午夜时间段", () => {
-    expect(parseRanges("周一至周日 17:30-02:00")).toEqual([[1050, 1560]]);
-    expect(opensLate("11:30-14:00 17:30-22:30")).toBe(true);
-    expect(opensLate("11:00-21:00")).toBe(false);
+describe("judgeAxis", () => {
+  it("无证据 / 只有弱证据 → 待核实", () => {
+    expect(J([]).level).toBe("待核实");
+    expect(J([ev("n1", "pos", "weak")]).level).toBe("待核实");
   });
-  it("未知时不猜", () => {
-    expect(opensLate(undefined)).toBeUndefined();
-    expect(opensLate("请电话咨询")).toBeUndefined();
+  it("单一强正面 → 中；两篇强正面 → 高；有负面不给高", () => {
+    expect(J([ev("n1", "pos", "strong")]).level).toBe("中");
+    expect(J([ev("n1", "pos", "strong"), ev("n2", "pos", "strong")]).level).toBe("高");
+    expect(J([ev("n1", "pos", "strong"), ev("n2", "pos", "strong"), ev("n2", "neg", "weak")]).level).toBe("中");
+  });
+  it("强负面：无正面 → 低；有正面 → 中且标分歧", () => {
+    expect(J([ev("n1", "neg", "strong")]).level).toBe("低");
+    const r = J([ev("n1", "neg", "strong"), ev("n2", "pos", "weak")]);
+    expect(r.level).toBe("中");
+    expect(r.disputed).toBe(true);
+  });
+  it("超过 365 天的强证据降为旁证", () => {
+    const r = J([ev("old", "pos", "strong"), ev("n1", "pos", "strong")]);
+    expect(r.level).toBe("中");
+    expect(r.evidence.find((e) => e.noteId === "old")?.stale).toBe(true);
+  });
+  it("只统计所属轴，并给出来源数与最近日期", () => {
+    const r = J([ev("n1", "pos", "strong"), ev("n2", "pos", "weak"), ev("n2", "pos", "strong", "parents")]);
+    expect(r.sources).toBe(2);
+    expect(r.latest).toBe("2026-10-01");
   });
 });
 
-describe("recommend", () => {
-  const pois = [
-    poi("a", { rating: 4.8, cost: 600, openTime: "17:00-23:30", name: "某某鮨" }),
-    poi("b", { rating: 4.2, cost: 120, openTime: "11:00-21:00" }),
-    poi("c", { rating: 4.5, cost: 280 }),
-    poi("d", {}),
-  ];
-  it("最多 3 家并带不同标签", () => {
-    const r = recommend(pois, "solo", ctx);
-    expect(r.length).toBeLessThanOrEqual(3);
-    expect(new Set(r.map((x) => x.badge)).size).toBe(r.length);
-    expect(r[0].badge).toBe("最匹配");
-  });
-  it("深夜只保留营业时间明确的店", () => {
-    const r = recommend(pois, "late", ctx);
-    expect(r.map((x) => x.poi.id)).toEqual(["a"]);
-  });
-  it("预算排除超预算店，未知人均保留但标注", () => {
-    const r = recommend(pois, "budget", ctx, 300);
-    expect(r.map((x) => x.poi.id)).not.toContain("a");
-    expect(r.find((x) => x.poi.id === "d")?.reasons.some((x) => x.text.includes("未提供人均"))).toBe(true);
-  });
-  it("预算场景未填预算返回空", () => {
-    expect(recommend(pois, "budget", ctx)).toEqual([]);
-  });
-  it("不再去的店被排除，且理由不含编造字段", () => {
-    const notes = { a: { ...emptyNote(), revisit: "no" as const } };
-    const r = recommend(pois, "omakase", { notes, checkins: [] });
-    expect(r.map((x) => x.poi.id)).not.toContain("a");
-  });
-  it("结果稳定", () => {
-    expect(recommend(pois, "date", ctx)).toEqual(recommend(pois, "date", ctx));
+describe("judgeVerdict", () => {
+  const r = (level: "高" | "中" | "低" | "待核实") => ({ ...J([]), level });
+  it("按固定规则给结论", () => {
+    expect(judgeVerdict(r("低"), r("高"), r("高")).id).toBe("unstable");
+    expect(judgeVerdict(r("中"), r("高"), r("高")).id).toBe("cross");
+    expect(judgeVerdict(r("中"), r("高"), r("待核实")).id).toBe("parents");
+    expect(judgeVerdict(r("高"), r("待核实"), r("中")).id).toBe("onway");
+    expect(judgeVerdict(r("高"), r("低"), r("待核实")).id).toBe("regular");
+    expect(judgeVerdict(r("高"), r("待核实"), r("待核实")).id).toBe("unknown");
+    expect(judgeVerdict(r("待核实"), r("高"), r("高")).id).toBe("unknown");
   });
 });
 
-const checkin = (i: number, pieces: [string, number][], overall = 4): Checkin => ({
-  id: `c${i}`, date: "2026-01-01", shopId: "a", shopName: "店a", menu: "", pieces: pieces.map(([fish, rating]) => ({ fish, rating, note: "" })), overall, note: "",
-});
-
-describe("taste", () => {
-  it("数据不足不下结论", () => {
-    const t = buildTaste([checkin(1, [["鲣鱼", 5]])]);
-    expect(t.enough).toBe(false);
-    expect(t.statements).toEqual([]);
-    expect(t.needMore).toContain("打卡");
+describe("catalog（真实素材）", () => {
+  it("30 篇笔记，来源链接不含查询参数/令牌", () => {
+    expect(catalog.notes).toHaveLength(30);
+    for (const n of catalog.notes) {
+      expect(n.url).toMatch(/^https:\/\/www\.xiaohongshu\.com\/explore\/[0-9a-f]+$/);
+      expect(n.summary.length).toBeGreaterThan(5);
+    }
   });
-  it("足够时给出高分鱼种", () => {
-    const t = buildTaste([
-      checkin(1, [["鲣鱼", 5], ["鲈鱼", 2], ["鰤鱼", 4]]),
-      checkin(2, [["鲣鱼", 5], ["鲈鱼", 2], ["海胆", 5]]),
-      checkin(3, [["鲣鱼", 4], ["鲈鱼", 2]]),
-    ]);
-    expect(t.enough).toBe(true);
-    expect(t.topFish[0].fish).toBe("鲣鱼");
-    expect(t.lowFish[0].fish).toBe("鲈鱼");
-    expect(t.topFish.map((f) => f.fish)).not.toContain("海胆");
+  it("未映射素材必须写明原因；其余都被某家店引用", () => {
+    expect(catalog.unmapped.length).toBeGreaterThan(0);
+    for (const n of catalog.unmapped) expect(n.unmappedReason).toBeTruthy();
+    expect(catalog.notes.length - catalog.unmapped.length).toBeGreaterThanOrEqual(20);
   });
-});
-
-describe("fish", () => {
-  it("每条都有来源，且数量不超过目标", () => {
-    expect(FISH.length).toBeLessThan(40);
-    for (const f of FISH) expect(f.source.url).toMatch(/^https:\/\//);
+  it("引用不存在的笔记会报错", () => {
+    const raw = { schemaVersion: 1, sourceGeneratedAt: null, collectionNote: "", notes: [] };
+    const shops = { schemaVersion: 1, dataVersion: "x", updatedAt: "2026-01-01", shops: [{ id: "a", name: "A", keywords: ["a"], evidence: [{ noteId: "zz", axis: "stability", polarity: "pos", strength: "weak", text: "t" }] }] };
+    expect(() => buildCatalog(raw, shops)).toThrow(/不存在/);
   });
-  it("记录名匹配", () => {
-    const f = FISH.find((x) => x.id === "buri")!;
-    expect(fishMatches(f, "鰤鱼")).toBe(true);
-    expect(fishMatches(f, "海胆")).toBe(false);
+  it("真实数据的几个关键结论", () => {
+    const shops = buildShops([]);
+    const by = (id: string) => shops.find((s) => s.key === id)!;
+    expect(by("jianglong").axes.stability.level).toBe("高");
+    expect(by("jianglong").axes.crossing.level).toBe("待核实");
+    expect(by("zhiting").axes.parents.level).toBe("高");
+    expect(by("zhiting").verdict.id).toBe("parents");
+    expect(by("qiwu").axes.parents.level).toBe("低");
+    expect(by("qiwu").hasNegative).toBe(true);
+    expect(by("xiaoshi").axes.stability.disputed).toBe(true);
   });
 });
 
-describe("backup", () => {
-  it("往返一致", () => {
-    const d = { ...emptyData(), checkins: [checkin(1, [["鲣鱼", 5]])] };
-    const r = parseBackup(JSON.stringify(d));
-    expect(r.ok && r.data.checkins).toHaveLength(1);
+describe("buildShops / filterShops", () => {
+  const pois = [poi("a", { name: "匠龙Omakase（福田店）", cost: 260 }), poi("b", { name: "匠龍 大悦城店", lng: 113.95, lat: 22.52 }), poi("c", { name: "某某鮨", cost: 700 }), poi("d", { name: "匠龙文具", type: "购物服务;文化用品店" })];
+  const shops = buildShops(pois);
+  it("同一门店命中多个分店时各出一张卡并共享证据，非餐饮不匹配", () => {
+    const jl = shops.filter((s) => s.curated?.id === "jianglong");
+    expect(jl.map((s) => s.poi?.id).sort()).toEqual(["a", "b"]);
+    expect(jl.every((s) => s.axes.stability.level === "高")).toBe(true);
+    expect(matchesCurated(pois[3], catalog.shops.find((s) => s.id === "jianglong")!)).toBe(false);
   });
-  it("拒绝坏文件", () => {
-    expect(parseBackup("not json").ok).toBe(false);
-    expect(parseBackup("{}").ok).toBe(false);
-    expect(parseBackup(JSON.stringify({ schemaVersion: 99 })).ok).toBe(false);
-    const bad = { ...emptyData(), checkins: [{ id: "x", date: "bad", shopName: "a", overall: 9 }] };
-    const r = parseBackup(JSON.stringify(bad));
-    expect(r.ok).toBe(false);
+  it("未命中的整理门店仍显示（无定位），仅高德的店无证据", () => {
+    expect(shops.some((s) => s.key === "zhiting" && !s.poi)).toBe(true);
+    const c = shops.find((s) => s.key === "amap:c")!;
+    expect(c.sources).toBe(0);
+    expect(c.verdict.id).toBe("unknown");
+    expect(c.axes.parents.level).toBe("待核实");
   });
-});
-
-describe("openTime 边界", () => {
-  it("恰好 22:00 打烊不算深夜，22:01 之后才算", () => {
-    expect(opensLate("11:00-22:00")).toBe(false);
-    expect(opensLate("11:00-22:30")).toBe(true);
+  it("筛选：高/人均/口岸/搜索/我的", () => {
+    const run = (o: Partial<ReturnType<typeof defaultFilters>>, st = {}) => filterShops(shops, { ...defaultFilters(), ...o }, st);
+    expect(run({ stable: true }).every((s) => s.axes.stability.level === "高")).toBe(true);
+    expect(run({ crossing: true })).toHaveLength(0);
+    expect(run({ price: "gt600" }).map((s) => s.key).sort()).toEqual(["amap:c", "qiwu"]);
+    expect(run({ price: "lt300" }).every((s) => (s.priceNum ?? 999) < 300)).toBe(true);
+    expect(run({ port: "szbay" }).map((s) => s.poi?.id)).toEqual(["b"]);
+    expect(run({ query: "福田店" }).map((s) => s.poi?.id)).toEqual(["a"]);
+    expect(run({ mine: true })).toHaveLength(0);
+    const mine = run({ mine: true }, { "amap:c": { favorite: true, visited: false, note: "" } });
+    expect(mine.map((s) => s.key)).toEqual(["amap:c"]);
   });
-  it("忽略非法时间", () => {
-    expect(parseRanges("11:00-27:99")).toEqual([]);
-    expect(opensLate("11:00-27:99")).toBeUndefined();
-  });
-});
-
-describe("recommend 理由", () => {
-  it("理由只引用可见字段：未知评分/人均不会被编造", () => {
-    const r = recommend([poi("x", { name: "普通店" })], "solo", ctx);
-    const texts = r[0].reasons.map((x) => x.text).join("|");
-    expect(texts).toContain("未提供评分");
-    expect(texts).not.toMatch(/高德评分 \d/);
-    expect(texts).not.toContain("人均 ¥");
-  });
-  it("无特色字段时明说不代表风格特别", () => {
-    const r = recommend([poi("x"), poi("y"), poi("z")], "solo", ctx);
-    const t = r.find((p) => p.badge === "最有特色")!.reasons.map((x) => x.text).join("|");
-    expect(t).toContain("没有可见的特色字段");
-  });
-  it("最稳妥理由给出实际已知字段数", () => {
-    const r = recommend([poi("x", { rating: 4, cost: 100, address: "某路" }), poi("y")], "solo", ctx);
-    const p = r.find((q) => q.badge === "最稳妥")!;
-    expect(p.poi.id).toBe("y");
-    expect(p.reasons.some((x) => x.text.includes("0 项"))).toBe(true);
-    const r2 = recommend([poi("x", { rating: 4, cost: 100, address: "某路" })], "solo", ctx);
-    expect(r2).toHaveLength(1);
-  });
-  it("特色理由只在确有名称关键词或用户填写时出现", () => {
-    const notes = { x: { ...emptyNote(), chef: "某师傅" } };
-    const r = recommend([poi("x", { rating: 4 }), poi("y", { rating: 5 }), poi("z", { rating: 4.5 })], "solo", { notes, checkins: [] });
-    const t = r.find((p) => p.badge === "最有特色")!.reasons.map((x) => x.text).join("|");
-    expect(t).toContain("你填写了师傅");
-    expect(t).not.toContain("名称/类别含特色关键词");
-  });
-  it("用户记录理由标注来源并引用真实打卡均分", () => {
-    const c = { ...checkin(1, [], 5), shopId: "x" };
-    const r = recommend([poi("x", { rating: 4 })], "solo", { notes: {}, checkins: [c] });
-    const u = r[0].reasons.find((x) => x.source === "你的记录");
-    expect(u?.text).toContain("5.0");
-  });
-  it("想再去/收藏加分且有对应理由", () => {
-    const notes = { x: { ...emptyNote(), favorite: true } };
-    const r = recommend([poi("x", { rating: 4 })], "solo", { notes, checkins: [] });
-    expect(r[0].reasons.some((x) => x.text === "你已收藏")).toBe(true);
+  it("个人状态兼容旧键", () => {
+    const v = shops.find((s) => s.key === "amap:c")!;
+    expect(stateOf({ "amap:c": { favorite: true, visited: false, note: "n" } }, v).note).toBe("n");
+    expect(stateOf({}, v)).toEqual({ favorite: false, visited: false, note: "" });
   });
 });
 
-describe("taste 阈值", () => {
-  it("均分 3.95 不得因四舍五入进入高分", () => {
-    const cs = [
-      checkin(1, [["甲", 4], ["甲", 4], ["乙", 5]]),
-      checkin(2, [["甲", 4], ["甲", 4], ["乙", 5]]),
-      checkin(3, [["甲", 4], ["甲", 4], ["乙", 5]]),
-    ];
-    // 甲 全 4 分：属高分；构造 3.95：19 个 4 + ... 改用精确边界
-    expect(buildTaste(cs).topFish.map((f) => f.fish)).toContain("甲");
-    const many = [{ fish: "丙", rating: 4 }, ...Array(19).fill({ fish: "丙", rating: 4 })];
-    const low = [...many.slice(0, 19), { fish: "丙", rating: 3 }]; // 20 贯，均分 3.95
-    const t = buildTaste([
-      { ...checkin(1, []), pieces: low.map((p) => ({ ...p, note: "" })) },
-      checkin(2, [["丁", 3]]),
-      checkin(3, [["戊", 3]]),
-    ]);
-    expect(t.topFish.map((f) => f.fish)).not.toContain("丙");
-  });
-  it("单次记录的鱼种不下结论，2 次才计入", () => {
-    const t = buildTaste([
-      checkin(1, [["甲", 5], ["乙", 5], ["丙", 5], ["丁", 5]]),
-      checkin(2, [["甲", 5], ["乙", 1], ["丙", 2], ["戊", 3]]),
-      checkin(3, [["己", 3], ["庚", 3]]),
-    ]);
-    expect(t.topFish.map((f) => f.fish)).toEqual(["甲"]);
-    expect(t.lowFish).toEqual([]);
-  });
-  it("空白鱼名被忽略；刚好阈值（2.5/4）计入", () => {
-    const t = buildTaste([
-      checkin(1, [[" ", 5], ["甲", 4], ["乙", 2]]),
-      checkin(2, [["甲", 4], ["乙", 3], ["丙", 3]]),
-      checkin(3, [["丙", 3], ["丁", 3], ["戊", 3]]),
-    ]);
-    expect(t.topFish.map((f) => f.fish)).toEqual(["甲"]);
-    expect(t.lowFish.map((f) => f.fish)).toEqual(["乙"]);
-  });
-  it("无打卡不崩溃", () => {
-    const t = buildTaste([]);
-    expect(t.avgOverall).toBeNull();
-    expect(t.enough).toBe(false);
+describe("ports", () => {
+  it("距离合理且由近到远", () => {
+    expect(distanceKm(PORTS[0], PORTS[0])).toBe(0);
+    const d = portDistances({ lng: 113.95, lat: 22.5 });
+    expect(d[0].port.id).toBe("szbay");
+    expect(d[0].km).toBeLessThan(d[1].km);
   });
 });
 
-describe("fish 匹配", () => {
-  it("单字不泛匹配", () => {
-    for (const f of FISH) expect(fishMatches(f, "鱼")).toBe(false);
-    expect(fishMatches(FISH[0], "")).toBe(false);
+describe("amap 映射", () => {
+  it("缺失字段保持 undefined，不编造", () => {
+    const p = mapPoi({ id: "1", name: "x", location: { lng: 114, lat: 22.5 }, rating: [], cost: "", tel: "[]" });
+    expect(p).toMatchObject({ id: "1", name: "x" });
+    expect(p?.rating).toBeUndefined();
+    expect(p?.cost).toBeUndefined();
+    expect(p?.tel).toBeUndefined();
+    expect(mapPoi({ id: "1", name: "x" })).toBeNull();
   });
-  it("日文名可匹配，月份合法", () => {
-    expect(fishMatches(FISH[0], "カツオ")).toBe(true);
-    for (const f of FISH) for (const m of f.months) expect(m >= 1 && m <= 12).toBe(true);
+  it("发现结果过滤：只保留像 Omakase/寿司的店", () => {
+    expect(looksLikeOmakase(poi("1", { name: "某某鮨" }))).toBe(true);
+    expect(looksLikeOmakase(poi("2", { name: "老王面馆", type: "餐饮服务;中餐厅" }))).toBe(false);
   });
 });
 
-describe("backup 校验加强", () => {
-  const base = () => JSON.parse(JSON.stringify(emptyData()));
-  const ck = { id: "k", date: "2026-02-03", shopName: "a", overall: 4 };
-  it("接受带默认值的最小打卡", () => {
-    const d = { ...base(), checkins: [ck] };
-    const r = parseBackup(JSON.stringify(d));
-    expect(r.ok && r.data.checkins[0].pieces).toEqual([]);
+describe("parseBackup", () => {
+  it("v2 通过校验；错误输入都被拒绝", () => {
+    expect(parseBackup(JSON.stringify(emptyData())).ok).toBe(true);
+    for (const bad of ["{", "[]", "null", "{}", JSON.stringify({ schemaVersion: 9 }), JSON.stringify({ schemaVersion: 2, shops: { a: { favorite: "x" } } })]) {
+      expect(parseBackup(bad).ok).toBe(false);
+    }
   });
-  it("拒绝不存在的日期", () => {
-    for (const date of ["2026-02-30", "2026-13-01", "2026-00-10"])
-      expect(parseBackup(JSON.stringify({ ...base(), checkins: [{ ...ck, date }] })).ok).toBe(false);
+  it("v1 只迁移收藏/去过/备注", () => {
+    const r = parseBackup(JSON.stringify({ schemaVersion: 1, notes: { p: { favorite: true, privateNote: "n", style: "x" }, q: {} }, checkins: [{}] }));
+    expect(r.ok && r.data.shops).toEqual({ "amap:p": { favorite: true, visited: false, note: "n" } });
   });
-  it("拒绝重复打卡 id、重复比较项、超过 3 家", () => {
-    expect(parseBackup(JSON.stringify({ ...base(), checkins: [ck, ck] })).ok).toBe(false);
-    expect(parseBackup(JSON.stringify({ ...base(), compare: ["a", "a"] })).ok).toBe(false);
-    expect(parseBackup(JSON.stringify({ ...base(), compare: ["a", "b", "c", "d"] })).ok).toBe(false);
+});
+
+describe("stateOf 回退", () => {
+  it("高德未命中时读取任一分店键的个人记录", () => {
+    const v = buildShops([]).find((s) => s.key === "zhiting")!;
+    expect(stateOf({ "zhiting@123": { favorite: true, visited: false, note: "分店" } }, v).note).toBe("分店");
   });
-  it("拒绝 poi 键名与 id 不一致、越界坐标、评分", () => {
-    const p = poi("a");
-    expect(parseBackup(JSON.stringify({ ...base(), pois: { b: p } })).ok).toBe(false);
-    expect(parseBackup(JSON.stringify({ ...base(), pois: { a: { ...p, lat: 99 } } })).ok).toBe(false);
-    expect(parseBackup(JSON.stringify({ ...base(), pois: { a: { ...p, rating: 6 } } })).ok).toBe(false);
+});
+
+describe("judgeAxis 边界", () => {
+  it("365 天内算强、超过算旁证；缺日期按旁证", () => {
+    const n = new Map<string, unknown>([["a", { publishedAt: "2025-11-20" }], ["b", { publishedAt: "2025-11-19" }], ["c", { publishedAt: null }]]);
+    const run = (id: string) => judgeAxis("stability", [ev(id, "pos", "strong")], n as never, "2026-11-20").evidence[0].stale;
+    expect(run("a")).toBe(false);
+    expect(run("b")).toBe(true);
+    expect(run("c")).toBe(true);
   });
-  it("拒绝数组/null/原始值/非整数评分", () => {
-    for (const t of ["[]", "null", "42", '"x"', ""]) expect(parseBackup(t).ok).toBe(false);
-    const pc = { ...ck, pieces: [{ fish: "甲", rating: 3.5 }] };
-    expect(parseBackup(JSON.stringify({ ...base(), checkins: [pc] })).ok).toBe(false);
-  });
-  it("错误信息声明未修改，且不抛异常", () => {
-    const r = parseBackup('{"schemaVersion":1,"checkins":"x"}');
-    expect(!r.ok && r.error).toContain("未做任何修改");
-  });
-  it("__proto__ 键不会污染原型", () => {
-    parseBackup('{"schemaVersion":1,"notes":{"__proto__":{"favorite":true}}}');
-    expect(({} as Record<string, unknown>).favorite).toBeUndefined();
+  it("同一篇笔记的两条强正面只算 1 个来源，不能给高", () => {
+    expect(J([ev("n1", "pos", "strong"), ev("n1", "pos", "strong")]).level).toBe("中");
   });
 });

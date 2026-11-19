@@ -1,77 +1,64 @@
-"use client";
+import { AXES } from "@/lib/catalog";
+import type { ShopView } from "@/lib/shops";
+import type { ShopState } from "@/lib/types";
+import AxisBadge from "./LevelBadge";
 
-import Link from "next/link";
-import { useState } from "react";
-import { money, rate, text } from "@/lib/format";
-import { useStore } from "@/lib/store";
-import type { Poi } from "@/lib/types";
+export const UNKNOWN = "待核实";
 
-export function Tag({ kind, children }: { kind: "amap" | "user" | "derived"; children: React.ReactNode }) {
-  const label = kind === "amap" ? "高德" : kind === "user" ? "你填写" : "推导";
-  return (
-    <span className={`tag tag-${kind}`}>
-      <span className="sr-only">来源：</span>
-      {label}
-      {children}
-    </span>
-  );
+/** 一句话理由：只引用素材里的原有判断，无素材时明说。 */
+export function oneLiner(v: ShopView): string {
+  if (v.sources === 0) return "素材里还没有这家店的评价，三项都待核实。";
+  for (const a of AXES) {
+    const e = v.axes[a].evidence.find((x) => x.strength === "strong" && x.polarity === (v.axes[a].level === "低" ? "neg" : "pos"));
+    if (e) return e.text;
+  }
+  return v.axes.stability.evidence[0]?.text ?? v.axes.parents.evidence[0]?.text ?? "只有零散旁证，暂不下结论。";
+}
+
+export function priceLine(v: ShopView): string {
+  if (v.curated?.price?.set) return v.curated.price.set;
+  if (v.poi?.cost) return `高德人均 ¥${v.poi.cost}（套餐、酒水、加点待核实）`;
+  return `人均${UNKNOWN}`;
 }
 
 interface Props {
-  poi: Poi;
-  index?: number;
-  selected?: boolean;
-  badge?: string;
-  onSelect?: () => void;
+  v: ShopView;
+  index: number;
+  state: ShopState;
+  selected: boolean;
+  onOpen: () => void;
 }
 
-export default function ShopCard({ poi, index, selected, badge, onSelect }: Props) {
-  const { notes, patchNote, toggleCompare, data } = useStore();
-  const note = notes(poi.id);
-  const [msg, setMsg] = useState("");
-  const inCompare = data.compare.includes(poi.id);
+export default function ShopCard({ v, index, state, selected, onOpen }: Props) {
+  const place = [v.poi?.businessArea || v.poi?.district, v.ports[0] ? `近${v.ports[0].port.name}（直线约 ${v.ports[0].km.toFixed(1)} km）` : ""].filter(Boolean).join(" · ");
+  const disputed = AXES.some((a) => v.axes[a].disputed);
   return (
-    <article className={`card${selected ? " card-sel" : ""}`} aria-label={poi.name}>
-      <div className="card-head">
-        <h3>
-          {index !== undefined && <span className="idx">{index + 1}</span>}
-          {badge && <span className="badge">{badge}</span>}
-          {selected && <span className="sel-label">已选中</span>}
-          <button className="link-btn" onClick={onSelect} aria-pressed={selected}>
-            {poi.name}
-          </button>
-        </h3>
+    <article className="card" data-selected={selected} data-testid="shop-card" aria-label={v.name}>
+      <h3>
+        <button type="button" onClick={onOpen} aria-label={`${index + 1}. ${v.name}，查看详情`}>
+          {index + 1}. {v.name}
+          {state.favorite ? " ★" : ""}
+          {state.visited ? " ✓" : ""}
+        </button>
+      </h3>
+      <p className="meta">{place || `位置${UNKNOWN}`}</p>
+      <span className={`verdict v-${v.verdict.id}`}>{v.verdict.label}</span>
+      <div className="axes">
+        {AXES.map((a) => (
+          <AxisBadge key={a} r={v.axes[a]} />
+        ))}
       </div>
-      <dl className="facts">
-        <div><dt>区域</dt><dd>{text(poi.district)}</dd></div>
-        <div><dt>地址</dt><dd>{text(poi.address)}</dd></div>
-        <div><dt>评分</dt><dd>{rate(poi.rating)}</dd></div>
-        <div><dt>人均</dt><dd>{money(poi.cost)}</dd></div>
-      </dl>
-      <p className="muted small"><Tag kind="amap">{""}</Tag> 以上字段来自高德，“未知”表示高德未返回</p>
-      <div className="actions">
-        <Link className="btn btn-primary" href={`/shop?id=${encodeURIComponent(poi.id)}`}>
-          详情与补充
-        </Link>
-        <button className="btn" aria-pressed={note.favorite} onClick={() => patchNote(poi, { favorite: !note.favorite })}>
-          {note.favorite ? "★ 已收藏" : "☆ 收藏"}
-        </button>
-        <button className="btn" aria-pressed={note.visited} onClick={() => patchNote(poi, { visited: !note.visited })}>
-          {note.visited ? "✓ 去过" : "标记去过"}
-        </button>
-        <button
-          className="btn"
-          aria-pressed={inCompare}
-          onClick={() => {
-            const r = toggleCompare(poi);
-            setMsg(r.ok ? "" : (r.message ?? ""));
-          }}
-        >
-          {inCompare ? "移出比较" : "加入比较"}
+      <p className="meta" data-testid="card-price">人均：{priceLine(v)}</p>
+      <p className="reason">{oneLiner(v)}</p>
+      {(disputed || v.hasNegative) && <p className="reason warn">⚠ 素材中有负面或分歧说法，详情里查看。</p>}
+      <div className="card-foot">
+        <span>
+          {v.sources} 篇来源 · 资料 {v.latest ?? UNKNOWN}
+        </span>
+        <button type="button" className="btn" onClick={onOpen}>
+          详情
         </button>
       </div>
-      {msg && <p role="alert" className="error small">{msg}</p>}
     </article>
   );
 }
-
