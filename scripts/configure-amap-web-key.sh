@@ -17,13 +17,12 @@ umask 077
 TMP="$(mktemp "$ROOT/.env.local.tmp.XXXXXX")"
 trap 'rm -f "$TMP"' EXIT
 
-python3 - "$TARGET" "$TMP" "$AMAP_KEY" <<'PY'
+python3 - "$TARGET" "$TMP" <<'PY'
 from pathlib import Path
 import sys
 
 target = Path(sys.argv[1])
 tmp = Path(sys.argv[2])
-key = sys.argv[3]
 replaced = {"AMAP_WEB_SERVICE_KEY", "AMAP_KEY"}
 kept = []
 if target.exists():
@@ -33,13 +32,13 @@ if target.exists():
             kept.append(line)
 while kept and not kept[-1].strip():
     kept.pop()
-content = kept + ([""] if kept else []) + [
-    f"AMAP_WEB_SERVICE_KEY={key}",
-    f"AMAP_KEY={key}",
-]
-tmp.write_text("\n".join(content) + "\n", encoding="utf-8")
+tmp.write_text("\n".join(kept) + ("\n\n" if kept else ""), encoding="utf-8")
 PY
 
+{
+  printf 'AMAP_WEB_SERVICE_KEY=%s\n' "$AMAP_KEY"
+  printf 'AMAP_KEY=%s\n' "$AMAP_KEY"
+} >> "$TMP"
 chmod 600 "$TMP"
 mv -f "$TMP" "$TARGET"
 trap - EXIT
