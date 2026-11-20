@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { catalog } from "./catalog";
+import { audit } from "./data";
 import { searchOmakase } from "./amap";
 import { appDataSchema, emptyData, parseBackup, type AppData, type Poi, type ShopState } from "./types";
 
@@ -192,7 +192,7 @@ export function PoiProvider({ children }: { children: ReactNode }) {
   const reload = useCallback(() => {
     const my = ++seq.current;
     setState((s) => ({ ...s, status: "loading", error: null }));
-    searchOmakase(catalog.shops)
+    searchOmakase(audit.candidates.filter((c) => c.decision === "include"))
       .then((r) => {
         if (my === seq.current) setState({ status: "ready", pois: r.pois, error: null, failed: r.failed });
       })

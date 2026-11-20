@@ -11,14 +11,13 @@ interface Props {
   onSelect: (key: string) => void;
 }
 
-const pinHtml = (label: string, evid: boolean, sel: boolean) =>
-  `<div class="pin${evid ? " pin-evid" : ""}${sel ? " pin-sel" : ""}" data-testid="pin">${label}</div>`;
+const pinHtml = (label: string, sel: boolean) => `<div class="pin${sel ? " pin-sel" : ""}" data-testid="pin">${label}</div>`;
 
 export default function ShopMap({ shops, selectedKey, onSelect }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
   const fitKey = useRef("");
-  const markers = useRef<Map<string, { m: any; label: string; evid: boolean }>>(new Map());
+  const markers = useRef<Map<string, { m: any; label: string }>>(new Map());
   const onSelectRef = useRef(onSelect);
   const shopsRef = useRef(shops);
   const selectedRef = useRef(selectedKey);
@@ -40,7 +39,7 @@ export default function ShopMap({ shops, selectedKey, onSelect }: Props) {
     loadAMap()
       .then((AMap) => {
         if (cancelled || !el.current) return;
-        const map = new AMap.Map(el.current, { zoom: 11, center: SHENZHEN_CENTER, resizeEnable: true });
+        const map = new AMap.Map(el.current, { zoom: 11, center: SHENZHEN_CENTER, resizeEnable: true, mapStyle: "amap://styles/whitesmoke" });
         mapRef.current = map;
         map.addControl(new AMap.Scale());
         map.addControl(new AMap.ToolBar());
@@ -67,7 +66,7 @@ export default function ShopMap({ shops, selectedKey, onSelect }: Props) {
   }, [attempt]);
 
   // 仅当可见店铺集合/顺序变化时重建标记；收藏等个人状态变化不触发（97 个标记重建在慢设备上要数秒）。
-  const idKey = shops.map((v) => `${v.key}:${v.sources > 0 ? 1 : 0}`).join(",");
+  const idKey = shops.map((v) => v.key).join(",");
   useEffect(() => {
     const map = mapRef.current;
     const AMap = window.AMap;
@@ -78,17 +77,16 @@ export default function ShopMap({ shops, selectedKey, onSelect }: Props) {
     const list: any[] = [];
     shops.forEach((v, i) => {
       if (!v.poi) return;
-      const evid = v.sources > 0;
       const label = String(i + 1);
       const m = new AMap.Marker({
         position: [v.poi.lng, v.poi.lat],
         title: v.name,
-        content: pinHtml(label, evid, selectedRef.current === v.key),
+        content: pinHtml(label, selectedRef.current === v.key),
         offset: new AMap.Pixel(-14, -14),
-        zIndex: evid ? 120 : 100,
+        zIndex: 100,
       });
       m.on("click", () => onSelectRef.current(v.key));
-      markers.current.set(v.key, { m, label, evid });
+      markers.current.set(v.key, { m, label });
       list.push(m);
     });
     map.add(list);
@@ -101,9 +99,9 @@ export default function ShopMap({ shops, selectedKey, onSelect }: Props) {
 
   useEffect(() => {
     if (state !== "ready") return;
-    markers.current.forEach(({ m, label, evid }, key) => {
-      m.setContent(pinHtml(label, evid, key === selectedKey));
-      m.setzIndex(key === selectedKey ? 200 : evid ? 120 : 100);
+    markers.current.forEach(({ m, label }, key) => {
+      m.setContent(pinHtml(label, key === selectedKey));
+      m.setzIndex(key === selectedKey ? 200 : 100);
     });
   }, [selectedKey, idKey, state]);
 
@@ -111,7 +109,7 @@ export default function ShopMap({ shops, selectedKey, onSelect }: Props) {
     const map = mapRef.current;
     if (state !== "ready" || !map || !selectedKey) return;
     const v = shopsRef.current.find((x) => x.key === selectedKey);
-    if (v?.poi) map.setCenter([v.poi.lng, v.poi.lat]);
+    if (v?.poi) map.setCenter([v.poi.lng, v.poi.lat], true);
   }, [selectedKey, state]);
 
   return (
@@ -122,7 +120,7 @@ export default function ShopMap({ shops, selectedKey, onSelect }: Props) {
         <div className="map-overlay map-error" role="alert">
           <p><strong>地图暂时无法显示</strong></p>
           <p>{error}</p>
-          <p>店铺列表仍可使用。</p>
+          <p>店铺列表仍可使用，但不含位置。</p>
           <button type="button" className="btn btn-primary" onClick={() => setAttempt((a) => a + 1)}>
             重试加载地图
           </button>

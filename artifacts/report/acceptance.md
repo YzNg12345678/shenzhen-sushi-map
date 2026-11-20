@@ -1,52 +1,38 @@
-# 验收报告：深圳 Omakase 跨境家庭选店地图（Kanban t_b856d045）
+# 验收报告：深圳 Omakase（Kanban t_47733881，恢复卡 t_ba9397ec）
 
-日期：2026-11-20　分支：`shenzhen-sushi-map/t_b856d045-claude-code-omakase`
+日期：2026-11-20/21　分支：`shenzhen-sushi-map/t_47733881-claude-code-omakase`　基线：8051d9344cf0834c04d73cf21fb74fa2cab0f404
 
-## 1. 实现内容
-- 单页：地图 + 搜索 + 一排核心筛选（带父母 高 / 值得过关 高 / 近期稳定 高 / 人均 / 口岸 / 我的收藏·去过）+ 卡片列表 + 详情抽屉；设置（导入/导出/清空 + 数据说明）为轻量对话框。旧的季节、比较、护照、数据管理、地图等页面与导航已删除。
-- 首屏标题/副标题说明目标人群，并列出三判断（稳不稳 / 带父母合不合适 / 值不值得专程过关）。
-- 三轴（高/中/低/待核实，无总分）规则见 `lib/judge.ts`；结论标签由三轴固定规则得出；卡片/详情显示来源篇数、最近资料日期、判定理由、“正文与评论有分歧”与负面 ⚠。
-- 价格拆分：正文说法 / 评论补充 / 酒水 / 高德人均 / 最终人均（待店家确认）。
-- 数据：`data/notes.json`（30 篇小红书笔记元数据 + 我方摘要，链接已去查询参数）、`data/shops.json`（16 家门店、53 条逐篇证据）；个人状态仅 localStorage（`shenzhen-omakase-map:v2`，兼容迁移旧 v1）。
+## 1. 结果摘要
+- 主清单 **2 家**（穗 Sushi Minoru、隐谷 Omakase 福田财富店）；待核实区 **22 家**（不计入主清单）；排除 **34 家**；候选共 58。数量少是刻意的：证据不足即不收录。
+- 独立 QA 复核后降级：鮨嵐前海店（板前/一场制证据与引用页面不符）、齐武（身份仅一篇用户笔记）均移入待核实。
+- 图鉴 **60 条 / 9 类 / 95 个来源**（官方/政府 37、权威媒体 1、百科/二手整理 57；行业机构 0——全すし連、Michelin、豊洲鱼种旬页均未取得可读页面）。
+- 旧“三件事/三轴”框架已从代码、数据、文档删除（`tests/audit.test.ts` 扫描保证）。
 
-## 2. 数据整合状态
-素材目录 `shared/xhs-collection/shenzhen-omakase-map/` 的 `web-dataset.json`（30 篇，采集 2026-11-20 05:38）、`dataset.json`、`insights.md`、`collection-report.json`（30/30 详情、30/30 评论页、0 失败）均已读取并整合：25 篇映射到 16 家门店，5 篇因未写店名未映射（原因显示在设置里）。优先字段：价格/加点透明、稳定与服务公平、忌口执行（齐武）、座位/噪音/预约（仅有零散说法，其余待核实）、跨境价值（无素材→待核实，口岸仅为直线距离估算）、分歧状态。互动量不参与、不展示。
+## 2. 筛选规则与审计
+规则 R1–R8、深圳 Omakase 特点研究、逐候选逐条检查、价格证据、身份证据、原因、来源、更新时间见 `artifacts/report/omakase-audit.md`（由 `scripts/build-report.mjs` 从 `data/audit.json` 确定性生成）；研究笔记 `research-shenzhen-omakase.md`。动态高德检索走 `lib/rules.ts`：名称命中排除模式（放题/回转/居酒屋/外卖…）优先拒绝；未审计 POI 一律不进主清单；命中 exclude/pending 候选拒绝；已入选候选需全名+分店限定都命中（不使用单字关键词），类型明确非餐饮或高德人均 <300 拒绝。真实 E2E：高德返回 70 个地点，2 个通过，68 个被拒绝。
+真实高德事实快照 `artifacts/report/amap-probe.json`（51 个关键词，297 个 POI）。
 
-## 3. Named VoltAgent agents 实际调用（原生 Agent 调用）
-| agent | 范围 | 结果 |
-| --- | --- | --- |
-| ui-ux-tester | 390x844 / 1360x900 浏览器走查 | 提出 B1 筛选首次加载后点击慢、B2 筛选叠加无结果、H1 地图占比、H4 加载期间列表重排、M1/M2 设置/抽屉过长等；已修：加载期间不先展示无定位门店（H4）、空状态文案、地图比例 34→38dvh、电话 tel 链接；个人状态变化不再重建标记（性能）。未修（已知限制）：设置/抽屉较长、默认未折叠来源。 |
-| frontend-developer | 代码评审 | 确认并已修：个人状态旧键回退后写入丢字段、检索失败时分店键状态不可读、judge 注释与代码不符；其余（脚本超时重试、短关键词误匹配）记为已知限制。 |
-| accessibility-tester | WCAG 2.2 AA | 对比度 6.5–8.8:1 通过；已修：链接下划线、卡片标题触控高度 44px。抽屉保持非模态 `role=dialog`（需保持地图可操作，带 Esc/关闭按钮/焦点管理），人工屏幕阅读器与 200% 缩放未做，列为限制。 |
-| qa-expert | 测试策略 | 提出 365 天边界、同源去重、stateOf 回退等用例，已补；E2E 场景清单已全部覆盖。 |
+## 3. 图鉴
+`data/atlas.json`、`data/sources.atlas.json`；来源清单 `artifacts/report/atlas-sources.md`；研究笔记 `research-atlas-notes.md`。二次核对删改了第一轮无依据内容（如神奈川县日历月份、kuromaguro 数字、saba 九州冬季说法、wasabi 旬）。已知弱点：23→22 条无月份；10 条仅日文维基支撑；JNTO 页面为脚本渲染未能逐字核对，已撤回依赖。QA 低级别提示（madai 月份与说明、hotate 月份、kuromaguro 措辞不一致）未再修，记为限制。
 
-## 4. 测试结果
-- `pnpm lint`：通过　`pnpm typecheck`：通过
-- `pnpm test`：2 个文件、**42 个单元测试全部通过**（三轴规则与边界、结论规则、真实数据交叉校验、分店匹配、筛选、口岸距离、高德字段映射、备份校验/v1 迁移、存储读写与失败路径）
-- `pnpm build`：通过
-- 真实高德生产 E2E（`next start` + Playwright Chromium，真实高德 JS API，无 mock）：**5/5 通过**（7.9 min）
-  1. 桌面：首页理解度、地图加载与 94 个标记、无旧导航、搜索、近期稳定=高（4/97）、带父母=高（植庭）、过关价值=高→空状态、人均、口岸、无结果搜索
-  2. 桌面：详情抽屉、三轴解释、价格拆分、来源链接（xiaohongshu.com/explore/…，`target=_blank`，`rel=noopener`，无令牌）、收藏/去过/备注跨刷新、“我的”筛选、导出文件校验、非法导入被拒、二次确认清空、导入恢复
-  3. 错误状态：高德脚本被拦截→地图错误提示 + 检索失败提示，整理门店仍可浏览，恢复后重试成功
-  4. 损坏的本地数据：另存副本并提示，不覆盖原数据
-  5. 390x844 移动端：首屏标题/人群/三判断/搜索/筛选可见、地图 >200px、无横向溢出、触控 ≥44px、卡片→抽屉（视口内、焦点到关闭按钮、Esc 关闭）、收藏/备注刷新保留、设置对话框
-- 控制台/页面错误：`artifacts/report/console-errors.json`——产品错误 **0**，第三方非预期 0，仅 4 条高德瓦片 `ERR_ABORTED`（地图平移时浏览器取消在途请求，已单独归类）。
+## 4. 命令与真实结果
+| 命令 | 结果 |
+| --- | --- |
+| `node scripts/validate-data.mjs` | 通过（58 候选、include=2；atlas 60 条） |
+| `node scripts/build-report.mjs` | 通过，生成 omakase-audit.md / atlas-sources.md |
+| `pnpm lint` | 0 error / 0 warning |
+| `pnpm typecheck` | 通过 |
+| `pnpm test` | 4 files, 127 tests passed |
+| `pnpm build` | 通过（65 个静态页） |
+| 真实高德 production E2E（`pnpm e2e`，生产服务 127.0.0.1:3617） | **7 passed**（桌面 5 + 移动 2） |
 
-## 5. 截图（`artifacts/screenshots/`，均已逐张查看）
-- desktop-01-home：地图为主角，左栏标题/三判断/搜索/筛选/卡片，无遮挡；字号清楚。
-- desktop-02-filter：近期稳定=高 4 家，地图只剩 4 个标记，筛选按钮深绿选中态清晰。
-- desktop-03-empty：值得过关=高→“没有符合条件的店”并给出原因与“清除全部筛选”。
-- desktop-04-detail：抽屉覆盖左栏、地图完整，选中点深色放大；三轴、价格拆分、待核实标签可读。
-- desktop-05-settings：设置对话框含导出/导入/清空、来源与更新时间、规则、未映射素材，无溢出。
-- desktop-06-amap-error：地图错误态居中提示 + 重试按钮；列表/抽屉仍可用，位置显示待核实。
-- mobile-01-home：390 宽首屏含标题、三判断、搜索、筛选、约 320px 地图、首张卡片；无横向溢出。
-- mobile-02-filter：筛选后 4 个标记与“共 4 家（筛选前 97 家）”。
-- mobile-03-detail / mobile-04-detail-sources：底部抽屉约 74% 高度，三轴/价格/来源链接可读，不遮挡操作按钮；高德版权不再穿透抽屉。
-- mobile-05-settings：对话框在视口内，按钮可触控。
-发现的观感问题：手机上抽屉覆盖大部分地图；设置/抽屉内容偏长；已记入限制。
+E2E 覆盖：主清单仅含合格店且价位 ≥300、每卡 headline 不同；搜索/筛选抽屉/空状态；每店详情 8 个字段 + 优势 + 风险 + 置信度 + 更新时间 + 来源链接；收藏/去过/备注跨刷新；导出、非法导入被拒、清空、导入恢复；图鉴列表/搜索/类别/月份/空状态/详情；筛选依据页与高德拒绝计数；高德脚本被拦截的错误态与重试恢复；损坏本地存储；390×844 无横向溢出、触控目标 ≥44px。console 报告 `console-errors.json`：真实流程无产品错误；其中 2 条 “product” 分类是故意访问不存在的图鉴路径产生的 404，2 条 third-party 是故意拦截高德脚本。
 
-## 6. 剩余真实限制
-- 素材仅 30 篇：多数店带父母/过关价值为“待核实”，无店过关价值达到“高”（“值得过关 高”筛选为空状态，属如实）。
-- 高德检索结果含约 80 家仅有位置信息的店；品牌分店证据按品牌共享并标注“分店待核实”；关键词按名称匹配，改名需更新 `data/shops.json`。
-- 高德检索限流时可能部分失败（已重试并提示）；在无 GPU 的无头浏览器里整页较慢（E2E 单场景 1–4 分钟），真实设备未测。
-- 未做屏幕阅读器人工测试与 200% 缩放人工核验；GitHub Pages 导出未在本轮重新部署验证（代码路径未改）。
+## 5. 截图（artifacts/screenshots/，已逐张查看关键页）
+desktop-01-home、02-filter、03-empty、04-detail、05-atlas-list、06-atlas-detail、07-audit、08-amap-error；mobile-01-home、02-filter、03-detail、04-detail-sources、05-settings、06-atlas-list、07-atlas-detail、08-audit、09-amap-error。
+
+## 6. 原生 named subagents
+source_verification_agent（店铺审计，2 轮）、bibliography_agent（图鉴，2 轮）、frontend-developer（UI）、qa-expert（独立 QA，已返回完整报告）。QA 发现并已修复：B1 鮨嵐证据不符→降级；H1 高德类型“购物服务”误拒→规则放宽到全名+分店命中；H2 隐谷/穗引用错位与夸大→改写并补来源日期、重新分层；M1 排除模式可被候选名绕过→改为最优先；M2 触控目标→CSS；L2 404 标题；README/测试失败项。未修：L3 详情抽屉在高负载无头环境下较慢（机器负载 >20，非真机 GPU 测量）。
+
+## 7. 限制
+见 README“已知限制”。

@@ -1,0 +1,4412 @@
+{
+  "schemaVersion": 3,
+  "dataVersion": "2026-11-20.1",
+  "updatedAt": "2026-11-20",
+  "priceFloor": 300,
+  "characteristics": [
+    {
+      "text": "深圳小红书上被反复讨论的“omakase”大多是 200–300 元的平价套餐：匠龙 298/480/630、小十 299、十贯 298、寿司大 280、小志 298、半藏 290、鮨政 200 出头，真正 ≥300 且有板前描述的店明显更少",
+      "sources": [
+        "xhs:6a7460ae0000000021021b87",
+        "xhs:683fc8120000000012005a35",
+        "xhs:6a4b0a720000000008032b38",
+        "xhs:69b403fd0000000023012dcb"
+      ]
+    },
+    {
+      "text": "300 元以上的样本拉得很开：进吾 368、鮨汐 498、隐谷约 640–720、齐武作者称约 2000；价格越高，评论越集中在忌口执行、区别对待与餐量，而不是食材新鲜度",
+      "sources": [
+        "xhs:6a50d1210000000011006fac",
+        "xhs:6af8607d000000002a039152",
+        "xhs:69736a1b0000000028008a61",
+        "web:dianping-yingu-794041893"
+      ]
+    },
+    {
+      "text": "中低价位的出品公式高度同质：海胆（蛋糕/热狗/手卷）、飘雪鹅肝金枪鱼赤身、茶碗蒸与甜点反复出现，套餐结构多为前菜或茶碗蒸、刺身、6–10 贯握寿司、一道海胆主打，烧物与汁物较少见",
+      "sources": [
+        "xhs:69b406cf000000001a0218c1",
+        "xhs:6a747ee80000000026035169",
+        "xhs:6ab0b55700000000270098dc",
+        "xhs:69ba8044000000001a0364f0",
+        "xhs:6a7460ae0000000021021b87"
+      ]
+    },
+    {
+      "text": "价格透明度是争议点：同一 368 套餐里，原只海胆需加 66 元、部分菜品是三选一，评论区会主动纠正正文；谁的“套餐”才是最低价需要逐店核对",
+      "sources": [
+        "xhs:6a50d1210000000011006fac"
+      ]
+    },
+    {
+      "text": "形态上不只有江户前：有日法融合、板前潮菜、烧鸟 omakase 与京都庭院式江户前老店（植庭）；其中潮菜与烧鸟类是否算“主厨发办”需单独核实",
+      "sources": [
+        "xhs:6a0d3387000000003603352f",
+        "xhs:6af67e51000000002b039379",
+        "xhs:6a964e98000000002803586b",
+        "xhs:6ad18f910000000014030482"
+      ]
+    },
+    {
+      "text": "“omakase”常被用于放题与普通套餐：980 元自助、680/980 寿司放题、带“omakase”名的 268 元 bistro 套餐，都不应仅凭店名收录",
+      "sources": [
+        "xhs:6889fc7400000000230195b0",
+        "xhs:693d7bd9000000001e02fa48",
+        "xhs:6a4b0a720000000008032b38"
+      ]
+    },
+    {
+      "text": "服务与预约争议集中在高价店：忌口被忽略、新客与熟客/开酒客待遇不同、餐量小；预约规则与一场制说明在笔记里极少被写明",
+      "sources": [
+        "xhs:69736a1b0000000028008a61",
+        "xhs:693d7bd9000000001e02fa48"
+      ]
+    },
+    {
+      "text": "香港读者的对照物主要是连锁寿司与香港价位：评论里出现“宁愿食寿司郎”“跑去香港吃了千两”等说法，说明深圳 300–600 元档的价值判断高度依赖出品与服务细节",
+      "sources": [
+        "xhs:6889fc7400000000230195b0",
+        "xhs:68485565000000002202d69c"
+      ]
+    },
+    {
+      "text": "深圳 300 元以上的板前店，公开页面里午晚市价差很大：穗 Sushi Minoru 午市 480 起、晚市 1180 起；隐谷午市约 400、晚市 1880；鮨嵐前海约 700–990",
+      "sources": [
+        "web:163-minoru-J0FCF1T10522KVMT",
+        "web:hk01-omakase5-1081872",
+        "web:dianping-arashi-713080343"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "R1",
+      "kind": "include",
+      "title": "必须是板前",
+      "text": "主清单店必须有来源描述存在板前（counter）座位或师傅在客人面前现场制作；仅名称含 omakase 不算，无板前描述记 unknown。"
+    },
+    {
+      "id": "R2",
+      "kind": "include",
+      "title": "主厨发办为主",
+      "text": "必须是主厨发办（chef's choice）套餐为主，而不是单点为主、三选一为主或自助；套餐可有少量加点。"
+    },
+    {
+      "id": "R3",
+      "kind": "include",
+      "title": "一场制/定时/预约制",
+      "text": "有一场制、定时开场或预约制证据则作为加分项写入 profile；缺失记 unknown，不单独构成排除，但不得凭空补写。"
+    },
+    {
+      "id": "R4",
+      "kind": "exclude",
+      "title": "排除类别",
+      "text": "普通日料、居酒屋、放题/自助、回转寿司、普通寿司店与外卖寿司、烧肉、拉面、铁板烧及其他非 omakase 一律排除；依据来源描述和类型，不只看店名关键词。"
+    },
+    {
+      "id": "R5",
+      "kind": "price",
+      "title": "价格门槛 300 元/位",
+      "text": "取该店最低套餐的每位价格核验；明确低于 300 元必须排除，需有来源证明 ≥300 才可入主清单。高德人均只作价格冲突信号，不能单独证明 ≥300。"
+    },
+    {
+      "id": "R6",
+      "kind": "price",
+      "title": "价格未知的处理",
+      "text": "价格未知且无法核实 ≥300 的店不得进入主清单：身份可信者放“待核实区”(pending)，身份也缺失者排除。"
+    },
+    {
+      "id": "R7",
+      "kind": "evidence",
+      "title": "证据最低要求",
+      "text": "入主清单至少要有可追溯的价格来源与板前/发办描述；点赞、收藏、评论数不计入质量证据；单一来源仅可给“低”置信度。"
+    },
+    {
+      "id": "R8",
+      "kind": "include",
+      "title": "分店处理",
+      "text": "连锁或多分店按分店逐一核对地址与价格；高德 POI 须同时匹配分店关键词，不以一家的证据代表其他分店。"
+    },
+    {
+      "id": "R9",
+      "kind": "evidence",
+      "title": "不明字段留待核实",
+      "text": "主厨、流派、食材、预约规则等无来源的字段一律为 null，界面显示“待核实”；禁止编造。"
+    }
+  ],
+  "excludeNamePatterns": [
+    {
+      "pattern": "寿司郎|スシロー|滨寿司|はま寿司|元气寿司|くら寿司|藏寿司|回转|回転|旋转",
+      "label": "回转寿司连锁"
+    },
+    {
+      "pattern": "放题|自助|畅吃|无限|任食|BUFFET|buffet",
+      "label": "放题/自助"
+    },
+    {
+      "pattern": "居酒屋|烧鸟屋|串烧|烧烤|烤肉|烧肉|焼肉|铁板烧(?!.*omakase)|烤鱼",
+      "label": "居酒屋/烧烤/烧肉/铁板烧"
+    },
+    {
+      "pattern": "拉面|拉麺|乌冬|饭团|丼|牛丼|定食|便当|盖饭|咖喱|煲仔|火锅|寿喜烧|关东煮",
+      "label": "拉面/饭类/定食/锅物"
+    },
+    {
+      "pattern": "外卖|宅配|配送|速递|手卷店|卷寿司|和风卷|寿司外送",
+      "label": "外卖/宅配/卷寿司"
+    },
+    {
+      "pattern": "棋牌|台球|电动车|科技|文化发展|有限公司|酒业|酱酒|烟酒|超市|儿童",
+      "label": "非餐饮误匹配"
+    },
+    {
+      "pattern": "炸鸡|烧烤|奶茶|咖啡|面包|酒馆|酒吧|Bistro|bistro|霧BISTRO",
+      "label": "酒吧/西餐/简餐"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "yingu",
+      "name": "隐谷 Omakase（福田财富店）",
+      "keywords": [
+        "隐谷",
+        "隐谷Omakase"
+      ],
+      "category": "omakase-sushi",
+      "decision": "include",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "点评作者明确选“板前位置”，店内另有两个包房",
+          "sources": [
+            "web:dianping-yingu-794041893",
+            "web:dianping-yingu-848685458"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "pass",
+          "note": "点评称主厨按忌口、时令与个人偏好定制，属主厨发办；香港01另写逐道介绍菜品",
+          "sources": [
+            "web:dianping-yingu-848685458"
+          ]
+        },
+        {
+          "rule": "R3",
+          "result": "unknown",
+          "note": "未见一场制/预约规则来源；香港01提到逐道介绍菜品",
+          "sources": [
+            "web:hk01-omakase5-1081872"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "不属放题、居酒屋、回转或外卖",
+          "sources": [
+            "web:ctrip-yingu-25046130"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "最低口径为香港01所述午市约 400 元，仍高于 300；其余来源 627–1880",
+          "sources": [
+            "web:hk01-omakase5-1081872",
+            "web:dianping-yingu-794041893",
+            "web:ctrip-yingu-25046130",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "3 个独立公开页 + 高德 POI 互相印证；未使用互动量",
+          "sources": [
+            "web:dianping-yingu-794041893",
+            "web:dianping-yingu-848685458",
+            "web:ctrip-yingu-25046130",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R8",
+          "result": "pass",
+          "note": "仅财富店一家入主清单，高德 POI 与点评地址一致（福华三路88号财富大厦41层）",
+          "sources": [
+            "web:dianping-yingu-794041893",
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "点评作者选板前位，称主厨按忌口、时令定制",
+            "sources": [
+              "web:dianping-yingu-848685458"
+            ]
+          },
+          {
+            "text": "携程笔记：主厨来自香港，创意发办，板前座位到访时已满",
+            "sources": [
+              "web:ctrip-yingu-25046130"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "午市约 400 元起（香港01）；点评 720 / 携程 640 / 高德 627；香港01另写单人餐原价 1880",
+        "basis": [
+          {
+            "text": "香港01：午市人均约 400 元；另写“海胆热狗单人餐”原价 1880 元（共 8 道，最受欢迎档）",
+            "sources": [
+              "web:hk01-omakase5-1081872"
+            ]
+          },
+          {
+            "text": "点评：¥720/人，设板前位和两个包房",
+            "sources": [
+              "web:dianping-yingu-794041893"
+            ]
+          },
+          {
+            "text": "携程笔记：人均 ¥640",
+            "sources": [
+              "web:ctrip-yingu-25046130"
+            ]
+          },
+          {
+            "text": "高德人均 627",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ],
+        "perPersonMin": 400,
+        "perPersonMax": 1880
+      },
+      "reason": "香港01、点评、携程与高德四路价位口径均高于 300（午市约 400，晚市 627–1880），点评写板前位，另一点评写主厨按忌口定制；缺口是一场制/预约规则，小红书无交叉证据，置信度“中”。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "隐谷Omakase(福田财富店)",
+        "address": "福华三路88号财富大厦41楼b",
+        "cost": 627.0,
+        "note": "高德类型为餐饮相关场所，非日本料理分类；名称与地址与点评一致"
+      },
+      "updatedAt": "2026-11-21",
+      "branchKeywords": [
+        "福田财富"
+      ],
+      "branchNote": "点评/携程记录的是福田财富大厦 41 层店；其他分店未核对",
+      "profile": {
+        "headline": {
+          "text": "福田财富大厦 41 层的高空板前，主厨为香港籍，按时令与忌口现场定制，公开点评实付约 640–720 元/位",
+          "sources": [
+            "web:dianping-yingu-794041893",
+            "web:dianping-yingu-848685458",
+            "web:ctrip-yingu-25046130"
+          ]
+        },
+        "cuisine": {
+          "text": "偏主厨自创的创意发办：携程笔记称菜品立意创新、手法与装盘各有自己的设计，而非纯江户前路线",
+          "sources": [
+            "web:ctrip-yingu-25046130"
+          ]
+        },
+        "ingredients": {
+          "text": "被记录的食材有松叶蟹、海胆（含紫苏海胆天妇罗与海胆热狗）、蓝鳍金枪鱼大腹、天然石恒鲷寿司、粉贝拼赤贝、清酒煮鲍鱼与静冈蜜瓜",
+          "sources": [
+            "web:ctrip-yingu-25046130"
+          ]
+        },
+        "chef": {
+          "text": "主厨来自香港；点评作者提到主厨会按忌口、时令与个人偏好定制。具体姓名与资历公开来源未写",
+          "sources": [
+            "web:dianping-yingu-848685458",
+            "web:ctrip-yingu-25046130"
+          ]
+        },
+        "menu": {
+          "text": "单人 omakase，茶碗蒸、鲍鱼、天妇罗、松叶蟹冻、握寿司与手卷、鸽子等都出现在记录里；固定套餐档位与加点规则未见来源",
+          "sources": [
+            "web:ctrip-yingu-25046130"
+          ]
+        },
+        "value": {
+          "text": "口径分层：香港01午市约 400、点评与高德 627–720，另有原价 1880 元的单人餐档；各口径均不低于 300",
+          "sources": [
+            "web:hk01-omakase5-1081872",
+            "web:dianping-yingu-794041893",
+            "web:ctrip-yingu-25046130",
+            "amap:probe-20261120"
+          ]
+        },
+        "space": {
+          "text": "板前位与两个包房，吧台环绕玻璃窗，位于财富大厦 41 层；携程作者到访时板前座位已满",
+          "sources": [
+            "web:dianping-yingu-794041893",
+            "web:hk01-omakase5-1081872",
+            "web:ctrip-yingu-25046130"
+          ]
+        },
+        "booking": null,
+        "scenes": null,
+        "strengths": [
+          {
+            "text": "点评明确写到主厨按忌口、时令与个人偏好定制；香港01另提到逐道介绍菜品",
+            "sources": [
+              "web:dianping-yingu-848685458"
+            ]
+          },
+          {
+            "text": "同一栋楼里少见的 600 元以上、板前加包房并存的格局，便于一人到小聚两种用法",
+            "sources": [
+              "web:dianping-yingu-794041893"
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "text": "点评发布于 2022 年、携程评价为 2021 年，价格与出品可能已变化；缺少近期用户来源，新近稳定性无法判断",
+            "sources": [
+              "web:dianping-yingu-794041893",
+              "web:dianping-yingu-848685458",
+              "web:ctrip-yingu-25046130"
+            ]
+          },
+          {
+            "text": "携程笔记提到店内推出 999999 元单人 omakase 年卡，属营销噱头性质，不代表常规价位",
+            "sources": [
+              "web:ctrip-yingu-25046130"
+            ]
+          },
+          {
+            "text": "是否一场制、取消与预约规则没有来源，预约难度只能待核实",
+            "sources": [
+              "web:ctrip-yingu-25046130"
+            ]
+          }
+        ],
+        "disputes": [
+          {
+            "text": "人均口径不一致：点评 720、携程 640、高德 627；均高于 300 元门槛，但读者应以预约时店家报价为准",
+            "sources": [
+              "web:dianping-yingu-794041893",
+              "web:ctrip-yingu-25046130",
+              "amap:probe-20261120"
+            ]
+          },
+          {
+            "text": "香港01称吧台环绕玻璃窗并逐道介绍；点评写板前位加两个包房。座位描述一致，价位随午晚市与套餐而不同",
+            "sources": [
+              "web:hk01-omakase5-1081872",
+              "web:dianping-yingu-794041893"
+            ]
+          }
+        ]
+      },
+      "confidence": {
+        "level": "中",
+        "reason": "价位有三个公开页与高德互相印证，但点评/携程评价多为 2021–2022 年、小红书无交叉证据，且预约规则未知"
+      }
+    },
+    {
+      "id": "qiwu",
+      "name": "齐武（后海）",
+      "keywords": [
+        "齐武",
+        "齐武日本料理"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "笔记描述大将在场边做手握并与其他客人交谈，属板前形态；未见“板前”字样，据行为推断（复核后降级：仅一篇用户笔记描述，未见“板前/吧台”字样或套餐结构，证据不足以满足身份硬证据）",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "大将握制、提前问忌口，标签为 omakase；套餐明细未披露（复核后降级：仅一篇用户笔记描述，未见“板前/吧台”字样或套餐结构，证据不足以满足身份硬证据）",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        {
+          "rule": "R3",
+          "result": "pass",
+          "note": "作者提前一个月预约，并有预约时登记忌口的流程",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "不属放题/居酒屋/回转",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "作者称人均约 2000 元，高德 1824 元，均远高于 300",
+          "sources": [
+            "xhs:69736a1b0000000028008a61",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅 1 篇小红书（负面）+ 高德；公开网页未找到独立来源，“黑珍珠”仅为作者自述，未获核实",
+          "sources": [
+            "xhs:69736a1b0000000028008a61",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R8",
+          "result": "pass",
+          "note": "高德 POI 为齐武·日本料理（鹏润达商业广场店）后海滨路3368号；“齐武今成”为不同类型 POI，已排除",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "大将现场握寿司并与其他客人交谈，提前一个月预约且预约时问忌口",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "作者称人均约 2000 元；高德人均 1824 元",
+        "basis": [
+          {
+            "text": "笔记作者称人均已经到 2k",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          },
+          {
+            "text": "高德人均 1824，与笔记同量级",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ],
+        "perPersonMin": 1824,
+        "perPersonMax": 2000
+      },
+      "reason": "价位有作者自述（约 2000）与高德 1824 同量级，但 Omakase 身份只有一篇小红书负面体验笔记的行为描述（大将现场握寿司、预约问忌口），没有板前/吧台座位或发办套餐结构的独立来源，“黑珍珠”也只是作者自述未核实。依据保守原则降为待核实，不计入主清单。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "齐武·日本料理(鹏润达商业广场店)",
+        "address": "粤海街道海珠社区后海滨路3368号(后海地铁站F口旁)",
+        "cost": 1824.0,
+        "note": "高德类型为中餐厅，疑似分类有误，名称与笔记一致"
+      },
+      "updatedAt": "2026-11-21",
+      "profile": {
+        "headline": {
+          "text": "后海鹏润达的高价日料板前，作者称人均约 2000 元；评论区分化明显，争议集中在忌口执行与新客/熟客待遇",
+          "sources": [
+            "xhs:69736a1b0000000028008a61",
+            "amap:probe-20261120"
+          ]
+        },
+        "cuisine": null,
+        "ingredients": null,
+        "chef": {
+          "text": "店内由“大将”亲手握寿司，并会与同场客人交流；作者与评论对其沟通方式评价两极。大将姓名未披露",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        "menu": {
+          "text": "评论称餐量偏小、男性小胃口以外难吃饱，追加项目定价偏高；套餐明细笔记未列",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        "value": {
+          "text": "作者称人均约 2000 元，高德人均 1824 元，二者同量级",
+          "sources": [
+            "xhs:69736a1b0000000028008a61",
+            "amap:probe-20261120"
+          ]
+        },
+        "space": null,
+        "booking": {
+          "text": "作者提前约一个月预约，预约时会询问忌口",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        "scenes": {
+          "text": "评论区有人到访恰逢生日，店方送了蛋糕并分享自酿酒，可见庆生有被照顾的先例（单条评论）",
+          "sources": [
+            "xhs:69736a1b0000000028008a61"
+          ]
+        },
+        "strengths": [
+          {
+            "text": "评论区有熟客称出品“水平是在线的”，说明价格带内至少有稳定的口碑基础（评论，未与第二来源交叉）",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          },
+          {
+            "text": "有评论者提到店家分享自酿酒并为生日客人备了蛋糕",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "text": "作者提前告知乳糖不耐受与不吃 wasabi，仍被端上奶制品和 wasabi，重做后又出错，属忌口执行失误",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          },
+          {
+            "text": "多条评论称新客被冷落、熟客与开酒客更受关照，服务存在区别对待争议",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          },
+          {
+            "text": "2000 元量级下餐量与加点定价被评论者质疑",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          }
+        ],
+        "disputes": [
+          {
+            "text": "作者与部分评论称服务冷淡、被忽略；另一评论称体验很好且受到庆生招待。同一店不同到访体验落差大",
+            "sources": [
+              "xhs:69736a1b0000000028008a61"
+            ]
+          }
+        ]
+      },
+      "confidence": {
+        "level": "低",
+        "reason": "复核后降级：单一用户来源，缺少公开网页独立证据"
+      },
+      "branchKeywords": [
+        "日本料理",
+        "鹏润达"
+      ]
+    },
+    {
+      "id": "jianglong",
+      "name": "匠龙 Omakase（鮨·匠龍）",
+      "keywords": [
+        "匠龙",
+        "匠龍",
+        "鮨匠龙"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:6a7460ae0000000021021b87",
+            "xhs:69e61154000000001b022c2d"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 298 元，低于 300 元门槛",
+          "sources": [
+            "xhs:6a7460ae0000000021021b87",
+            "xhs:69e61154000000001b022c2d"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:6a7460ae0000000021021b87",
+            "xhs:69e61154000000001b022c2d"
+          ]
+        },
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "笔记描述板前现场制作",
+          "sources": [
+            "xhs:6a7460ae0000000021021b87",
+            "xhs:69e61154000000001b022c2d"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "多篇笔记描述坐在板前看师傅捏寿司，套餐含海胆蛋糕与鹅肝金枪鱼赤身",
+            "sources": [
+              "xhs:6a7460ae0000000021021b87",
+              "xhs:69e61154000000001b022c2d"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "fail",
+        "label": "套餐 298 / 480 / 630 元（2026-08 笔记）；多篇称单人 200 多",
+        "basis": [
+          {
+            "text": "套餐 298 / 480 / 630 元（2026-08 笔记）；多篇称单人 200 多",
+            "sources": [
+              "xhs:6a7460ae0000000021021b87",
+              "xhs:69e61154000000001b022c2d"
+            ]
+          }
+        ],
+        "perPersonMin": 298
+      },
+      "reason": "多篇笔记确认其为板前并有 298/480/630 三档，但最低档 298 元低于 300 元门槛；高德各分店人均 196–288 元也指向 300 以下。按“取最低套餐价核验”规则排除。若将来只展示 480/630 档，需分档建模，当前不入主清单。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "匠龙Omakase(领展中心城店)",
+        "address": "福华一路3号领展中心城L1层东走廊",
+        "cost": 253.0,
+        "note": "另有汉京店288、大悦城店196、罗湖kk time店224，均低于300"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "领展",
+        "汉京",
+        "大悦城",
+        "kk time",
+        "会展"
+      ],
+      "branchNote": "笔记提及大悦城店、福田领展店、会展中心一带；高德另有汉京、罗湖 kk time 店"
+    },
+    {
+      "id": "xiaoshi",
+      "name": "小十 Omakase",
+      "keywords": [
+        "小十",
+        "小十Omakase"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 299 元，低于 300 元门槛",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "299 元海胆热狗套餐（2025-06 笔记）",
+        "basis": [
+          {
+            "text": "299 元海胆热狗套餐（2025-06 笔记）",
+            "sources": [
+              "xhs:683fc8120000000012005a35"
+            ]
+          }
+        ],
+        "perPersonMin": 299
+      },
+      "reason": "299 元海胆热狗套餐低于 300 元门槛，高德各分店人均 282–290 元一致；同合集评论者还称其食材偏弱，且有评论称国庆期间吃后腹泻（单条）。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "小十(地王大厦店)",
+        "address": "地王大厦信兴广场1层北门",
+        "cost": 288.0,
+        "note": "星河Cocopark 290，前海周大福 282"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "地王",
+        "Cocopark",
+        "前海"
+      ]
+    },
+    {
+      "id": "shiguan",
+      "name": "十贯 SUSHI JYUKAN",
+      "keywords": [
+        "十贯"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 298 元，低于 300 元门槛",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "298 元海胆热狗套餐（2025-06 笔记）",
+        "basis": [
+          {
+            "text": "298 元海胆热狗套餐（2025-06 笔记）",
+            "sources": [
+              "xhs:683fc8120000000012005a35"
+            ]
+          }
+        ],
+        "perPersonMin": 298
+      },
+      "reason": "298 元套餐低于门槛；评论称板前位置挤、周边较吵，也有评论称需提前排队。高德人均 288–295 元。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "十贯SUSHI JYUKAN(皇庭广场店)",
+        "address": "福华三路118号皇庭广场L2层L2-19",
+        "cost": 295.0
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "皇庭",
+        "保利"
+      ]
+    },
+    {
+      "id": "shoudai",
+      "name": "寿司大 / 星耀·Omakase",
+      "keywords": [
+        "寿司大",
+        "星耀"
+      ],
+      "category": "regular-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "unknown",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 280 元，低于 300 元门槛",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "280 元单人套餐（2025-06 笔记）",
+        "basis": [
+          {
+            "text": "280 元单人套餐（2025-06 笔记）",
+            "sources": [
+              "xhs:683fc8120000000012005a35"
+            ]
+          }
+        ],
+        "perPersonMin": 280
+      },
+      "reason": "合集给出 280 元单人套餐，低于 300；评论称厨师忙于出餐、板前与普通桌几乎没有区别，缺少主厨发办互动证据。高德人均 317–376 元高于套餐价，更可能含加点。公开点评页另有 2021 年的“星耀·Omakase”588 元套餐记录，但年代久远且无板前证据，不采用。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "寿司大(福田店)",
+        "address": "海田路辛诚花园",
+        "cost": 362.0,
+        "note": "博今国际店317、南山店376、宝安店342；人均含加点，与单人套餐价不一致"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "福田",
+        "南山",
+        "博今",
+        "宝安"
+      ]
+    },
+    {
+      "id": "xiaozhi",
+      "name": "寿司処·小志",
+      "keywords": [
+        "小志",
+        "寿司処小志"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 298 元，低于 300 元门槛",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "298 元单人套餐（2025-06 笔记）",
+        "basis": [
+          {
+            "text": "298 元单人套餐（2025-06 笔记）",
+            "sources": [
+              "xhs:683fc8120000000012005a35"
+            ]
+          }
+        ],
+        "perPersonMin": 298
+      },
+      "reason": "单人套餐 298 元，低于门槛；作者称更适合单点，不是主厨发办导向。高德各分店人均 224–255 元。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "寿司処·小志(深圳湾万象城店)",
+        "address": "深圳湾C区B栋B1CB165A",
+        "cost": 255.0
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "万象城",
+        "深业上城",
+        "Kkmall",
+        "蛇口"
+      ]
+    },
+    {
+      "id": "banzo",
+      "name": "半藏寿司 Hanzo",
+      "keywords": [
+        "半藏",
+        "Hanzo"
+      ],
+      "category": "regular-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "unknown",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:683fc8120000000012005a35",
+            "xhs:68485565000000002202d69c"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 290 元，低于 300 元门槛",
+          "sources": [
+            "xhs:683fc8120000000012005a35",
+            "xhs:68485565000000002202d69c"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:683fc8120000000012005a35",
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "290 元 12 贯套餐 / 人均约 340（2025-06 两篇笔记）",
+        "basis": [
+          {
+            "text": "290 元 12 贯套餐 / 人均约 340（2025-06 两篇笔记）",
+            "sources": [
+              "xhs:683fc8120000000012005a35",
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ],
+        "perPersonMin": 290
+      },
+      "reason": "最低套餐 290 元低于 300；笔记称人多、未坐到板前、出品中规中矩，评论称新鲜度不佳，更接近连锁寿司店而非板前发办。高德人均 206–271 元。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "半藏寿司(深圳One Avenue·卓悦中心店)",
+        "address": "福华一路348号卓悦中心东区L1层",
+        "cost": 271.0
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "卓悦",
+        "万象城",
+        "万象天地",
+        "壹方城"
+      ]
+    },
+    {
+      "id": "zhizheng",
+      "name": "鮨政 / 鮨政·Omakase / BLACK LABEL",
+      "keywords": [
+        "鮨政"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:683fc8120000000012005a35",
+            "xhs:68485565000000002202d69c"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 200 元，低于 300 元门槛",
+          "sources": [
+            "xhs:683fc8120000000012005a35",
+            "xhs:68485565000000002202d69c"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:683fc8120000000012005a35",
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "单人套餐 200 出头（2025-06），另一笔记人均约 250",
+        "basis": [
+          {
+            "text": "单人套餐 200 出头（2025-06），另一笔记人均约 250",
+            "sources": [
+              "xhs:683fc8120000000012005a35",
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ],
+        "perPersonMin": 200
+      },
+      "reason": "套餐 200 出头、人均 250 左右，明确低于 300；高德各分店 216–281 元一致。深圳湾/深业上城/万象前海等分店均未见 300 元以上套餐证据，BLACK LABEL 万象城店高德仅 216 元。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨政·Omakase(深圳湾万象城店)",
+        "address": "科苑南路2888号深圳湾万象城A区B1层B175",
+        "cost": 249.0,
+        "note": "深业上城235，万象前海250，万象天地281，BLACK LABEL万象城216"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "深圳湾",
+        "深业上城",
+        "前海",
+        "万象天地",
+        "BLACK LABEL",
+        "平安"
+      ]
+    },
+    {
+      "id": "wu-bistro",
+      "name": "雾 bistro（霧BISTRO）",
+      "keywords": [
+        "雾bistro",
+        "霧BISTRO",
+        "雾mist"
+      ],
+      "category": "other-cuisine",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "unknown",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "xhs:6a4b0a720000000008032b38"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 268 元，低于 300 元门槛",
+          "sources": [
+            "xhs:6a4b0a720000000008032b38"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "xhs:6a4b0a720000000008032b38"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "268 元套餐（2026-07 笔记，作者怀疑为推广期价）",
+        "basis": [
+          {
+            "text": "268 元套餐（2026-07 笔记，作者怀疑为推广期价）",
+            "sources": [
+              "xhs:6a4b0a720000000008032b38"
+            ]
+          }
+        ],
+        "perPersonMin": 268
+      },
+      "reason": "268 元低于门槛；高德把各店标为酒吧/西餐，人均 202–268 元，笔记评论也质疑“omakase 里怎么出现三文鱼”。属 bistro 形态而非板前发办。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "霧BISTRO(华侨城恒邦置地大厦店)",
+        "address": "香蜜湖街道侨香路3089号恒邦置地大厦一楼1-102",
+        "cost": 268.0,
+        "note": "福田财富店202、后海五矿店230"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "xiangman",
+      "name": "鮨响满·Omakase（皇庭广场店 / 国贸店）",
+      "keywords": [
+        "鮨響满",
+        "鮨响满"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "web:hk01-xiangman-60354510"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 284 元，低于 300 元门槛",
+          "sources": [
+            "web:hk01-xiangman-60354510"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "web:hk01-xiangman-60354510"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "香港01：设板前，师傅现场握寿司",
+            "sources": [
+              "web:hk01-xiangman-60354510"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "fail",
+        "label": "人均 ¥284 起（香港01，试业阶段）",
+        "basis": [
+          {
+            "text": "人均 ¥284 起（香港01，试业阶段）",
+            "sources": [
+              "web:hk01-xiangman-60354510"
+            ]
+          }
+        ],
+        "perPersonMin": 284
+      },
+      "reason": "香港01称其板前有师傅现场捏制，但标示人均 284 元起，起步价低于 300；高德皇庭店 300、国贸店 294，边界值不能证明套餐 ≥300。按最低价规则排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨響满·Omakase(皇庭广场店)",
+        "address": "福华三路皇庭广场R层",
+        "cost": 300.0,
+        "note": "国贸店294"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "皇庭",
+        "国贸"
+      ]
+    },
+    {
+      "id": "lvyoudao",
+      "name": "旅游岛 Omakase 无国界料理",
+      "keywords": [
+        "旅游岛"
+      ],
+      "category": "omakase-other",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "unknown",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "web:xhs-lvyoudao-6952597e"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 298 元，低于 300 元门槛",
+          "sources": [
+            "web:xhs-lvyoudao-6952597e"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "web:xhs-lvyoudao-6952597e"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "人均 298 元，13 道（公开小红书页）",
+        "basis": [
+          {
+            "text": "人均 298 元，13 道（公开小红书页）",
+            "sources": [
+              "web:xhs-lvyoudao-6952597e"
+            ]
+          }
+        ],
+        "perPersonMin": 298
+      },
+      "reason": "公开笔记写人均 298 元、13 道菜，低于门槛；也未见板前证据，且为“无国界料理”。排除。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "weixianxian",
+      "name": "鮨味鲜 OMAKASE 日料（平湖店）",
+      "keywords": [
+        "鮨味鲜"
+      ],
+      "category": "regular-japanese",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "unknown",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 297 元，低于 300 元门槛",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "高德人均 297 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 297 元（无套餐价）",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ],
+        "perPersonMin": 297
+      },
+      "reason": "仅有高德人均 297 元，低于 300；位于龙岗平湖，无任何点评/笔记证据说明板前发办。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨味鲜OMAKASE日料(平湖店)",
+        "address": "禾花社区富安大道18号亚钢一号三栋1层",
+        "cost": 297.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhiyue",
+      "name": "旨楽板前寿司 / 旨楽料理店",
+      "keywords": [
+        "旨楽"
+      ],
+      "category": "regular-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "unknown",
+          "note": "类别判断依据见 reason",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "最低套餐价 191 元，低于 300 元门槛",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "价格来自笔记正文，互动量未计入",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "fail",
+        "label": "高德人均 191–194 元",
+        "basis": [
+          {
+            "text": "高德人均 191–194 元",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ],
+        "perPersonMin": 191
+      },
+      "reason": "高德人均 191–194 元，明显低于门槛；名称含“板前”但价位与高德分类均指向平价寿司。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "旨楽板前寿司(金光华广场店)",
+        "address": "人民南路2028号金光华广场F2层",
+        "cost": 191.0,
+        "note": "KK one 店194"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "buffet-980",
+      "name": "omakase 自助（980 元/位，店名未披露）",
+      "keywords": [
+        "omakase自助"
+      ],
+      "category": "buffet",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "标题与标签写明“omakase 自助、畅吃”，980 元为自助价，属放题",
+          "sources": [
+            "xhs:6889fc7400000000230195b0"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "980 元是畅吃价而非 omakase 套餐价",
+          "sources": [
+            "xhs:6889fc7400000000230195b0"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "笔记未提店名，评论区也在追问“哪儿呀”",
+          "sources": [
+            "xhs:6889fc7400000000230195b0"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "正文与标签均为自助/畅吃，无板前发办描述",
+            "sources": [
+              "xhs:6889fc7400000000230195b0"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "980 元/位畅吃（自助）",
+        "basis": [
+          {
+            "text": "980 元/位畅吃",
+            "sources": [
+              "xhs:6889fc7400000000230195b0"
+            ]
+          }
+        ]
+      },
+      "reason": "标题自称 omakase，但正文是“980 元/位畅吃”的自助，按证据属放题；评论区有人质疑“不值这价，宁愿吃寿司郎”。店名也未披露，无法落点。排除。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "fangti-680-980",
+      "name": "避雷笔记所指店（680/980 元，店名未披露）",
+      "keywords": [
+        "680 980 避雷"
+      ],
+      "category": "buffet",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "评论区有人指出“这家是寿司放题”，笔记作者自述 980 档“全是寿司没别的类目”",
+          "sources": [
+            "xhs:693d7bd9000000001e02fa48"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "店名未披露，无法与高德 POI 对齐",
+          "sources": [
+            "xhs:693d7bd9000000001e02fa48"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "评论区指为寿司放题，作者称全是寿司",
+            "sources": [
+              "xhs:693d7bd9000000001e02fa48"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "680 / 980 元套餐（店名未披露）",
+        "basis": [
+          {
+            "text": "作者称 680 与 980 两档",
+            "sources": [
+              "xhs:693d7bd9000000001e02fa48"
+            ]
+          }
+        ]
+      },
+      "reason": "笔记只给 680/980 两档，评论称其为寿司放题；作者本人投诉被强迫吃米饭、食材不新鲜。店名缺失加放题属性，双重不满足。排除。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "longhua-yifang",
+      "name": "龙华壹方天地新开板前（店名未披露）",
+      "keywords": [
+        "壹方天地",
+        "龙华板前"
+      ],
+      "category": "unknown",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "标题称“板前 omakase”，正文仅有氛围描述",
+          "sources": [
+            "xhs:6ad8b5a2000000002b01e1b2"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "标题写“不贵”，无具体价格；评论区有人追问人均无人回答",
+          "sources": [
+            "xhs:6ad8b5a2000000002b01e1b2"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "店名与价格均缺失",
+          "sources": [
+            "xhs:6ad8b5a2000000002b01e1b2"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "笔记只给环境照片式描述与“不贵”，评论区一直在问店名与人均，正文无答案；高德检索壹方天地只返回寿司郎。无法落点也无价格，排除，待补店名后可重审。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索“壹方天地 omakase”只返回商场与服装/儿童用品等 POI，无板前类"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "cheap-lowkey",
+      "name": "“真正低调的神”巨便宜（店名未披露）",
+      "keywords": [
+        "低调的神"
+      ],
+      "category": "unknown",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "正文仅有标签，无店名/价格/菜品",
+          "sources": [
+            "xhs:6a70a1d00000000025007cdd"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "评论区有人问“一位多少钱”，无回答",
+          "sources": [
+            "xhs:6a70a1d00000000025007cdd"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "笔记正文只有两个标签，标题写“巨便宜”；评论区有人称“巨难吃，平价 omakase 里很一般”、还有人质疑海胆没处理干净。既无店名也无价格，且标题自述便宜，排除。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "rifa-fusion",
+      "name": "日法 fusion（chef 藤本，店名未披露）",
+      "keywords": [
+        "藤本",
+        "日法fusion"
+      ],
+      "category": "other-cuisine",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "正文为 7 道 course + 餐前小吃 + 甜点，评论区在问是否都是板前位，无答案",
+          "sources": [
+            "xhs:6a0d3387000000003603352f"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "正文未写价格",
+          "sources": [
+            "xhs:6a0d3387000000003603352f"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "店名未披露，仅有主厨姓氏",
+          "sources": [
+            "xhs:6a0d3387000000003603352f"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "正文描述 7 道 course，未写板前",
+            "sources": [
+              "xhs:6a0d3387000000003603352f"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "笔记称“最强日法 fusion”，有当季新菜单与主厨藤本，但店名、价格、是否板前均未披露，评论区同样在追问。身份与价格都无证据，排除，待补店名后可重审。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索“藤本 日法”无数据"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "chunhaiwan",
+      "name": "春海湾当代潮菜会宴（南山）",
+      "keywords": [
+        "春海湾"
+      ],
+      "category": "other-cuisine",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R2",
+          "result": "fail",
+          "note": "正文列举卤水拼盘、粿条披萨、北京烤鸭等单点菜，并有四楼包间宴请；未见主厨发办套餐",
+          "sources": [
+            "xhs:6af67e51000000002b039379"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "评论者估“人均得三百了吧”，非来源价格",
+          "sources": [
+            "xhs:6af67e51000000002b039379"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "属潮菜宴请餐厅，非 omakase",
+          "sources": [
+            "xhs:6af67e51000000002b039379"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无套餐价；评论者估约 300，非来源价格",
+        "basis": []
+      },
+      "reason": "虽有“板前潮菜体验”和“潮汕 omakase”话题，但正文展示的是明档潮菜单点与宴请包间，没有主厨发办套餐或一场制证据；价格仅有评论者猜测。按证据判为非 Omakase。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索“春海湾”无对应 POI"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhuke",
+      "name": "竹·SUSHI TA-KE 日本料理",
+      "keywords": [
+        "竹SUSHI TA-KE",
+        "SUSHI TA-KE"
+      ],
+      "category": "regular-japanese",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "笔记只称“师傅技术不过关”，未写发办",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "笔记人均约 350",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "仅一句差评，无板前/套餐信息",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "合集人均约 350（单一笔记）",
+        "basis": [
+          {
+            "text": "合集写人均 350",
+            "sources": [
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ],
+        "perPersonMin": 350
+      },
+      "reason": "合集标注人均 350，但评价为“除了海胆没有记忆点、米饭松散”，没有板前与发办的任何描述，身份不成立。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "竹·SUSHI TA-KE日本料理(龙岗大运天地店)",
+        "address": "大运天地购物中心1楼南区湖边SL110",
+        "cost": 221.0,
+        "note": "仅检索到龙岗店，与笔记所述 350 元的店是否同一分店未核实"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhiteng-hk",
+      "name": "植藤",
+      "keywords": [
+        "植藤"
+      ],
+      "category": "regular-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R2",
+          "result": "fail",
+          "note": "笔记称单人套餐约 300，放很多 Hello Kitty 造型寿司拍照",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "以造型寿司拍照为卖点，味道被评为平淡",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "合集称约 300 元单人套餐、味道平淡、以 Hello Kitty 寿司拍照取胜，不具备主厨发办特征；价格也只是“左右”，无法证明 ≥300。排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "植藤.鱼生寿司铁板烧(卓悦中心店)",
+        "address": "深南大道2005号One Avenue卓悦中心北区中央大街N137街铺2",
+        "cost": 298.0,
+        "note": "高德类型含铁板烧；前海店植藤·鱼屋寿司料理酒场 257"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "xintian",
+      "name": "新田（全称未知）",
+      "keywords": [
+        "新田"
+      ],
+      "category": "unknown",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "合集写 380 元午市 12 贯，是午市价而非晚市；评论者问“全称搜不到”",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "全称与地址未知，无法落点",
+          "sources": [
+            "xhs:683fc8120000000012005a35"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "380 元午市 12 贯寿司（合集）",
+        "basis": [
+          {
+            "text": "午市 12 贯寿司套餐 380 元",
+            "sources": [
+              "xhs:683fc8120000000012005a35"
+            ]
+          }
+        ],
+        "perPersonMin": 380
+      },
+      "reason": "合集把它排第一，称“最有鱼味、环境最好”，但只给 380 元午市 12 贯，评论者连全称都搜不到。无法落点、无板前证据，暂排除，待确认全称后重审（已列入高德补查名单）。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索“新田寿司”未找到匹配的深圳板前店"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zichuan",
+      "name": "梓川 Omakase（正东名苑店）",
+      "keywords": [
+        "梓川"
+      ],
+      "category": "unknown",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "仅有 1 条评论推荐“非常优秀”，高德无人均且类型为购物相关",
+          "sources": [
+            "xhs:693d7bd9000000001e02fa48",
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "只在一条评论里被推荐，高德无人均、类型也不是餐饮分类，没有套餐价、板前或主厨证据。排除，待补证据。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "梓川Omakase(正东名苑店)",
+        "address": "海德二路正东名苑2栋A座133号",
+        "note": "高德类型为购物相关，无人均"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "xingyao-2021",
+      "name": "星耀·Omakase（万象前海）",
+      "keywords": [
+        "星耀"
+      ],
+      "category": "unknown",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "2021 年点评记录有 588 元套餐",
+          "sources": [
+            "web:dianping-xingyao-744471095"
+          ]
+        },
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "点评未写板前与主厨",
+          "sources": [
+            "web:dianping-xingyao-744471095"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "唯一来源为 2021-12 点评，距今近五年；店是否仍以此名营业未核实",
+          "sources": [
+            "web:dianping-xingyao-744471095"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "2021 年点评：588 元套餐（已过期）",
+        "basis": [
+          {
+            "text": "点评称 588 元套餐，2021-12",
+            "sources": [
+              "web:dianping-xingyao-744471095"
+            ],
+            "asOf": "2021-12"
+          }
+        ]
+      },
+      "reason": "公开点评页写 588 元套餐，但时间是 2021 年 12 月，无板前/主厨描述，高德也没有同名 POI；时效与身份都不足，排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索“星耀Omakase”无数据"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhifan",
+      "name": "鮨凡·Omakase（深圳湾店）",
+      "keywords": [
+        "鮨凡"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "OpenRice 标注已永久停业",
+          "sources": [
+            "web:openrice-zhifan"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "OpenRice：设板前座位，已关闭",
+            "sources": [
+              "web:openrice-zhifan"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "OpenRice 人均 301+（已停业）",
+        "basis": [
+          {
+            "text": "OpenRice 价格档 301+，店已关",
+            "sources": [
+              "web:openrice-zhifan"
+            ]
+          }
+        ],
+        "perPersonMin": 301
+      },
+      "reason": "OpenRice 页面显示人均 301+ 且有板前，但标记永久停业，不能入图。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "nantan-others",
+      "name": "居代·铁板烧 / 踏雪·板前中餐 / 四叶寿司 / 鮨习·金枪鱼市 / 鮨一 / 鮨幸",
+      "keywords": [
+        "居代",
+        "踏雪",
+        "四叶寿司",
+        "鮨习",
+        "鮨一",
+        "鮨幸",
+        "水木",
+        "田舍家"
+      ],
+      "category": "other-cuisine",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "高德类型为铁板烧、中餐厅等，非寿司 omakase",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "仅高德人均 400–1500 元，无任何板前/发办描述",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": []
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "这些高德 POI 人均 400–1500 元，但类型分别为铁板烧、板前中餐、中餐厅、综合日料，名称与分类都不指向板前 omakase 寿司，没有来源能说明发办形态，故合并排除，不凭名称或高价推断。 重跑探测新增的水木·日本料理（1013）与田舍家云端铁板怀石（901）同样只有高德人均与名称，归入此类。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "踏雪·板前中餐",
+        "address": "粤海街道海珠社区后海滨路3288号后海汇L1-36",
+        "cost": 1498.0,
+        "note": "居代659、四叶寿司860、鮨习400、鮨一1302、鮨幸483"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "niaopengju",
+      "name": "鸟鹏居酒屋",
+      "keywords": [
+        "鸟鹏居"
+      ],
+      "category": "izakaya",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "合集写人均 150，居酒屋，评论称刺身定价离谱",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "合集写人均 150，居酒屋，评论称刺身定价离谱",
+            "sources": [
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "合集写人均 150，居酒屋，评论称刺身定价离谱；按排除类别规则直接排除，不进入价格核验。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "micai",
+      "name": "米彩料理",
+      "keywords": [
+        "米彩"
+      ],
+      "category": "regular-japanese",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "合集写人均 100，平价日料需排队",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "合集写人均 100，平价日料需排队",
+            "sources": [
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "合集写人均 100，平价日料需排队；按排除类别规则直接排除，不进入价格核验。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "shanhetian",
+      "name": "山禾田日料小屋",
+      "keywords": [
+        "山禾田"
+      ],
+      "category": "other-cuisine",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "合集写人均 80，寿喜锅与舒芙蕾",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "合集写人均 80，寿喜锅与舒芙蕾",
+            "sources": [
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "合集写人均 80，寿喜锅与舒芙蕾；按排除类别规则直接排除，不进入价格核验。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "yixu",
+      "name": "一绪寿喜烧",
+      "keywords": [
+        "一绪"
+      ],
+      "category": "buffet",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "合集称其为自助寿喜烧，人均 220",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "合集称其为自助寿喜烧，人均 220",
+            "sources": [
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "合集称其为自助寿喜烧，人均 220；按排除类别规则直接排除，不进入价格核验。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "dayu",
+      "name": "大渔铁板烧",
+      "keywords": [
+        "大渔"
+      ],
+      "category": "other-cuisine",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "合集写铁板烧人均 240，并称冻品多、吃完腹泻",
+          "sources": [
+            "xhs:68485565000000002202d69c"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "合集写铁板烧人均 240，并称冻品多、吃完腹泻",
+            "sources": [
+              "xhs:68485565000000002202d69c"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "合集写铁板烧人均 240，并称冻品多、吃完腹泻；按排除类别规则直接排除，不进入价格核验。",
+      "amapFacts": null,
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "sushiro",
+      "name": "寿司郎 / 元气寿司",
+      "keywords": [
+        "寿司郎",
+        "元气"
+      ],
+      "category": "kaiten",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "回转寿司连锁，评论里作为价格对照出现",
+          "sources": [
+            "xhs:6889fc7400000000230195b0",
+            "xhs:693d7bd9000000001e02fa48"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "回转寿司连锁，评论里作为价格对照出现",
+            "sources": [
+              "xhs:6889fc7400000000230195b0",
+              "xhs:693d7bd9000000001e02fa48"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无可核实的套餐价",
+        "basis": []
+      },
+      "reason": "回转寿司连锁，评论里作为价格对照出现；按排除类别规则直接排除，不进入价格核验。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "寿司郎(壹方天地店)",
+        "address": "工业路与龙华大道交汇处壹方天地D区B1层",
+        "cost": 98.0,
+        "note": "深圳各店人均 71–117 元"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhiting",
+      "name": "植庭寿司（侨城一号）",
+      "keywords": [
+        "植庭",
+        "植庭寿司",
+        "植庭日本料理"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "笔记称店内有适合观赏料理的板前座位，并提到板前互动轻松自然",
+          "sources": [
+            "xhs:6a603624000000000503aab5",
+            "xhs:6ad18f910000000014030482"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "pass",
+          "note": "午市为套餐形式，主厨还会就鱼片的吃法提出建议；酒肴四道加十余贯寿司由店方安排",
+          "sources": [
+            "xhs:6a6235ae000000001002a8e8",
+            "xhs:6ad18f910000000014030482"
+          ]
+        },
+        {
+          "rule": "R3",
+          "result": "unknown",
+          "note": "提到可订靠窗位、生日可包板，未见一场制说明",
+          "sources": [
+            "xhs:6ad18f910000000014030482"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "自称深圳老牌江户前寿司，京都庭院风",
+          "sources": [
+            "xhs:6a6235ae000000001002a8e8",
+            "xhs:6a603624000000000503aab5",
+            "xhs:6ad18f910000000014030482"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "三篇笔记均未写价格；高德人均 1158/1582 元但不是套餐价，午市套餐价无法核实",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "3 篇独立笔记同店描述，一致",
+          "sources": [
+            "xhs:6a6235ae000000001002a8e8",
+            "xhs:6a603624000000000503aab5",
+            "xhs:6ad18f910000000014030482"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "板前座位 + 套餐 + 主厨提示吃法，江户前风格",
+            "sources": [
+              "xhs:6a603624000000000503aab5",
+              "xhs:6ad18f910000000014030482",
+              "xhs:6a6235ae000000001002a8e8"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "套餐价待核实；高德人均 1158（侨城一号店）/ 1582（锦绣桃园）",
+        "basis": [
+          {
+            "text": "高德人均 1158 与 1582，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "身份可信（三篇笔记一致描述板前与江户前套餐），高德人均也在千元量级，但没有任何来源写出午市/晚市套餐价，无法证明 ≥300 的最低套餐，所以进待核实区。补一条午市套餐价即可转为主清单。 第二轮：有搜索摘要称其午市为 380 元加 10% 服务费、含 12 贯，但该页面（知乎）读取失败，无法核对出处，故未作为价格证据。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "植庭寿司(侨城一号广场店)",
+        "address": "深云路二号侨城一号广场裙楼L1-02",
+        "cost": 1158.0,
+        "note": "另有植庭日本料理（锦绣桃园内）1582，疑为同品牌另一址，待核实"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "侨城一号",
+        "锦绣桃园"
+      ],
+      "branchNote": "高德有侨城一号店与锦绣桃园内的“植庭日本料理”两个 POI"
+    },
+    {
+      "id": "komuro",
+      "name": "小室 Komuro（深圳湾）",
+      "keywords": [
+        "小室",
+        "Komuro"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "指南称八席板前",
+          "sources": [
+            "web:enprimeur-komuro",
+            "web:joinpearl-komuro"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "pass",
+          "note": "指南称仅提供单一 omakase，无替换",
+          "sources": [
+            "web:enprimeur-komuro"
+          ]
+        },
+        {
+          "rule": "R3",
+          "result": "pass",
+          "note": "指南称预约需提前数周，是深圳最难订的桌位之一",
+          "sources": [
+            "web:enprimeur-komuro"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "两个指南页均写价格未列出",
+          "sources": [
+            "web:enprimeur-komuro",
+            "web:joinpearl-komuro"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "来源均为二手指南页，未找到商家或点评价格；高德未检索到",
+          "sources": []
+        },
+        {
+          "rule": "R8",
+          "result": "unknown",
+          "note": "指南给出的是路口位置，无门牌，需高德核对",
+          "sources": []
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "八席板前、单一 omakase、预约需数周，与银座鮨あらい合作的江户前（二手指南）",
+            "sources": [
+              "web:enprimeur-komuro",
+              "web:joinpearl-komuro"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "价格未列出",
+        "basis": []
+      },
+      "reason": "二手指南对身份写得最具体：八席、单一菜单、需提前数周预约；但两个指南页都没有价格，也没有商家官方页，不能证明 ≥300，进待核实区。已加入高德补查名单。 第二轮：OpenRice 页无菜单与价格，其余仍是二手指南，价格缺口未补上。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索待补（已列入 amap-probe-requests）"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "xiaohuoxi",
+      "name": "小火玺（板前烧鸟 Omakase）",
+      "keywords": [
+        "小火玺",
+        "小火璽"
+      ],
+      "category": "omakase-other",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "店内新设带小门隔开的板前空间，评论也证实",
+          "sources": [
+            "xhs:6a964e98000000002803586b"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "pass",
+          "note": "主厨 Jayden 出当日菜单，另有菜单外的辣子鳗鱼",
+          "sources": [
+            "xhs:6a964e98000000002803586b"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "笔记无价格；评论区有人问套餐价，无回答。高德 141 元为火锅主店口径",
+          "sources": [
+            "xhs:6a964e98000000002803586b",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅 1 篇笔记，高德无板前烧鸟独立 POI",
+          "sources": [
+            "xhs:6a964e98000000002803586b",
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "火锅店内新开烧鸟 omakase 板前，主厨 Jayden 当日菜单",
+            "sources": [
+              "xhs:6a964e98000000002803586b"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "套餐价未披露；高德 141 元为火锅店口径",
+        "basis": [
+          {
+            "text": "高德小火璽人均 141，与板前烧鸟 omakase 不同业态",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "形态独特（火锅店内的粤泰融合烧鸟板前），身份证据来自单篇详细食记；但没有任何价格，高德人均又是火锅口径，不能证明 ≥300。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "小火璽",
+        "address": "粤海街道蔚蓝海岸社区创业路1777号海信南方大厦3层02户",
+        "cost": 141.0,
+        "note": "另有雲澗·小火璽 岗厦店，无人均；板前烧鸟所在分店不明"
+      },
+      "updatedAt": "2026-11-20",
+      "branchNote": "笔记提到“大表哥来吃过椰浆鸡锅”的小火玺新增烧鸟板前，具体分店未披露"
+    },
+    {
+      "id": "jinwu",
+      "name": "进吾渔所（深业上城店）",
+      "keywords": [
+        "进吾",
+        "进吾渔所"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "作者选板前位置看师傅捏寿司",
+          "sources": [
+            "xhs:6a50d1210000000011006fac"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "套餐含三选一主菜与加价项，更像固定套餐加选择，非纯发办",
+          "sources": [
+            "xhs:6a50d1210000000011006fac"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "作者称“368 套餐”，但评论指出多项需加价或三选一；高德深业上城店 251、前海店 141 与之冲突",
+          "sources": [
+            "xhs:6a50d1210000000011006fac",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅 1 篇笔记；评论与正文冲突",
+          "sources": [
+            "xhs:6a50d1210000000011006fac"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "板前位置，套餐中有三选一主菜",
+            "sources": [
+              "xhs:6a50d1210000000011006fac"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "套餐 368 元（作者）；高德 251（深业上城）/141（前海）",
+        "basis": [
+          {
+            "text": "作者写 368 套餐",
+            "sources": [
+              "xhs:6a50d1210000000011006fac"
+            ]
+          },
+          {
+            "text": "高德深业上城店人均 251",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "368 元来自作者正文，但评论区逐项指出原只海胆需加 66 元、三重盛在三选一里，高德人均 251 元也明显低于 368。价格与发办程度都有争议，不能确认最低套餐 ≥300，进待核实区。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "进吾渔所(深业上城店)",
+        "address": "皇岗路5001号深圳深业上城B1层",
+        "cost": 251.0,
+        "note": "高德类型被标为垂钓园（分类异常）；进吾寿司前海店141、卓悦中心店279"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "深业上城"
+      ],
+      "branchNote": "笔记为深业上城店"
+    },
+    {
+      "id": "xunzhu",
+      "name": "旬筑（深圳湾万象城店）",
+      "keywords": [
+        "旬筑"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "笔记称新开板前料理，店面传统与现代并置",
+          "sources": [
+            "xhs:697ec32f000000000a02da94"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "作者称可按预算单点，说明不是纯发办",
+          "sources": [
+            "xhs:697ec32f000000000a02da94"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "作者写“人均 300”，恰在门槛上；“赏海胆”套餐无价格；高德无人均",
+          "sources": [
+            "xhs:697ec32f000000000a02da94",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅 1 篇笔记",
+          "sources": [
+            "xhs:697ec32f000000000a02da94"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "板前料理，可单点也有赏海胆套餐",
+            "sources": [
+              "xhs:697ec32f000000000a02da94"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "作者称人均约 300，套餐价未写",
+        "basis": [
+          {
+            "text": "作者写人均 300",
+            "sources": [
+              "xhs:697ec32f000000000a02da94"
+            ]
+          }
+        ]
+      },
+      "reason": "作者写人均 300、赏海胆套餐接近千元水准，但没有套餐价；单点可选意味着发办程度存疑，高德也无人均。边界价且无套餐价，进待核实区。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "旬筑(深圳湾万象城店)",
+        "address": "科苑南路2888号深圳湾万象城B区B1层",
+        "note": "高德无人均"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhixi",
+      "name": "鮨汐（深圳湾万象城 Wave 广场旁）",
+      "keywords": [
+        "鮨汐",
+        "鮨汐Omakase",
+        "卷卷"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "笔记未写板前座位，只说师傅技术与食材搭配",
+          "sources": [
+            "xhs:6af8607d000000002a039152"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "498 套餐含五道酒肴与海胆手卷、金枪鱼大腹，发办程度未证",
+          "sources": [
+            "xhs:6af8607d000000002a039152"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "作者选 498 元套餐，≥300；单一笔记",
+          "sources": [
+            "xhs:6af8607d000000002a039152"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅 1 篇笔记；高德仅匹配到罗湖的“鮨汐日料宅配”，与深圳湾店不符；评论称前身“卷卷”午市“一言难尽”",
+          "sources": [
+            "xhs:6af8607d000000002a039152",
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "套餐含五道酒肴与手卷、大腹，未写板前",
+            "sources": [
+              "xhs:6af8607d000000002a039152"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "498 元套餐（单一笔记，作者所选）",
+        "basis": [
+          {
+            "text": "作者选 498 元套餐",
+            "sources": [
+              "xhs:6af8607d000000002a039152"
+            ]
+          }
+        ],
+        "perPersonMin": 498
+      },
+      "reason": "498 元价位明确，但板前形态与店址均未能核实：高德只找到罗湖区的外卖宅配 POI，且评论称其前身“卷卷”体验欠佳。身份证据不足，进待核实区；核实板前与店址后可入主清单。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索“鮨汐Omakase”无数据；仅“鮨汐”匹配到罗湖区日料宅配 POI（书城路）"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zesushi",
+      "name": "泽寿司（后海汇）",
+      "keywords": [
+        "泽寿司",
+        "澤寿司",
+        "澤寿司"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "作者坐在板前看师傅制作",
+          "sources": [
+            "xhs:6a9a88f4000000002802fa91"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "笔记只提金枪鱼大腹与烧鸟，未写发办",
+          "sources": [
+            "xhs:6a9a88f4000000002802fa91"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "笔记无价格；高德人均 254 元，低于 300",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅 1 篇笔记",
+          "sources": [
+            "xhs:6a9a88f4000000002802fa91"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "板前坐席，晚餐有大腹与盐烤烧鸟",
+            "sources": [
+              "xhs:6a9a88f4000000002802fa91"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "无套餐价；高德人均 254 元（偏低信号）",
+        "basis": [
+          {
+            "text": "高德人均 254",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "板前坐席可信，但没有价格，高德人均 254 元指向 300 以下；未达“明确 <300”的证据，暂列待核实，若套餐页确认最低价 <300 即转排除。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "澤寿司",
+        "address": "后海滨路3288号后海汇1层3号",
+        "cost": 254.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhiyi",
+      "name": "鮨毅 Omakase（弘毅大厦店）",
+      "keywords": [
+        "鮨毅"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 746 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 746 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 746 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 746 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨毅Omakase(弘毅大厦店)",
+        "address": "弘毅大厦1E",
+        "cost": 746.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "wuwei",
+      "name": "无味·Omakase（蛇口店）",
+      "keywords": [
+        "无味",
+        "味無味"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 1273 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 1273 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 1273 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 1273 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "无味·Omakase(蛇口店)",
+        "address": "龟山路1号",
+        "cost": 1273.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "jiu-banqian",
+      "name": "久·板前 Omakase（中洲湾店）",
+      "keywords": [
+        "久·板前",
+        "久板前"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 485 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 485 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 485 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 485 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "久·板前Omakase(中洲湾店)",
+        "address": "滨河大道9283号中洲滨海商业中心一期101L1层L133室",
+        "cost": 485.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "shiying",
+      "name": "鮨影 Omakase（皇庭广场店）",
+      "keywords": [
+        "鮨影"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 801 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 801 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 801 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 801 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。同品牌华强北店高德人均 252 元，不同分店价位差距大，仅皇庭店作线索。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨影·Omakase(皇庭广场店)",
+        "address": "福华三路118号皇庭广场L1-57A号铺",
+        "cost": 801.0
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "皇庭"
+      ]
+    },
+    {
+      "id": "daban",
+      "name": "大阪·omakase（阳光店）",
+      "keywords": [
+        "大阪omakase"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 371 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 371 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 371 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 371 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "大阪·omakase(阳光店)",
+        "address": "嘉宾路2001号(阳光酒店二楼)",
+        "cost": 371.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "zhihuan",
+      "name": "鮨欢·Omakase（罗湖大中华口岸店）",
+      "keywords": [
+        "鮨欢"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 368 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 368 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 368 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 368 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨欢·Omakase(罗湖大中华口岸店)",
+        "address": "南湖街道人民南路1008号环球经贸广场304号",
+        "cost": 368.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "rama",
+      "name": "Rama 板前料理",
+      "keywords": [
+        "Rama"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 531 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 531 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 531 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 531 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "Rama板前料理",
+        "address": "芳芷四路与兰芷二路交叉口东北20米",
+        "cost": 531.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "yinyin",
+      "name": "吟隐·日料·Omakase（福田）",
+      "keywords": [
+        "吟隐"
+      ],
+      "category": "omakase-other",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "网易文章称铁板烧 omakase 与寿司 omakase，未明确板前座位",
+          "sources": [
+            "web:163-yinyin"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "pass",
+          "note": "文章称两位兄弟主厨亲自出品、“每道菜专属于你”",
+          "sources": [
+            "web:163-yinyin"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "文章未列套餐价",
+          "sources": [
+            "web:163-yinyin"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "单一自媒体文章",
+          "sources": [
+            "web:163-yinyin"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "自媒体称铁板烧与寿司 omakase，两位主厨兄弟",
+            "sources": [
+              "web:163-yinyin"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "套餐价未披露",
+        "basis": []
+      },
+      "reason": "网易订阅文章称其怀石级、两位主厨兄弟经营，但无价格也无板前细节，且是单一自媒体来源。进待核实区；已列入高德补查名单。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索待补"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "seiku",
+      "name": "Sei ku（深圳湾万象城 L413）",
+      "keywords": [
+        "Sei ku",
+        "seiku"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "二手页称“refined Japanese omakase”，未写板前",
+          "sources": [
+            "web:enprimeur-seiku"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "页面价格写 $200–300 per person，币种口径不明（可能为人民币档位标签）",
+          "sources": [
+            "web:enprimeur-seiku"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅二手聚合页（称 Black Pearl 1 Diamond 2025），未交叉核实",
+          "sources": [
+            "web:enprimeur-seiku"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "二手页：omakase，菜品含鮟肝茶碗蒸、帆立贝鱼子酱等",
+            "sources": [
+              "web:enprimeur-seiku"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "二手页价格档位口径不明",
+        "basis": []
+      },
+      "reason": "聚合页给出黑珍珠一钻、深圳湾万象城 L413，但价格档位写成美元区间、币种不明，也无板前描述，不能证明门槛。进待核实区，建议到黑珍珠官方榜单与点评页补查。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索待补"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "sushiman",
+      "name": "Sushi Man（福田 / 南山）",
+      "keywords": [
+        "Sushi Man",
+        "SushiMan",
+        "sushi man"
+      ],
+      "category": "unknown",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "名称含 Omakase/板前，但无任何点评、笔记或指南页描述板前形态",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "仅高德人均 1546 元，不是套餐价",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "只有高德 POI，没有第二个独立来源",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "高德 POI 名称含 Omakase/板前，类型待核实",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "高德人均 1546 元（无套餐价）",
+        "basis": [
+          {
+            "text": "高德人均 1546 元，仅作价格冲突信号",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ]
+      },
+      "reason": "仅有高德 POI（人均 1546 元）和名称线索，没有任何描述板前、主厨发办或套餐价的内容，不能入主清单；保留为待核实线索。南山店高德 1261 元；一条评论问“sushi man 呢”，无价格或板前描述，名称无法单独证明 omakase 形态。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "SushiMan(福田店)",
+        "address": "中心四路1-5号嘉里建设广场3座1楼",
+        "cost": 1546.0
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "福田",
+        "南山"
+      ]
+    },
+    {
+      "id": "minoru",
+      "name": "穗 Sushi Minoru（海德三道大成基金总部）",
+      "keywords": [
+        "Sushi Minoru",
+        "穗 Sushi Minoru"
+      ],
+      "category": "omakase-sushi",
+      "decision": "include",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "163 报道称共 20 席，设一个 omakase bar；香港01称“师傅手势专业”",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT",
+            "web:hk01-omakase5-1081872"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "pass",
+          "note": "报道只列 omakase 套餐档（午市含一道前菜 + 9 贯）及主厨经历，未见单点为主",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT",
+            "web:ubeauty-omakase10-20062414"
+          ]
+        },
+        {
+          "rule": "R3",
+          "result": "unknown",
+          "note": "提供电话/微信预约；一场制或定时开场未见来源",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "非放题、居酒屋或连锁",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "最低档为午市 480 元（163），香港01写午市 680、晚市 1280；均 ≥300",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT",
+            "web:hk01-omakase5-1081872",
+            "web:ubeauty-omakase10-20062414"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "3 个独立媒体页（163 报道、香港01、utravel 榜单）一致指向同一店址与价位带；未使用互动量",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT",
+            "web:hk01-omakase5-1081872",
+            "web:ubeauty-omakase10-20062414"
+          ]
+        },
+        {
+          "rule": "R8",
+          "result": "unknown",
+          "note": "仅记录大成基金总部 3 楼一址，高德 POI「穗 · Sushi Minoru(大成基金总部大厦店)」已核对，高德人均 1445",
+          "sources": []
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "163 报道：20 席含一个 omakase bar，主厨梓健，午晚市均为 omakase 套餐（网易号“柠檬美食”2024-04 探店文章）",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT"
+            ]
+          },
+          {
+            "text": "香港01：午市单人餐 680、晚市 1280 起，称师傅手势专业",
+            "sources": [
+              "web:hk01-omakase5-1081872"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "午市 480 / 680 / 880 / 1880 元，晚市 1180 / 1380 / 1680 / 1980 元，另加 10% 服务费（163）",
+        "basis": [
+          {
+            "text": "163：午市 480/680/880/1880 元每位，晚市 1180/1380/1680/1980 元，加收 10% 服务费",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT"
+            ]
+          },
+          {
+            "text": "香港01：午市单人餐原价 680 元，晚市 1280 元起",
+            "sources": [
+              "web:hk01-omakase5-1081872"
+            ]
+          }
+        ],
+        "perPersonMin": 480,
+        "perPersonMax": 1980
+      },
+      "reason": "两家媒体对价位的写法不完全相同，但最低午市 480 元也高于 300；163 明确写了 omakase bar、20 席与主厨履历，足以算板前发办，所以入主清单。缺口是一场制规则、近期评价与高德核对，置信度“中”。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "穗 · Sushi Minoru(大成基金总部大厦店)",
+        "address": "大成基金总部3楼(后海地铁站M口步行30米)",
+        "cost": 1445.0,
+        "note": "高德类型为日本料理；高德人均 1445，与公开来源的午晚市价位同向且均高于 300。匹配规则要求全名含 Sushi Minoru 且分店含“大成基金”，不使用单字“穗”。"
+      },
+      "updatedAt": "2026-11-21",
+      "branchNote": "来源只记录海德三道大成基金总部 3 楼一处",
+      "profile": {
+        "headline": {
+          "text": "海德三道大成基金总部 3 楼的 20 席小体量 omakase，主厨梓健入行 18 年，午市 480 元起而晚市跳到 1180 元起",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        "cuisine": null,
+        "ingredients": {
+          "text": "该报道称它是深圳首家使用熟成柜的 omakase；具体鱼种与技法在公开来源中未列",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        "chef": {
+          "text": "主厨梓健，17 岁入行至今 18 年，曾在东京银座小野寺体系受训（来源原文表述），店内设一处 omakase bar",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        "menu": {
+          "text": "午市四档 480/680/880/1880 元，最低档含一道前菜加 9 贯寿司；晚市 1180/1380/1680/1980 元；另收 10% 服务费",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        "value": {
+          "text": "午晚市价差约 2.5 倍；香港01把午市写成 680、晚市 1280 起，与 163 的 480 与 1180 起并不一致，实付以预约时报价为准",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT",
+            "web:hk01-omakase5-1081872"
+          ]
+        },
+        "space": {
+          "text": "20 席，一个大堂加一间包房，另有 omakase bar",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        "booking": {
+          "text": "通过电话与微信预约；预约难度、取消规则未见来源",
+          "sources": [
+            "web:163-minoru-J0FCF1T10522KVMT"
+          ]
+        },
+        "scenes": null,
+        "strengths": [
+          {
+            "text": "午市 480 元入门档把预算门槛压在 500 元以内，同店也留有 1880 元的高档位，同店档位跨度较大",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT"
+            ]
+          },
+          {
+            "text": "主厨履历与熟成柜是少数能被媒体明确写出的“方法论”卖点，而非只讲海胆与鹅肝",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT"
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "text": "两篇媒体价格口径不同（480 vs 680；1180 vs 1280），且来源为 2024 年前后的探店文章，价位可能已调整",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT",
+              "web:hk01-omakase5-1081872"
+            ]
+          },
+          {
+            "text": "晚市 1180 元起并另收 10% 服务费，实付高于标价",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT"
+            ]
+          },
+          {
+            "text": "小红书 30 篇没有提到这家，近期出品与服务口碑缺少用户侧证据（以采集范围为限）",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT"
+            ]
+          }
+        ],
+        "disputes": [
+          {
+            "text": "午市价位 163 写 480 起、香港01写 680 起；晚市 163 写 1180 起、香港01写 1280 起",
+            "sources": [
+              "web:163-minoru-J0FCF1T10522KVMT",
+              "web:hk01-omakase5-1081872"
+            ]
+          }
+        ]
+      },
+      "confidence": {
+        "level": "中",
+        "reason": "价位与座位、主厨信息有两三家媒体支持，但口径不一、均非近期，且无小红书交叉证据；高德人均 1445 同向"
+      },
+      "branchKeywords": [
+        "大成基金"
+      ]
+    },
+    {
+      "id": "arashi-qianhai",
+      "name": "鮨嵐 Sushi Arashi（前海卓悦 INTOWN 店）",
+      "keywords": [
+        "鮨嵐",
+        "Sushi Arashi",
+        "鮨岚"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "复核后降级：原引用页面未能证明前海店的板前座位/一场制（点评页只写香港主厨、大堂与包房、逐道介绍；携程动态描述的是罗湖店语境）",
+          "sources": [
+            "web:dianping-arashi-713080343",
+            "web:trip-arashi-139091752"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "复核后降级：原引用页面未能证明前海店的板前座位/一场制（点评页只写香港主厨、大堂与包房、逐道介绍；携程动态描述的是罗湖店语境）",
+          "sources": [
+            "web:dianping-arashi-713080343",
+            "web:trip-arashi-139091752"
+          ]
+        },
+        {
+          "rule": "R3",
+          "result": "unknown",
+          "note": "复核后降级：原引用页面未能证明前海店的板前座位/一场制（点评页只写香港主厨、大堂与包房、逐道介绍；携程动态描述的是罗湖店语境）",
+          "sources": [
+            "web:dianping-arashi-713080343"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "pass",
+          "note": "非放题、居酒屋、回转",
+          "sources": [
+            "web:dianping-arashi-713080343"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "点评人均 744 元，携程页招牌套餐 990 元（原价 1208），高德人均 691；最低口径 691",
+          "sources": [
+            "web:dianping-arashi-713080343",
+            "web:trip-arashi-139091752",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "pass",
+          "note": "点评、携程与高德三路互相印证；未使用互动量",
+          "sources": [
+            "web:dianping-arashi-713080343",
+            "web:trip-arashi-139091752",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R8",
+          "result": "pass",
+          "note": "只让前海卓悦 INTOWN 店入选；罗湖店高德 531，但未核实其座位与套餐，不纳入",
+          "sources": [
+            "amap:probe-20261120"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "点评：板前座位，香港师傅做 omakase，一场制并逐道介绍",
+            "sources": [
+              "web:dianping-arashi-713080343"
+            ]
+          },
+          {
+            "text": "携程页：师傅席前现做，套餐为 omakase 形态",
+            "sources": [
+              "web:trip-arashi-139091752"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "点评人均 744 元；招牌套餐 990 元（原价 1208）；高德人均 691",
+        "basis": [
+          {
+            "text": "点评：人均 ¥744",
+            "sources": [
+              "web:dianping-arashi-713080343"
+            ]
+          },
+          {
+            "text": "携程页：海胆瀑布套餐 990 元（原价 1208）",
+            "sources": [
+              "web:trip-arashi-139091752"
+            ]
+          },
+          {
+            "text": "高德前海店人均 691",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ],
+        "perPersonMin": 691,
+        "perPersonMax": 990
+      },
+      "reason": "价位有多路佐证（点评人均 744、高德 691），但 Omakase 的“板前”硬证据在独立复核中不成立：点评页没有板前或一场制表述，携程动态属罗湖店语境。依据保守原则降为待核实，不计入主清单；需要前海店板前座位的直接来源后再评估。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨嵐SushiArashi(前海卓悦INTOWN店)",
+        "address": "前海深港合作区南山街道梦海大道5033号卓悦INTOWN一层金谷南二街",
+        "cost": 691.0,
+        "note": "罗湖店高德 531；携程页同店 POI 可见两家分店"
+      },
+      "updatedAt": "2026-11-21",
+      "branchKeywords": [
+        "前海"
+      ],
+      "branchNote": "仅前海卓悦 INTOWN 店入选；罗湖翠竹店（爱国路3049号）未核实板前与套餐，未纳入"
+    },
+    {
+      "id": "zhiguan2",
+      "name": "鮨冠 Omakase（深圳首店）",
+      "keywords": [
+        "鮨冠",
+        "鮨冠omakase"
+      ],
+      "category": "buffet",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R4",
+          "result": "fail",
+          "note": "香港头条称其“寿司放题”：基础 680 元/位，无限追加 15 款手握，另送前菜与甜品",
+          "sources": [
+            "web:stheadline-zhiguan-3486361"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "fail",
+          "note": "放题套餐以任食追加为主，不是主厨发办固定套餐",
+          "sources": [
+            "web:stheadline-zhiguan-3486361"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "fail",
+        "basis": [
+          {
+            "text": "香港头条：寿司放题，680 元起任食追加",
+            "sources": [
+              "web:stheadline-zhiguan-3486361"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "680 元/位起的放题（香港头条）",
+        "basis": [
+          {
+            "text": "放题起价 680 元/位",
+            "sources": [
+              "web:stheadline-zhiguan-3486361"
+            ]
+          }
+        ],
+        "perPersonMin": 680
+      },
+      "reason": "虽然名称含 omakase，且称北京厨师发办、设板前座位，但香港头条的标题和内容都是“寿司放题”，基础价 680 元任食追加 15 款手握。按放题排除；高德人均 931 元与放题加升级吻合。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨冠omakase(深圳首店)",
+        "address": "恒邦置地大厦二楼202",
+        "cost": 931.0
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "hemu2",
+      "name": "禾木·鲸生 Omakase·铁板烧（海上世界店）",
+      "keywords": [
+        "禾木",
+        "鲸生"
+      ],
+      "category": "omakase-other",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R5",
+          "result": "fail",
+          "note": "香港01/utravel 写最基本套餐 288 元；携程用户称“不到 300 块能吃到快 20 道”",
+          "sources": [
+            "web:ubeauty-omakase10-20062414",
+            "web:ctrip-hemu-136226047"
+          ]
+        },
+        {
+          "rule": "R4",
+          "result": "unknown",
+          "note": "兼营铁板烧，设日式板前与包间",
+          "sources": [
+            "web:ctrip-hemu-136226047"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "携程页：Omakase·铁板烧，设日式板前与包间",
+            "sources": [
+              "web:ctrip-hemu-136226047"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "fail",
+        "label": "最低套餐 288 元（utravel）；携程用户称不到 300 元",
+        "basis": [
+          {
+            "text": "最基本套餐 288 元",
+            "sources": [
+              "web:ubeauty-omakase10-20062414"
+            ]
+          },
+          {
+            "text": "单人套餐不到 300 元、近 20 道",
+            "sources": [
+              "web:ctrip-hemu-136226047"
+            ]
+          }
+        ],
+        "perPersonMin": 288
+      },
+      "reason": "多个来源指向最低套餐 288 元，低于门槛；携程评论称单人套餐不到 300 元。按最低套餐规则排除；晚市更高档套餐未见来源，不能替它入选。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "禾木·鲸生Omakase(海上世界店)",
+        "address": "太子路碧涛苑17栋",
+        "cost": 500.0,
+        "note": "高德人均 500，与 288 起的最低套餐并存"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "sushiyoshi",
+      "name": "寿司芳 SUSHIYOSHI（平安金融中心）",
+      "keywords": [
+        "寿司芳",
+        "寿芳",
+        "SUSHIYOSHI"
+      ],
+      "category": "omakase-sushi",
+      "decision": "exclude",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "pass",
+          "note": "深圳新闻网称设板前式柜台；财联社称大厅约十个座位，主厨 Hiroki 亲自制作",
+          "sources": [
+            "web:sznews-sushiyoshi-2024",
+            "web:cls-sushiyoshi-1407610"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "fail",
+          "note": "OpenRice 页面标注“已结业”，无近期证明其仍在营业的来源",
+          "sources": [
+            "web:openrice-sushiyoshi-5768094"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "pass",
+        "basis": [
+          {
+            "text": "深圳新闻网：板前式柜台；财联社：约 16 道 omakase，主厨 Hiroki",
+            "sources": [
+              "web:sznews-sushiyoshi-2024",
+              "web:cls-sushiyoshi-1407610"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "OpenRice 价格档 301+（页面已结业）",
+        "basis": [
+          {
+            "text": "OpenRice 价格档 301 元以上",
+            "sources": [
+              "web:openrice-sushiyoshi-5768094"
+            ]
+          }
+        ],
+        "perPersonMin": 301
+      },
+      "reason": "大阪米其林二星分店，深圳新闻网与财联社写到板前和约 16 道的 omakase，OpenRice 价格档 301+；但 OpenRice 明确标注已结业，且没有新来源证明恢复营业。暂按停业排除，若官方确认营业可重审。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德“寿司芳”检索待补（已列入补查名单）"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "sushiyoshi-lite",
+      "name": "半分寿司芳 SUSHIYOSHI lite（平安金融中心 C 座 L201）",
+      "keywords": [
+        "半分寿司芳",
+        "寿司芳lite"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "香港01称主厨为 Hiroki 打造，未写套餐是否发办",
+          "sources": [
+            "web:ubeauty-omakase10-20062414"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "unknown",
+          "note": "香港01称 398 元套餐最受欢迎，最低档价格未写",
+          "sources": [
+            "web:ubeauty-omakase10-20062414"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅一篇香港媒体榜单，且与停业的寿司芳同址同号 L201，营业状态不清",
+          "sources": [
+            "web:ubeauty-omakase10-20062414",
+            "web:openrice-sushiyoshi-5768094"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "香港媒体榜单提到由 Hiroki 打造，未写板前",
+            "sources": [
+              "web:ubeauty-omakase10-20062414"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "unknown",
+        "label": "最受欢迎套餐 398 元（utravel）",
+        "basis": [
+          {
+            "text": "398 元套餐最受欢迎",
+            "sources": [
+              "web:ubeauty-omakase10-20062414"
+            ]
+          }
+        ],
+        "perPersonMin": 398
+      },
+      "reason": "香港媒体称 398 元套餐最受欢迎，但没有板前描述，与同址 L201 的寿司芳 OpenRice 已结业信息冲突，营业状态不明。进待核实区。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索待补"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "toki",
+      "name": "莺时 TOKI（平安金融中心店，铁板烧 omakase）",
+      "keywords": [
+        "莺时",
+        "鶯時",
+        "TOKI"
+      ],
+      "category": "omakase-other",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "搜索结果称铁板前开放，但可读的携程页没有板前描述",
+          "sources": [
+            "web:ctrip-toki-135462243"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "未见套餐发办描述",
+          "sources": [
+            "web:ctrip-toki-135462243"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "携程人均 780（用户反馈），香港01榜单称 699–1699 元",
+          "sources": [
+            "web:ctrip-toki-135462243",
+            "web:ubeauty-omakase10-20062414"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "仅价格有来源，形态是铁板烧，属非寿司发办，需逐店证明主厨发办",
+          "sources": [
+            "web:ctrip-toki-135462243"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "携程页：活龙虾、黑金鲍、和牛为主，铁板烧形态",
+            "sources": [
+              "web:ctrip-toki-135462243"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "携程人均 780；香港01写 699–1699 元",
+        "basis": [
+          {
+            "text": "携程用户反馈人均 780",
+            "sources": [
+              "web:ctrip-toki-135462243"
+            ]
+          },
+          {
+            "text": "榜单写 699–1699 元",
+            "sources": [
+              "web:ubeauty-omakase10-20062414"
+            ]
+          }
+        ],
+        "perPersonMin": 699,
+        "perPersonMax": 1699
+      },
+      "reason": "价格明确高于 300，但形态是铁板烧，来源没有写主厨发办套餐的内容，无法判断是否属于 omakase-other。身份未证，进待核实区。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": false,
+        "note": "高德检索待补"
+      },
+      "updatedAt": "2026-11-20"
+    },
+    {
+      "id": "shigin2",
+      "name": "鮨吟 Sushi Gin（深南大道 / 万象天地）",
+      "keywords": [
+        "鮨吟",
+        "Sushi Gin"
+      ],
+      "category": "omakase-sushi",
+      "decision": "pending",
+      "checks": [
+        {
+          "rule": "R1",
+          "result": "unknown",
+          "note": "搜索摘要称开放吧台，但可读的携程/OpenRice/Trip 页面都没有板前描述",
+          "sources": [
+            "web:ctrip-sushigin-77748930",
+            "web:trip-sushigin-77748930",
+            "web:openrice-sushigin-r5971261"
+          ]
+        },
+        {
+          "rule": "R2",
+          "result": "unknown",
+          "note": "Trip 评论提到 1388 套餐与十二贯套餐，未写发办",
+          "sources": [
+            "web:trip-sushigin-77748930"
+          ]
+        },
+        {
+          "rule": "R5",
+          "result": "pass",
+          "note": "携程人均约 1213（深南大道店），万象天地店 1275；Trip 评论 1388 套餐；OpenRice 价格档 301+",
+          "sources": [
+            "web:ctrip-sushigin-77748930",
+            "web:trip-sushigin-77748930",
+            "web:openrice-sushigin-r5971261",
+            "amap:probe-20261120"
+          ]
+        },
+        {
+          "rule": "R7",
+          "result": "unknown",
+          "note": "价格有多源，身份只有品牌与套餐名，缺少板前或主厨发办描述",
+          "sources": [
+            "web:ctrip-sushigin-77748930",
+            "web:trip-sushigin-77748930"
+          ]
+        }
+      ],
+      "identity": {
+        "result": "unknown",
+        "basis": [
+          {
+            "text": "Trip 评论提到十二贯套餐一个人吃刚好，海胆手卷突出",
+            "sources": [
+              "web:trip-sushigin-77748930"
+            ]
+          }
+        ]
+      },
+      "price": {
+        "result": "pass",
+        "label": "携程人均约 1213 / 1275；套餐 1388；OpenRice 301+",
+        "basis": [
+          {
+            "text": "携程用户反馈人均约 1213",
+            "sources": [
+              "web:ctrip-sushigin-77748930"
+            ]
+          },
+          {
+            "text": "Trip 评论称 1388 套餐",
+            "sources": [
+              "web:trip-sushigin-77748930"
+            ]
+          },
+          {
+            "text": "高德深南大道店 1233、万象天地店 1524",
+            "sources": [
+              "amap:probe-20261120"
+            ]
+          }
+        ],
+        "perPersonMin": 301,
+        "perPersonMax": 1388
+      },
+      "reason": "价位毫无疑问高于 300（携程 1213、套餐 1388），分店有深南大道与万象天地两家；但可读页面里没有一条写到板前座位或主厨发办，不能凭品牌名纳入。拿到一条板前+发办描述即可转主清单。",
+      "amapFacts": {
+        "checkedAt": "2026-11-20",
+        "found": true,
+        "name": "鮨吟Sushi Gin(深南大道店)",
+        "address": "深南大道6023号耀华创建大厦F1层",
+        "cost": 1233.0,
+        "note": "万象天地店高德 1524；携程万象天地店人均 1275"
+      },
+      "updatedAt": "2026-11-20",
+      "branchKeywords": [
+        "深南大道",
+        "万象天地"
+      ],
+      "branchNote": "深圳至少有创建大厦店与万象天地店两处"
+    }
+  ]
+}

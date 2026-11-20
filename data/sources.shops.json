@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-20",
+  "sources": [
+    {
+      "id": "web:dianping-yingu-794041893",
+      "kind": "web",
+      "title": "隐谷Omakase(福田财富店) 点评笔记",
+      "publisher": "大众点评",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "隐谷人均 720 元、设板前位与两个包房",
+      "url": "https://m.dianping.com/discovery/794041893",
+      "publishedAt": "2022-04"
+    },
+    {
+      "id": "web:dianping-yingu-848685458",
+      "kind": "web",
+      "title": "隐谷Omakase(福田财富店) 点评笔记二",
+      "publisher": "大众点评",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "隐谷人均 720 元；板前位；主厨按忌口与时令定制",
+      "url": "https://m.dianping.com/discovery/848685458",
+      "publishedAt": "2022-07"
+    },
+    {
+      "id": "web:ctrip-yingu-25046130",
+      "kind": "web",
+      "title": "隐谷Omakase(福田财富店) 携程美食林",
+      "publisher": "携程",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "隐谷人均 640 元、主厨来自香港、菜品与 999999 元年卡",
+      "url": "https://you.ctrip.com/food/26/25046130.html",
+      "publishedAt": "2021-04"
+    },
+    {
+      "id": "web:hk01-xiangman-60354510",
+      "kind": "web",
+      "title": "皇庭广场美食10大推介",
+      "publisher": "香港01",
+      "accessedAt": "2026-11-20",
+      "tier": "权威媒体/出版物",
+      "supports": "鮨响满皇庭广场店人均 284 元起、设板前",
+      "url": "https://www.hk01.com/sns/article/60354510"
+    },
+    {
+      "id": "web:dianping-xingyao-744471095",
+      "kind": "web",
+      "title": "星耀·Omakase 点评笔记（2021-12）",
+      "publisher": "大众点评",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "星耀·Omakase 588 元套餐的 2021 年记录（已过期）",
+      "url": "https://m.dianping.com/discovery/744471095",
+      "publishedAt": "2021-12-17"
+    },
+    {
+      "id": "web:enprimeur-komuro",
+      "kind": "web",
+      "title": "Komuro 小室（深圳）",
+      "publisher": "En Primeur Club / Star Wine List",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "小室八席板前、单一 omakase、预约需提前数周；价格未列出",
+      "url": "https://www.enprimeurclub.com/restaurants/komuro-shenzhen-restaurant"
+    },
+    {
+      "id": "web:joinpearl-komuro",
+      "kind": "web",
+      "title": "Komuro 小室 深圳",
+      "publisher": "Pearl guide",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "小室八席、单一菜单、无价格",
+      "url": "https://joinpearl.co/restaurants/shenzhen/komuro"
+    },
+    {
+      "id": "web:enprimeur-seiku",
+      "kind": "web",
+      "title": "Sei ku（深圳）",
+      "publisher": "En Primeur Club",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "Sei ku 深圳湾万象城 L413，称黑珍珠一钻（2025），价格档位口径不明",
+      "url": "https://www.enprimeurclub.com/restaurants/sei-ku-shenzhen-restaurant"
+    },
+    {
+      "id": "web:openrice-zhifan",
+      "kind": "web",
+      "title": "鮨凡·Omakase(深圳湾店)",
+      "publisher": "OpenRice",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "鮨凡人均 301+、有板前，页面标注永久停业",
+      "url": "https://www.openrice.com.cn/zh-cn/shenzhen/r-%E9%AE%A8%E5%87%A1-omakase-%E5%90%8E%E6%B5%B7-%E6%97%A5%E6%9C%AC%E8%8F%9C-%E5%AF%BF%E5%8F%B8-%E5%88%BA%E8%BA%AB-r6071230"
+    },
+    {
+      "id": "web:163-yinyin",
+      "kind": "web",
+      "title": "深圳新式Omakase，怀石级料理",
+      "publisher": "网易订阅",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "吟隐·日料·Omakase 地址、两位主厨兄弟，未列价格",
+      "url": "https://www.163.com/dy/article/GJ5RL4130514C13V.html"
+    },
+    {
+      "id": "web:xhs-lvyoudao-6952597e",
+      "kind": "web",
+      "title": "这么顶的日料不在东京竟然在深圳",
+      "publisher": "小红书（公开页）",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "旅游岛 Omakase 无国界料理人均 298 元、13 道",
+      "url": "https://www.xiaohongshu.com/explore/6952597e0000000021032081"
+    },
+    {
+      "id": "web:hk01-omakase5-1081872",
+      "kind": "web",
+      "title": "深圳Omakase推介5大",
+      "publisher": "香港01",
+      "accessedAt": "2026-11-20",
+      "tier": "权威媒体/出版物",
+      "supports": "隐谷午市约400/晚市1880；穗 Sushi Minoru 午市680/晚市1280；鮨政284；吧台环绕玻璃窗",
+      "url": "https://www.hk01.com/%E6%97%85%E9%81%8A/1081872/%E6%B7%B1%E5%9C%B3omakase%E6%8E%A8%E4%BB%8B5%E5%A4%A7-41%E6%A8%93%E9%AB%98%E7%A9%BA%E9%9D%9A%E6%99%AF-%E6%B5%B7%E8%86%BD-%E5%88%BA%E8%BA%AB%E5%B1%B1-%E4%BA%BA%E5%9D%87-158%E8%B5%B7"
+    },
+    {
+      "id": "web:ubeauty-omakase10-20062414",
+      "kind": "web",
+      "title": "10大深圳Omakase推介",
+      "publisher": "香港 U Beauty / utravel",
+      "accessedAt": "2026-11-20",
+      "tier": "权威媒体/出版物",
+      "supports": "禾木鲸生最低套餐288；半分寿司芳398；莺时699-1699；穗等价位带",
+      "url": "https://ubeauty.com.hk/lifestyle/news/20062414/%E6%B7%B1%E5%9C%B3omakase%E6%8E%A8%E4%BB%8B-%E5%A4%A7%E6%B7%B1%E5%9C%B3omakase%E6%9C%80%E5%B9%B3-%E8%B5%B7-%E5%BF%85%E9%A3%9F%E6%B5%B7%E8%86%BD%E7%86%B1%E7%8B%97-%E9%90%B5%E6%9D%BF%E7%87%92-%E7%B1%B3%E8%8A%9D%E8%93%AE%E6%97%A5%E6%B3%95%E6%96%99%E7%90%86"
+    },
+    {
+      "id": "web:163-minoru-J0FCF1T10522KVMT",
+      "kind": "web",
+      "title": "1间包房，1个吧台，藏了位18年经验的老师傅",
+      "publisher": "网易号“柠檬美食”（自媒体探店推广）",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "穗 Sushi Minoru 20席、omakase bar、主厨梓健、午晚市套餐价；自媒体探店推广文，非独立媒体",
+      "url": "https://c.m.163.com/news/a/J0FCF1T10522KVMT.html",
+      "publishedAt": "2024-04-23"
+    },
+    {
+      "id": "web:dianping-arashi-713080343",
+      "kind": "web",
+      "title": "深圳新店｜前海也有好吃的omakase啦",
+      "publisher": "大众点评",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "鮨嵐前海店人均744、板前、香港师傅、一场制并逐道介绍",
+      "url": "https://m.dianping.com/discovery/713080343"
+    },
+    {
+      "id": "web:trip-arashi-139091752",
+      "kind": "web",
+      "title": "深圳高質日料店·鮨嵐",
+      "publisher": "Trip.com",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "鮨嵐板前现做、海胆瀑布套餐990元（原价1208）、两家分店地址",
+      "url": "https://hk.trip.com/moments/detail/shenzhen-26-139091752/"
+    },
+    {
+      "id": "web:stheadline-zhiguan-3486361",
+      "kind": "web",
+      "title": "深圳新开Omakase寿司放题！¥680起任食",
+      "publisher": "头条日报",
+      "accessedAt": "2026-11-20",
+      "tier": "权威媒体/出版物",
+      "supports": "鮨冠为寿司放题：680元起任食追加15款手握",
+      "url": "https://www.stheadline.com/zh-hans/food/3486361/%E6%B7%B1%E5%9C%B3%E6%96%B0%E5%BC%80Omakase%E5%AF%BF%E5%8F%B8%E6%94%BE%E9%A2%98680%E8%B5%B7%E4%BB%BB%E9%A3%9F%E5%90%9E%E6%8B%BF%E9%B1%BC%E4%B8%89%E6%96%87%E9%B1%BC%E6%89%87%E8%B4%9D-%E5%8D%87%E7%BA%A7%E8%B1%AA%E5%8F%B9%E6%B5%B7%E8%83%86-%E9%80%81%E5%89%8D%E8%8F%9C%E6%B1%A4%E5%93%81%E7%94%9C%E5%93%81"
+    },
+    {
+      "id": "web:ctrip-hemu-136226047",
+      "kind": "web",
+      "title": "禾木·鲸生Omakase·铁板烧(海上世界店)",
+      "publisher": "携程",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "禾木鲸生设日式板前，用户称单人套餐不到300元",
+      "url": "https://you.ctrip.com/food/26/136226047.html"
+    },
+    {
+      "id": "web:openrice-sushiyoshi-5768094",
+      "kind": "web",
+      "title": "寿芳SUSHIYOSHI (平安财险大厦)",
+      "publisher": "OpenRice",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "寿司芳价格档301+，页面标注已结业",
+      "url": "https://www.openrice.com.cn/zh-cn/shenzhen/r-%E5%AF%BF%E8%8A%B3sushiyoshi-%E7%A6%8F%E7%94%B0%E4%B8%AD%E5%BF%83%E5%8C%BA-%E6%97%A5%E6%9C%AC%E8%8F%9C-r5768094"
+    },
+    {
+      "id": "web:sznews-sushiyoshi-2024",
+      "kind": "web",
+      "title": "米其林二星名店寿司芳深圳店开幕一周年",
+      "publisher": "深圳新闻网",
+      "accessedAt": "2026-11-20",
+      "tier": "权威媒体/出版物",
+      "supports": "寿司芳深圳店板前式服务、主厨 Hiroki、2023-06 开业",
+      "url": "https://www.sznews.com/news/content/mb/2024-06/06/content_31000615.htm",
+      "publishedAt": "2024-06-06"
+    },
+    {
+      "id": "web:cls-sushiyoshi-1407610",
+      "kind": "web",
+      "title": "大阪米其林二星omakase料理中国内地首家分店落户深圳",
+      "publisher": "财联社",
+      "accessedAt": "2026-11-20",
+      "tier": "权威媒体/出版物",
+      "supports": "寿司芳深圳店约十个座位、约16道 omakase",
+      "url": "https://www.cls.cn/detail/1407610"
+    },
+    {
+      "id": "web:ctrip-toki-135462243",
+      "kind": "web",
+      "title": "莺时TOKI(平安金融中心店)",
+      "publisher": "携程",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "莺时人均780（用户反馈）",
+      "url": "https://you.ctrip.com/food/26/135462243.html"
+    },
+    {
+      "id": "web:ctrip-sushigin-77748930",
+      "kind": "web",
+      "title": "鮨吟Sushi Gin 攻略",
+      "publisher": "携程",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "鮨吟深南大道店人均约1213",
+      "url": "https://you.ctrip.com/food/shenzhen26/77748930.html"
+    },
+    {
+      "id": "web:trip-sushigin-77748930",
+      "kind": "web",
+      "title": "鮨吟 Sushi Gin (會展中心/CBD)",
+      "publisher": "Trip.com",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "鮨吟1388套餐与十二贯套餐的用户评论（2025-08至2026-02）",
+      "url": "https://tw.trip.com/restaurant/china/shenzhen/detail/restaurant-77748930/",
+      "publishedAt": "2026-02"
+    },
+    {
+      "id": "web:openrice-sushigin-r5971261",
+      "kind": "web",
+      "title": "鮨吟Sushi Gin (创建大厦)",
+      "publisher": "OpenRice",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "鮨吟价格档301+，无菜单",
+      "url": "https://www.openrice.com.cn/zh-cn/shenzhen/r-%E9%AE%A8%E5%90%9Fsushi-gin-%E8%BD%A6%E5%85%AC%E5%BA%99-%E6%97%A5%E6%9C%AC%E8%8F%9C-%E5%AF%BF%E5%8F%B8-%E5%88%BA%E8%BA%AB-r5971261/menus"
+    },
+    {
+      "id": "amap:probe-20261120",
+      "kind": "amap",
+      "title": "高德 PlaceSearch 探测（深圳，2026-11-20）",
+      "publisher": "高德地图 JS API",
+      "accessedAt": "2026-11-20",
+      "tier": "地图平台",
+      "supports": "各候选店高德 POI 名称、地址与人均 cost；人均可能偏低或缺失，仅作价格冲突信号"
+    }
+  ]
+}

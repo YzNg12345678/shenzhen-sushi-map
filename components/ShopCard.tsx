@@ -1,25 +1,6 @@
-import { AXES } from "@/lib/catalog";
 import type { ShopView } from "@/lib/shops";
 import type { ShopState } from "@/lib/types";
-import AxisBadge from "./LevelBadge";
-
-export const UNKNOWN = "待核实";
-
-/** 一句话理由：只引用素材里的原有判断，无素材时明说。 */
-export function oneLiner(v: ShopView): string {
-  if (v.sources === 0) return "素材里还没有这家店的评价，三项都待核实。";
-  for (const a of AXES) {
-    const e = v.axes[a].evidence.find((x) => x.strength === "strong" && x.polarity === (v.axes[a].level === "低" ? "neg" : "pos"));
-    if (e) return e.text;
-  }
-  return v.axes.stability.evidence[0]?.text ?? v.axes.parents.evidence[0]?.text ?? "只有零散旁证，暂不下结论。";
-}
-
-export function priceLine(v: ShopView): string {
-  if (v.curated?.price?.set) return v.curated.price.set;
-  if (v.poi?.cost) return `高德人均 ¥${v.poi.cost}（套餐、酒水、加点待核实）`;
-  return `人均${UNKNOWN}`;
-}
+import { CATEGORY_LABEL, TBD, nearestPortText } from "@/lib/ui/format";
 
 interface Props {
   v: ShopView;
@@ -29,36 +10,50 @@ interface Props {
   onOpen: () => void;
 }
 
+/** 编辑式条目：只显示该店真实具备的字段，不同店的内容与长度自然不同。 */
 export default function ShopCard({ v, index, state, selected, onOpen }: Props) {
-  const place = [v.poi?.businessArea || v.poi?.district, v.ports[0] ? `近${v.ports[0].port.name}（直线约 ${v.ports[0].km.toFixed(1)} km）` : ""].filter(Boolean).join(" · ");
-  const disputed = AXES.some((a) => v.axes[a].disputed);
+  const c = v.candidate;
+  const p = c.profile;
+  const where = [v.poi?.district, v.poi?.businessArea].filter(Boolean).join(" · ");
+  const style = p?.cuisine?.text ?? p?.ingredients?.text;
+  const risk = p?.risks[0]?.text;
+  const port = nearestPortText(v);
   return (
-    <article className="card" data-selected={selected} data-testid="shop-card" aria-label={v.name}>
-      <h3>
+    <article className="shop" data-selected={selected} data-testid="shop-card" data-shop-key={v.key} aria-label={v.name}>
+      <p className="shop-eyebrow">
+        <span className="no" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+        <span>{CATEGORY_LABEL[c.category]}</span>
+        <span>{where || `区域${TBD}`}</span>
+      </p>
+      <h3 className="shop-name">
         <button type="button" onClick={onOpen} aria-label={`${index + 1}. ${v.name}，查看详情`}>
-          {index + 1}. {v.name}
-          {state.favorite ? " ★" : ""}
-          {state.visited ? " ✓" : ""}
+          {v.name}
+          {state.favorite && <span className="mark" title="已收藏">★</span>}
+          {state.visited && <span className="mark" title="去过">✓</span>}
         </button>
       </h3>
-      <p className="meta">{place || `位置${UNKNOWN}`}</p>
-      <span className={`verdict v-${v.verdict.id}`}>{v.verdict.label}</span>
-      <div className="axes">
-        {AXES.map((a) => (
-          <AxisBadge key={a} r={v.axes[a]} />
-        ))}
-      </div>
-      <p className="meta" data-testid="card-price">人均：{priceLine(v)}</p>
-      <p className="reason">{oneLiner(v)}</p>
-      {(disputed || v.hasNegative) && <p className="reason warn">⚠ 素材中有负面或分歧说法，详情里查看。</p>}
-      <div className="card-foot">
-        <span>
-          {v.sources} 篇来源 · 资料 {v.latest ?? UNKNOWN}
-        </span>
-        <button type="button" className="btn" onClick={onOpen}>
-          详情
-        </button>
-      </div>
+      <p className="shop-price" data-testid="card-price">
+        <strong>¥{v.priceMin} 起</strong>
+        <span>{c.price.label}</span>
+      </p>
+      {p && <p className="shop-headline">{p.headline.text}</p>}
+      {style && (
+        <p className="shop-line">
+          <span className="k">风格与招牌</span>
+          {style}
+        </p>
+      )}
+      {risk && (
+        <p className="shop-line shop-risk">
+          <span className="k">需留意</span>
+          {risk}
+        </p>
+      )}
+      <p className="shop-foot">
+        <span>资料置信度 {c.confidence?.level ?? TBD}</span>
+        <span>更新 {c.updatedAt}</span>
+        {port ? <span>{port}</span> : !v.poi && <span>位置{TBD}</span>}
+      </p>
     </article>
   );
 }

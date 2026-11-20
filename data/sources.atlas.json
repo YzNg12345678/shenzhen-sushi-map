@@ -1,0 +1,960 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-20",
+  "sources": [
+    {
+      "id": "web:atlas-jetro-madai",
+      "kind": "web",
+      "title": "マダイ（日本の農林水産物・食品 品目紹介）",
+      "publisher": "JETRO（日本貿易振興機構）",
+      "url": "https://www.jetro.go.jp/agriportal/pickup/madai.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "madai：天然旬为春（桜鯛）与秋（紅葉鯛）、市场多为养殖、皮霜造り、主要产地"
+    },
+    {
+      "id": "web:atlas-shimane-shun",
+      "kind": "web",
+      "title": "旬情報（島根県の旬な魚介類）",
+      "publisher": "島根県東部農林水産振興センター水産部",
+      "url": "https://www.pref.shimane.lg.jp/industry/suisan/chiho_kikan/matsue_suisan/suisansinkou/shun/index.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "月别‘旬な魚料理一覧’（文字列表）：4 月マダイ・マサバ・マイワシ・サヨリ、6 月マアジ・アオリイカ、8 月スズキ、9 月アナゴ・ノドグロ・サワラ・マイワシ、10・11 月マサバ、12 月ハマチ、1 月ブリ、2 月サンマ、3 月ヤリイカ"
+    },
+    {
+      "id": "web:atlas-nagasaki-calendar",
+      "kind": "web",
+      "title": "おさかな旬のカレンダー",
+      "publisher": "長崎市（水産振興課）",
+      "url": "https://www.city.nagasaki.lg.jp/jigyo/370000/371000/p005845.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "旬魚表（按月文字列表）：1 月ブリ・マガキ、2 月イワシ・サワラ・アカガイ、3 月タイ、4 月マダイ、5 月イシダイ・ミズイカ、6 月アジ・ハモ、7 月アジ・クルマエビ、8 月アワビ、9 月コノシロ、10 月マサバ・ミズイカ、11 月ヒラメ・マガキ・カンパチ、12 月ヒラメ等"
+    },
+    {
+      "id": "web:atlas-hokkaido-kitamurasaki",
+      "kind": "web",
+      "title": "キタムラサキウニ[北紫海胆]",
+      "publisher": "北海道 水産林務部 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis084.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "murasaki-uni：キタムラサキウニ的漁期、生殖巣 6–8 月最发达、食用部位"
+    },
+    {
+      "id": "web:atlas-maff-tohoku-maguro",
+      "kind": "web",
+      "title": "マグロ（食卓の話題）",
+      "publisher": "農林水産省 東北農政局",
+      "url": "https://www.maff.go.jp/tohoku/monosiritai/syokutaku/maguro.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "kuromaguro、mebachi、kihada、minamimaguro：本鮪・インドマグロ・目鉢・黄肌等名称由来与等级"
+    },
+    {
+      "id": "web:atlas-kanagawa-spring",
+      "kind": "web",
+      "title": "春のカレンダー（神奈川県 魚の旬）",
+      "publisher": "神奈川県水産技術センター",
+      "url": "https://www.pref.kanagawa.jp/docs/mx7/cnt/f430693/p550036.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "sawara、sayori、madai、shako（子持ち 4–5 月）在神奈川县的春季旬期列示（页面为色块月份表，文字仅含鱼名与注记，未取得文字月份）"
+    },
+    {
+      "id": "web:atlas-kanagawa-summer",
+      "kind": "web",
+      "title": "夏のカレンダー（神奈川県 魚の旬）",
+      "publisher": "神奈川県水産技術センター",
+      "url": "https://www.pref.kanagawa.jp/docs/mx7/cnt/f430693/p550037.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "maaji、maiwashi、suzuki、anago、aoriika、アワビ禁漁期 在神奈川县的夏季旬期列示（页面为色块月份表，文字仅含鱼名与注记，未取得文字月份）"
+    },
+    {
+      "id": "web:atlas-kanagawa-autumn",
+      "kind": "web",
+      "title": "秋のカレンダー（神奈川県 魚の旬）",
+      "publisher": "神奈川県水産技術センター",
+      "url": "https://www.pref.kanagawa.jp/docs/mx7/cnt/f430693/p550038.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "saba（松輪・寒サバ）、katsuo（戻りガツオ）在神奈川县的秋季列示（页面为色块月份表，文字仅含鱼名与注记，未取得文字月份）"
+    },
+    {
+      "id": "web:atlas-kanagawa-zukan-awabi",
+      "kind": "web",
+      "title": "おさかな図鑑（アワビ類）",
+      "publisher": "神奈川県水産技術センター",
+      "url": "https://www.pref.kanagawa.jp/docs/mx7/cnt/f430693/zukan-awabi.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "awabi：アワビ类 4 种、分布、产卵期 11–1 月、漁獲サイズ"
+    },
+    {
+      "id": "web:atlas-mie-awabi",
+      "kind": "web",
+      "title": "おさかな図鑑：アワビ",
+      "publisher": "三重県水産研究所",
+      "url": "https://www.pref.mie.lg.jp/suigi/hp/86935017298.htm",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "awabi：三重县漁期 1/1–9/14、3 种、海女漁与主产地"
+    },
+    {
+      "id": "web:atlas-hiroshima-kaki",
+      "kind": "web",
+      "title": "本格シーズン到来！生産量日本一を誇る牡蠣の最新事情とは!?",
+      "publisher": "広島県（徹底解剖！ひろしまラボ）",
+      "url": "https://www.pref.hiroshima.lg.jp/lab/topics/20211108/01/",
+      "publishedAt": "2021-11-08",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "kaki：水揚げ 10–3 月、旬 12–2 月、生食用仅限餐饮、产量占全国约 6 成"
+    },
+    {
+      "id": "web:atlas-mhlw-anisakis",
+      "kind": "web",
+      "title": "食中毒予防：アニサキスによる食中毒を予防しましょう！",
+      "publisher": "厚生労働省（Webマガジン）",
+      "url": "https://www.mhlw.go.jp/stf/web_magazine/closeup/44.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "生食类条目的アニサキス提示：-20℃ 24h 以上冷冻、加热条件、醋/盐/酱油/芥末无效、易寄生种类"
+    },
+    {
+      "id": "web:atlas-hok-maanago",
+      "kind": "web",
+      "title": "マアナゴ[真穴子]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis003.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "anago：北海道旬‘夏と冬’、漁獲周年、地方名ハモ、全长"
+    },
+    {
+      "id": "web:atlas-hok-maiwashi",
+      "kind": "web",
+      "title": "マイワシ[真鰯]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis004.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "maiwashi：产卵期 12–6 月、资源水位数十年周期变动、渡岛漁獲 4–12 月"
+    },
+    {
+      "id": "web:atlas-hok-sake",
+      "kind": "web",
+      "title": "サケ(シロザケ)[鮭(白鮭)]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis019.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "ikura：漁獲 9–12 月、盛期溯上 10–11 月、イクラ・筋子加工、トキシラズ"
+    },
+    {
+      "id": "web:atlas-hok-sakuramasu",
+      "kind": "web",
+      "title": "サクラマス(ヤマメ)[桜鱒(山女魚)]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis023.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "sakuramasu：各海域漁獲时期、产卵期、富山ます寿司"
+    },
+    {
+      "id": "web:atlas-hok-sanma",
+      "kind": "web",
+      "title": "サンマ[秋刀魚]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis028.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "sanma：晩夏至秋脂肪升高、漁期 7–10 月、盐烧刺身寿司"
+    },
+    {
+      "id": "web:atlas-hok-kuromaguro",
+      "kind": "web",
+      "title": "クロマグロ[黒鮪]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis045.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "kuromaguro：旬秋至初冬、漁期 6–12 月、体长体重、大トロ中トロ"
+    },
+    {
+      "id": "web:atlas-hok-hirame",
+      "kind": "web",
+      "title": "ヒラメ[平目]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis046.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "hirame：寒びらめ旬秋至冬、产卵期 6–8 月、縁側"
+    },
+    {
+      "id": "web:atlas-hok-hotate",
+      "kind": "web",
+      "title": "ホタテガイ[帆立貝]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis061.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "hotate：垂下式与地まき式、各地漁獲时期、貝柱用法"
+    },
+    {
+      "id": "web:atlas-hok-kaki",
+      "kind": "web",
+      "title": "マガキ[牡蠣]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis062.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "kaki：最おいしい 12–2 月、养殖为主、各地漁獲时期"
+    },
+    {
+      "id": "web:atlas-hok-bakagai",
+      "kind": "web",
+      "title": "バカガイ[馬鹿貝]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis063.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "aoyagi：产卵期 7–9 月、江户前定番あおやぎ、斧足"
+    },
+    {
+      "id": "web:atlas-hok-ezoawabi",
+      "kind": "web",
+      "title": "エゾアワビ[蝦夷鮑]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis068.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "awabi：产卵期 8–10 月、天然禁漁 7–9 月、刺身寿司生食"
+    },
+    {
+      "id": "web:atlas-hok-yariika",
+      "kind": "web",
+      "title": "ヤリイカ[槍烏賊]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis070.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "yari-ika：各地漁期、产卵与寿命、寿司刺身用途"
+    },
+    {
+      "id": "web:atlas-hok-shako",
+      "kind": "web",
+      "title": "シャコ[蝦蛄]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis074.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "shako：产卵期 6–7 月、石狩湾漁期、新鲜时煮熟"
+    },
+    {
+      "id": "web:atlas-hok-amaebi",
+      "kind": "web",
+      "title": "ホッコクアカエビ[北国赤蝦]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis075.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "amaebi：产卵期 3–4 月、漁獲时期、生食甜味"
+    },
+    {
+      "id": "web:atlas-hok-toyamaebi",
+      "kind": "web",
+      "title": "トヤマエビ[富山蝦]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis076.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "botan-ebi：产卵 4–9 月、ボタンエビ名称混用、生食与煮熟甜味消失"
+    },
+    {
+      "id": "web:atlas-hok-tarabagani",
+      "kind": "web",
+      "title": "タラバガニ[鱈場蟹]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis079.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "tarabagani：寄居蟹类、产卵期 4–6 月、流通形态"
+    },
+    {
+      "id": "web:atlas-hok-kegani",
+      "kind": "web",
+      "title": "ケガニ[毛蟹]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis080.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "kegani：各地漁獲时期、雄蟹漁获规格、盐煮"
+    },
+    {
+      "id": "web:atlas-hok-zuwaigani",
+      "kind": "web",
+      "title": "ズワイガニ[楚蟹]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis082.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "zuwaigani：漁獲 3–6 与 11–12 月、产卵期、肉质"
+    },
+    {
+      "id": "web:atlas-hok-ezobafun",
+      "kind": "web",
+      "title": "エゾバフンウニ[蝦夷馬糞海胆]（北海道お魚図鑑）",
+      "publisher": "北海道 水産林務部 森林海洋環境局 成長産業課",
+      "url": "https://www.pref.hokkaido.lg.jp/sr/gid/fis083.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "bafun-uni：产卵期与漁期的海域差、食用部位、食饵影响味道"
+    },
+    {
+      "id": "web:atlas-jetro-buri",
+      "kind": "web",
+      "title": "ブリ（ハマチ） | 日本産食材ピックアップ",
+      "publisher": "JETRO（日本貿易振興機構）",
+      "url": "https://www.jetro.go.jp/agriportal/pickup/buri.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "buri：冬旬寒ブリ、养殖占比与全年供应、料理用法"
+    },
+    {
+      "id": "web:atlas-jetro-scallops",
+      "kind": "web",
+      "title": "ホタテ | 日本産食材ピックアップ",
+      "publisher": "JETRO（日本貿易振興機構）",
+      "url": "https://www.jetro.go.jp/agriportal/pickup/scallops.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "hotate：垂下式与地まき式的水揚期、玉冷用于刺身寿司"
+    },
+    {
+      "id": "web:atlas-jetro-wasabi",
+      "kind": "web",
+      "title": "わさび | 日本産食材ピックアップ",
+      "publisher": "JETRO（日本貿易振興機構）",
+      "url": "https://www.jetro.go.jp/agriportal/pickup/wasabi.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "wasabi：沢わさび与畑わさび、主产地、辛味成分、握寿司起源说明"
+    },
+    {
+      "id": "web:atlas-jetro-yuzu",
+      "kind": "web",
+      "title": "ゆず | 日本産食材ピックアップ",
+      "publisher": "JETRO（日本貿易振興機構）",
+      "url": "https://www.jetro.go.jp/agriportal/pickup/yuzu.html",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "yuzu：出货集中 11–1 月、青ゆず与黄ゆず、产地占比、皮用于刺身"
+    },
+    {
+      "id": "web:atlas-jfa-kuromaguro-2015",
+      "kind": "web",
+      "title": "太平洋クロマグロの資源・養殖管理に関する全国会議 資料（平成27年8月27日）",
+      "publisher": "水産庁",
+      "url": "https://www.jfa.maff.go.jp/j/study/enoki/attach/pdf/kuromaguro-20.pdf",
+      "publishedAt": "2015-08-27",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "kuromaguro：产卵场（南西诸岛至台湾东方 4–7 月、日本海 7–8 月）、成熟年龄、日本海产卵期自主规制"
+    },
+    {
+      "id": "web:atlas-toyosu-weekly-2025-09w1",
+      "kind": "web",
+      "title": "水産物の週間市況について（2025年9月1週）",
+      "publisher": "東京都中央卸売市場 豊洲市場 水産農産品課",
+      "url": "https://www.shijou.metro.tokyo.lg.jp/documents/d/shijou/2025091-pdf",
+      "publishedAt": "2025-09-11",
+      "accessedAt": "2026-11-20",
+      "tier": "官方/政府",
+      "supports": "maaji、saba、sanma、katsuo、kinmedai、mebachi：该周豊洲的主产地与流通形态（仅说明单周供应，不代表旬期）"
+    },
+    {
+      "id": "web:atlas-nippon-edomae",
+      "kind": "web",
+      "title": "「江戸前寿司」のいろは——伝承から攻略法まで 銀座名店「鮨青木」店主が伝授",
+      "publisher": "nippon.com",
+      "url": "https://www.nippon.com/ja/views/b01706/",
+      "publishedAt": "2014-07-24",
+      "accessedAt": "2026-11-20",
+      "tier": "权威媒体/出版物",
+      "supports": "江户前仕事（盐醋〆、蒸煮、渍汁）、煮切り（酱油加味醂煮一沸并刷涂）、ツメ用于煮蛸与穴子、粗盐用于アオリイカ与白身、ヅケ与鲔鱼旧称‘下魚’、シャリ温度、ガリ用于清口、江户前魚介列表"
+    },
+    {
+      "id": "web:atlas-wiki-madai",
+      "kind": "web",
+      "title": "マダイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%80%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "madai：产卵期、养殖、淡白无异味、旬‘冬’及桜鯛/紅葉鯛称呼"
+    },
+    {
+      "id": "web:atlas-wiki-hirame",
+      "kind": "web",
+      "title": "ヒラメ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%92%E3%83%A9%E3%83%A1",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "hirame：旬冬、产卵期地域差、エンガワ、クドア"
+    },
+    {
+      "id": "web:atlas-wiki-suzuki",
+      "kind": "web",
+      "title": "スズキ (魚) - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BA%E3%82%AD_(%E9%AD%9A)",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "suzuki：夏肥美、冬产卵期身瘦、洗い、出世魚称呼"
+    },
+    {
+      "id": "web:atlas-wiki-kinmedai",
+      "kind": "web",
+      "title": "キンメダイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%B3%E3%83%A1%E3%83%80%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kinmedai：旬冬但四季有脂、肉质、稲取等产地"
+    },
+    {
+      "id": "web:atlas-wiki-ishidai",
+      "kind": "web",
+      "title": "イシダイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%A4%E3%82%B7%E3%83%80%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "ishidai：旬秋、40cm 以下为佳、シガテラ、クチグロ"
+    },
+    {
+      "id": "web:atlas-wiki-konoshiro",
+      "kind": "web",
+      "title": "コノシロ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%8E%E3%82%B7%E3%83%AD",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kohada：成长阶段称呼、旬与脂、酢漬け与江戸前"
+    },
+    {
+      "id": "web:atlas-wiki-maaji",
+      "kind": "web",
+      "title": "マアジ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A2%E3%82%B8",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "maaji：旬夏、产卵期、回游型/居つき型、关アジ"
+    },
+    {
+      "id": "web:atlas-wiki-maiwashi",
+      "kind": "web",
+      "title": "マイワシ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%83%AF%E3%82%B7",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "maiwashi：柔软多小骨、资源长周期波动"
+    },
+    {
+      "id": "web:atlas-wiki-sanma",
+      "kind": "web",
+      "title": "サンマ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%B3%E3%83%9E",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "sanma：秋、脂含量、全年作业、寄生虫与甲壳类过敏提示"
+    },
+    {
+      "id": "web:atlas-wiki-saba",
+      "kind": "web",
+      "title": "サバ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%90",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "saba：秋サバ・寒サバ、品牌、〆鯖、アニサキス与生き腐れ"
+    },
+    {
+      "id": "web:atlas-wiki-sawara",
+      "kind": "web",
+      "title": "サワラ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%AF%E3%83%A9",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "sawara：春的印象与寒鰆、出世魚、赤身分类、身软"
+    },
+    {
+      "id": "web:atlas-wiki-sayori",
+      "kind": "web",
+      "title": "サヨリ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%A8%E3%83%AA",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "sayori：旬 3–5 月、たて塩、ウオノエ类寄生"
+    },
+    {
+      "id": "web:atlas-wiki-kuromaguro",
+      "kind": "web",
+      "title": "クロマグロ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%83%9E%E3%82%B0%E3%83%AD",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kuromaguro：体长体重、养殖现状、トロ脂质、水银、资源管理"
+    },
+    {
+      "id": "web:atlas-wiki-kihada",
+      "kind": "web",
+      "title": "キハダ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%8F%E3%83%80",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kihada：旬夏至秋、脂少、与メバチ幼鱼相似"
+    },
+    {
+      "id": "web:atlas-wiki-mebachi",
+      "kind": "web",
+      "title": "メバチ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%90%E3%83%81",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "mebachi：春夏クロマグロ味落期需求上升、赤く柔らか"
+    },
+    {
+      "id": "web:atlas-wiki-minamimaguro",
+      "kind": "web",
+      "title": "ミナミマグロ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%8A%E3%83%9F%E3%83%9E%E3%82%B0%E3%83%AD",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "minamimaguro：脂多、仅次クロマグロ、インドマグロ、资源衰退"
+    },
+    {
+      "id": "web:atlas-wiki-katsuo",
+      "kind": "web",
+      "title": "カツオ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%84%E3%82%AA",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "katsuo：初鰹与戻り鰹、产地差异、生食倾向、薬味"
+    },
+    {
+      "id": "web:atlas-wiki-maanago",
+      "kind": "web",
+      "title": "マアナゴ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A2%E3%83%8A%E3%82%B4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "anago：旬 7–8 月、产卵期、メソ、煮穴子"
+    },
+    {
+      "id": "web:atlas-wiki-nihonunagi",
+      "kind": "web",
+      "title": "ニホンウナギ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%9B%E3%83%B3%E3%82%A6%E3%83%8A%E3%82%AE",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "unagi：蒲焼消费、シラスウナギ依赖、IUCN 濒危"
+    },
+    {
+      "id": "web:atlas-wiki-akamutsu",
+      "kind": "web",
+      "title": "アカムツ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AB%E3%83%A0%E3%83%84",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "akamutsu：全年有脂、白身のトロ、产地与高级化"
+    },
+    {
+      "id": "web:atlas-wiki-buri",
+      "kind": "web",
+      "title": "ブリ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%96%E3%83%AA",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "buri：寒ブリ、出世魚、养殖、氷見"
+    },
+    {
+      "id": "web:atlas-wiki-kanpachi",
+      "kind": "web",
+      "title": "カンパチ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%B3%E3%83%91%E3%83%81",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kanpachi：回游、养殖、アニサキス、シガテラ、与ブリ区别"
+    },
+    {
+      "id": "web:atlas-wiki-sakuramasu",
+      "kind": "web",
+      "title": "サクラマス - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%82%AF%E3%83%A9%E3%83%9E%E3%82%B9",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "sakuramasu：春捕获、产卵期、富山鱒寿司的替代种"
+    },
+    {
+      "id": "web:atlas-wiki-hamo",
+      "kind": "web",
+      "title": "ハモ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%A2",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "hamo：夏、骨切り、湯引き、鱧寿司、产地"
+    },
+    {
+      "id": "web:atlas-wiki-awabi",
+      "kind": "web",
+      "title": "アワビ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%AF%E3%83%93",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "awabi：コリコリ食感、酒蒸し"
+    },
+    {
+      "id": "web:atlas-wiki-hotategai",
+      "kind": "web",
+      "title": "ホタテガイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9B%E3%82%BF%E3%83%86%E3%82%AC%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "hotate：产地、貝柱与ヒモ、冷凍貝柱、ウロ（贝毒与镉）"
+    },
+    {
+      "id": "web:atlas-wiki-akagai",
+      "kind": "web",
+      "title": "アカガイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AB%E3%82%AC%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "akagai：红色来源、缶詰多为サルボウ、春の季語"
+    },
+    {
+      "id": "web:atlas-wiki-torigai",
+      "kind": "web",
+      "title": "トリガイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%AA%E3%82%AC%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "torigai：旬（太平洋侧春先/日本海侧夏）、足的黑色部分、进口冷冻"
+    },
+    {
+      "id": "web:atlas-wiki-hamaguri",
+      "kind": "web",
+      "title": "ハマグリ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%9E%E3%82%B0%E3%83%AA",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "hamaguri：流通种实为チョウセン/シナ、产卵期、绝灭危惧 II 类"
+    },
+    {
+      "id": "web:atlas-wiki-bakagai",
+      "kind": "web",
+      "title": "バカガイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%90%E3%82%AB%E3%82%AC%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "aoyagi：青柳名称由来、小柱、产地变迁"
+    },
+    {
+      "id": "web:atlas-wiki-mirukui",
+      "kind": "web",
+      "title": "ミルクイ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%AB%E3%82%AF%E3%82%A4",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "mirugai：真ミルと白ミル、进口比例、水管"
+    },
+    {
+      "id": "web:atlas-wiki-kurumaebi",
+      "kind": "web",
+      "title": "クルマエビ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AB%E3%83%9E%E3%82%A8%E3%83%93",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kuruma：旬初夏至秋、产地、养殖史、名称由来"
+    },
+    {
+      "id": "web:atlas-wiki-hokkokuakaebi",
+      "kind": "web",
+      "title": "ホッコクアカエビ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9B%E3%83%83%E3%82%B3%E3%82%AF%E3%82%A2%E3%82%AB%E3%82%A8%E3%83%93",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "amaebi：甘味来源、大小用途、产卵期、日本海为南限"
+    },
+    {
+      "id": "web:atlas-wiki-botanebi",
+      "kind": "web",
+      "title": "ボタンエビ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%A8%E3%83%93",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "botan：漁期 10–5 月、本牡丹海老与同名流通种"
+    },
+    {
+      "id": "web:atlas-wiki-shako",
+      "kind": "web",
+      "title": "シャコ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%A3%E3%82%B3",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "shako：旬春至初夏、カツブシ、シャコツメ、茹で"
+    },
+    {
+      "id": "web:atlas-wiki-zuwaigani",
+      "kind": "web",
+      "title": "ズワイガニ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%BA%E3%83%AF%E3%82%A4%E3%82%AC%E3%83%8B",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "zuwai：冬、漁期、地域品牌与雌雄、内子外子"
+    },
+    {
+      "id": "web:atlas-wiki-kegani",
+      "kind": "web",
+      "title": "ケガニ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B1%E3%82%AC%E3%83%8B",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kegani：北海道漁期近乎全年、蟹味噌多"
+    },
+    {
+      "id": "web:atlas-wiki-tarabagani",
+      "kind": "web",
+      "title": "タラバガニ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%83%A9%E3%83%90%E3%82%AC%E3%83%8B",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "tarabagani：寄居蟹类、漁期、生食评价、ハナサキガニ"
+    },
+    {
+      "id": "web:atlas-wiki-kouika",
+      "kind": "web",
+      "title": "コウイカ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%82%A6%E3%82%A4%E3%82%AB",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kouika：旬 4–5 月、スミイカ、肉厚"
+    },
+    {
+      "id": "web:atlas-wiki-aoriika",
+      "kind": "web",
+      "title": "アオリイカ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AA%E3%83%AA%E3%82%A4%E3%82%AB",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "aoriika：春夏、游离氨基酸、地方名"
+    },
+    {
+      "id": "web:atlas-wiki-yariika",
+      "kind": "web",
+      "title": "ヤリイカ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%A4%E3%83%AA%E3%82%A4%E3%82%AB",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "yariika：春季漁期、生食地位高于スルメイカ"
+    },
+    {
+      "id": "web:atlas-wiki-madako",
+      "kind": "web",
+      "title": "マダコ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%80%E3%82%B3",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "madako：麦わらダコ、明石、茹で蛸为主、塩もみ"
+    },
+    {
+      "id": "web:atlas-wiki-bafununi",
+      "kind": "web",
+      "title": "バフンウニ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%95%E3%83%B3%E3%82%A6%E3%83%8B",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "bafun-uni：产卵期苦味、与エゾバフンウニ区别、分布"
+    },
+    {
+      "id": "web:atlas-wiki-murasakiuni",
+      "kind": "web",
+      "title": "ムラサキウニ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%A0%E3%83%A9%E3%82%B5%E3%82%AD%E3%82%A6%E3%83%8B",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "murasaki-uni：旬 6–8 月、白雲丹/赤雲丹、板ウニミョウバン"
+    },
+    {
+      "id": "web:atlas-wiki-ikura",
+      "kind": "web",
+      "title": "イクラ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%A4%E3%82%AF%E3%83%A9",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "ikura：秋鲑漁期、筋子区别、軍艦巻き、醤油漬け"
+    },
+    {
+      "id": "web:atlas-wiki-kazunoko",
+      "kind": "web",
+      "title": "カズノコ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AB%E3%82%BA%E3%83%8E%E3%82%B3",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "kazunoko：ニシン卵、旬在腊月至正月、进口依赖、塩抜き"
+    },
+    {
+      "id": "web:atlas-wiki-karasumi",
+      "kind": "web",
+      "title": "カラスミ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%A9%E3%82%B9%E3%83%9F",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "karasumi：ボラ卵巣、产地、制法、サワラ卵巣"
+    },
+    {
+      "id": "web:atlas-wiki-caviar",
+      "kind": "web",
+      "title": "キャビア - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%93%E3%82%A2",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "caviar：チョウザメ、种类、CITES、养殖、マロソル"
+    },
+    {
+      "id": "web:atlas-wiki-wasabi",
+      "kind": "web",
+      "title": "ワサビ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%AF%E3%82%B5%E3%83%93",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "wasabi：辛味成分、本わさび与西洋わさび、产地、旬、抗菌"
+    },
+    {
+      "id": "web:atlas-wiki-nikiri",
+      "kind": "web",
+      "title": "煮切り - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E7%85%AE%E5%88%87%E3%82%8A",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "nikiri：煮切り的定义（去除酒/味醂酒精）"
+    },
+    {
+      "id": "web:atlas-wiki-nori",
+      "kind": "web",
+      "title": "海苔 - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E6%B5%B7%E8%8B%94",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "nori：种类、产地、收获期、製品形態、寿司用法与等级"
+    },
+    {
+      "id": "web:atlas-wiki-yuzu",
+      "kind": "web",
+      "title": "ユズ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%83%A6%E3%82%BA",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "yuzu：青柚子/黄柚子、果期、产地、香味用法"
+    },
+    {
+      "id": "web:atlas-wiki-sudachi",
+      "kind": "web",
+      "title": "スダチ - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%80%E3%83%81",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "sudachi：旬 8–10 月、徳島县占 98%、鱼类料理用法"
+    },
+    {
+      "id": "web:atlas-wiki-sushi",
+      "kind": "web",
+      "title": "寿司 - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E5%AF%BF%E5%8F%B8",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "shari、gari：酢飯构成、赤酢/白酢、江戸前仕事、ガリ、軍艦巻"
+    },
+    {
+      "id": "web:atlas-wiki-shoyu",
+      "kind": "web",
+      "title": "醤油 - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E9%86%A4%E6%B2%B9",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "shoyu：五大类型、濃口占约八成、再仕込み、江戸前与濃口"
+    },
+    {
+      "id": "web:atlas-wiki-konbujime",
+      "kind": "web",
+      "title": "昆布締め - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E6%98%86%E5%B8%83%E7%B7%A0%E3%82%81",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "madai、hirame：昆布〆的方法、对象鱼、旨味移行与脱水、富山起源"
+    },
+    {
+      "id": "web:atlas-wiki-su",
+      "kind": "web",
+      "title": "酢 - Wikipedia",
+      "publisher": "Wikipedia（日本語版）",
+      "url": "https://ja.wikipedia.org/wiki/%E9%85%A2",
+      "accessedAt": "2026-11-20",
+      "tier": "百科/二手整理",
+      "supports": "akazu：粕酢（赤酢）的原料、过去用于握寿司酢饭、战后流通减少与‘穀物酢’标示"
+    }
+  ]
+}

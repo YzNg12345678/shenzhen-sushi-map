@@ -1,8 +1,8 @@
 "use client";
 
 import { forwardRef, useState } from "react";
-import { AXES, AXIS_LABEL, catalog } from "@/lib/catalog";
-import { STALE_DAYS } from "@/lib/judge";
+import Link from "next/link";
+import { audit, dataset } from "@/lib/data";
 import { parseBackup, type AppData } from "@/lib/types";
 
 interface Props {
@@ -17,6 +17,8 @@ const SettingsDialog = forwardRef<HTMLDialogElement, Props>(function SettingsDia
   const [msg, setMsg] = useState<{ text: string; err: boolean } | null>(null);
   const [confirmClear, setConfirmClear] = useState(false);
   const count = Object.keys(data.shops).length;
+  const notes = dataset.notes;
+  const unmapped = notes.filter((n) => n.unmappedReason);
 
   const exportData = () => {
     const out = { ...data, exportedAt: new Date().toISOString() };
@@ -60,19 +62,18 @@ const SettingsDialog = forwardRef<HTMLDialogElement, Props>(function SettingsDia
 
       <h3>资料来源与更新时间</h3>
       <ul className="small">
-        <li>店铺位置、地址、电话、营业时间、人均来自高德地图实时检索；未返回的字段显示“待核实”。</li>
-        <li>评价摘要来自小红书 {catalog.notes.length} 篇笔记（采集于 {catalog.notes[0]?.collectedAt ?? "待核实"}），只保留摘要与来源链接，不复制正文和评论，互动量不参与判断。</li>
-        <li>数据版本 {catalog.dataVersion}，整理于 {catalog.updatedAt}。其中 {catalog.notes.length - catalog.unmapped.length} 篇已关联到门店，{catalog.unmapped.length} 篇无法确认店名。</li>
+        <li>店铺位置、地址、电话、营业时间、人均来自高德地图实时检索；未返回的字段显示“待核实”。高德人均仅供参考，不等同套餐价。</li>
+        <li>逐店评价由公开来源与 {notes.length} 篇小红书用户笔记整理，仅保留摘要与来源链接，不复制正文和评论。小红书为用户内容，仅作一手体验参考，互动量不作为质量依据。</li>
+        <li>名单数据版本 {audit.dataVersion}，更新于 {audit.updatedAt}。</li>
       </ul>
-      <h3>三项判断怎么得出</h3>
-      <ul className="small">
-        {AXES.map((a) => <li key={a}>{AXIS_LABEL[a]}：高 / 中 / 低 / 待核实，按来源数量与新鲜度逐店计算，不合成总分。</li>)}
-        <li>“高”需要至少 2 篇详细的正面记述且无负面；单一来源最高“中”；详细负面且无正面为“低”；{STALE_DAYS} 天前的说法按旁证处理，只有旁证则“待核实”。</li>
-        <li>带父母尚缺座位、安静度、洗手间、步行等素材，过关价值缺实际交通与香港同价位对比，因此多数店仍是“待核实”。</li>
-      </ul>
+      <h3>收录标准</h3>
+      <p className="small">
+        只收录通过 Omakase 身份与价位（每位 ¥{audit.priceFloor} 起）审核的店；证据不足的放在“待核实区”，不计入主清单。逐条规则、被排除的店与原因见
+        {" "}<Link href="/audit/" onClick={onClose}>筛选依据</Link>。
+      </p>
       <h3>未能映射到门店的素材</h3>
       <ul className="small" data-testid="unmapped">
-        {catalog.unmapped.length === 0 ? <li>无</li> : catalog.unmapped.map((n) => (
+        {unmapped.length === 0 ? <li>无</li> : unmapped.map((n) => (
           <li key={n.noteId}><a href={n.url} target="_blank" rel="noopener noreferrer">{n.title}</a>：{n.unmappedReason ?? "待核实"}</li>
         ))}
       </ul>

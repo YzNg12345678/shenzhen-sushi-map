@@ -1,128 +1,134 @@
-import { AXES, catalog, type Axis, type Catalog, type CuratedShop, type Evidence } from "./catalog";
-import { judgeAxis, judgeVerdict, type AxisResult, type Verdict } from "./judge";
+import { audit as defaultAudit } from "./data";
+import { splitPois, type PoiSplit } from "./rules";
 import { nameHasAny, normName as norm } from "./match";
 import { portDistances, type PortDistance } from "./ports";
+import type { AuditFile, Candidate } from "./schema";
 import type { Poi, ShopState } from "./types";
 import { emptyState } from "./types";
 
 export interface ShopView {
-  /** 个人状态键：`<门店id>@<高德id>` / `<门店id>`（无定位） / `amap:<高德id>`（仅高德）。 */
+  /** 个人状态键：`<候选id>@<高德id>` / `<候选id>`（高德未返回位置）。 */
   key: string;
   name: string;
-  curated?: CuratedShop;
+  candidate: Candidate;
   poi?: Poi;
-  axes: Record<Axis, AxisResult>;
-  verdict: Verdict;
-  /** 去重后的来源笔记数与最近发布日期。 */
-  sources: number;
-  latest: string | null;
   ports: PortDistance[];
-  /** 用于人均筛选的数字（素材套餐价取最低数字，否则高德人均）。 */
-  priceNum?: number;
-  priceFrom?: "素材" | "高德";
-  /** 是否含有负面说法（任一轴）。 */
-  hasNegative: boolean;
+  /** 审计价格下限（元/位），用于价位筛选与排序；一定 ≥ 300。 */
+  priceMin: number;
+  /** 高德人均与审计价是否不同口径（仅展示，不参与判断）。 */
+  district?: string;
 }
 
-
-export function matchesCurated(poi: Poi, shop: CuratedShop): boolean {
-  if (poi.type && !/餐饮/.test(poi.type)) return false;
-  if (!nameHasAny(poi.name, shop.keywords)) return false;
-  return !shop.branchKeywords || nameHasAny(poi.name, shop.branchKeywords);
+/** 主清单：只来自 decision=include 的审计候选；动态高德 POI 必须通过同一规则（lib/rules.ts）。 */
+export function includedCandidates(audit: AuditFile = defaultAudit): Candidate[] {
+  return audit.candidates.filter((c) => c.decision === "include");
 }
 
-function priceOf(shop: CuratedShop | undefined, poi: Poi | undefined): Pick<ShopView, "priceNum" | "priceFrom"> {
-  const m = shop?.price?.set?.match(/\d{3,4}/);
-  if (m) return { priceNum: Number(m[0]), priceFrom: "素材" };
-  if (poi?.cost) return { priceNum: poi.cost, priceFrom: "高德" };
-  return {};
-}
-
-function view(key: string, name: string, cat: Catalog, curated?: CuratedShop, poi?: Poi): ShopView {
-  const ev: Evidence[] = curated?.evidence ?? [];
-  const axes = Object.fromEntries(AXES.map((a) => [a, judgeAxis(a, ev, cat.noteById, cat.updatedAt)])) as Record<Axis, AxisResult>;
-  const all = Object.values(axes);
-  const dates = all.map((a) => a.latest).filter((d): d is string => Boolean(d)).sort();
+function view(c: Candidate, poi?: Poi, multi = false): ShopView {
   return {
-    key,
-    name,
-    curated,
+    key: poi ? `${c.id}@${poi.id}` : c.id,
+    name: multi && poi ? poi.name : c.name,
+    candidate: c,
     poi,
-    axes,
-    verdict: judgeVerdict(axes.stability, axes.parents, axes.crossing),
-    sources: new Set(ev.map((e) => e.noteId)).size,
-    latest: dates.length ? dates[dates.length - 1] : null,
     ports: poi ? portDistances(poi) : [],
-    hasNegative: ev.some((e) => e.polarity === "neg"),
-    ...priceOf(curated, poi),
+    priceMin: c.price.perPersonMin as number,
+    district: poi?.district,
   };
 }
 
-/** 合并整理好的门店与高德 POI。同一门店命中多个 POI（分店）时各出一张卡，证据共享并提示分店待核实。 */
-export function buildShops(pois: Poi[], cat: Catalog = catalog): ShopView[] {
-  const used = new Set<string>();
-  const out: ShopView[] = [];
-  for (const shop of cat.shops) {
-    const hits = pois.filter((p) => matchesCurated(p, shop));
-    if (hits.length === 0) {
-      out.push(view(shop.id, shop.name, cat, shop));
-      continue;
-    }
-    for (const p of hits) {
-      used.add(p.id);
-      out.push(view(`${shop.id}@${p.id}`, hits.length > 1 ? p.name : shop.name, cat, shop, p));
-    }
-  }
-  for (const p of pois) if (!used.has(p.id)) out.push(view(`amap:${p.id}`, p.name, cat, undefined, p));
-  return out.sort((a, b) => b.sources - a.sources || a.name.localeCompare(b.name, "zh"));
+export interface BuiltShops {
+  shops: ShopView[];
+  split: PoiSplit;
 }
 
-/** 读取个人状态；兼容旧键（`amap:<id>`、门店 id）。 */
+/** 合并审计通过的门店与（已过规则的）高德 POI。同一门店多个分店 POI 各出一张卡。 */
+export function buildShops(pois: Poi[], audit: AuditFile = defaultAudit): BuiltShops {
+  const split = splitPois(pois, audit);
+  const shops: ShopView[] = [];
+  for (const c of includedCandidates(audit)) {
+    const hits = split.admitted.filter((a) => a.candidate.id === c.id);
+    if (hits.length === 0) shops.push(view(c));
+    else for (const h of hits) shops.push(view(c, h.poi, hits.length > 1));
+  }
+  shops.sort((a, b) => a.name.localeCompare(b.name, "zh"));
+  return { shops, split };
+}
+
+/** 读取个人状态；兼容门店 id 键。 */
 export function stateOf(shops: Record<string, ShopState>, v: ShopView): ShopState {
-  const keys = [v.key, v.poi ? `amap:${v.poi.id}` : "", v.curated?.id ?? ""];
+  const keys = [v.key, v.poi ? `amap:${v.poi.id}` : "", v.candidate.id];
   for (const k of keys) if (k && shops[k]) return shops[k];
-  // 高德未命中时（无 POI），回退到该店任一分店键，避免检索失败时个人记录“消失”。
-  if (!v.poi && v.curated) {
-    const alt = Object.keys(shops).find((k) => k.startsWith(`${v.curated!.id}@`));
+  if (!v.poi) {
+    const alt = Object.keys(shops).find((k) => k.startsWith(`${v.candidate.id}@`));
     if (alt) return shops[alt];
   }
   return emptyState();
 }
 
-export type PriceBand = "any" | "lt300" | "300-600" | "gt600";
+export type PriceBand = "any" | "300-499" | "500-799" | "800+";
+export const PRICE_BANDS: { value: PriceBand; label: string }[] = [
+  { value: "any", label: "价位不限" },
+  { value: "300-499", label: "¥300–499" },
+  { value: "500-799", label: "¥500–799" },
+  { value: "800+", label: "¥800 以上" },
+];
+export type KindFilter = "any" | "omakase-sushi" | "omakase-other";
+export const KINDS: { value: KindFilter; label: string }[] = [
+  { value: "any", label: "类型不限" },
+  { value: "omakase-sushi", label: "板前寿司" },
+  { value: "omakase-other", label: "其他主厨发办" },
+];
+export type SortKey = "name" | "price-asc" | "price-desc" | "confidence";
+export const SORTS: { value: SortKey; label: string }[] = [
+  { value: "name", label: "按店名" },
+  { value: "price-asc", label: "价位由低到高" },
+  { value: "price-desc", label: "价位由高到低" },
+  { value: "confidence", label: "资料置信度" },
+];
+
 export interface Filters {
   query: string;
-  parents: boolean;
-  crossing: boolean;
-  stable: boolean;
   price: PriceBand;
-  port: "any" | "futian" | "szbay" | "luohu";
+  kind: KindFilter;
+  district: string; // "any" 或行政区名
+  confidence: "any" | "高" | "中" | "低";
   mine: boolean;
+  sort: SortKey;
 }
-export const defaultFilters = (): Filters => ({ query: "", parents: false, crossing: false, stable: false, price: "any", port: "any", mine: false });
+export const defaultFilters = (): Filters => ({ query: "", price: "any", kind: "any", district: "any", confidence: "any", mine: false, sort: "name" });
+export const isFiltered = (f: Filters): boolean => f.query !== "" || f.price !== "any" || f.kind !== "any" || f.district !== "any" || f.confidence !== "any" || f.mine;
+
+const RANK = { 高: 0, 中: 1, 低: 2 } as const;
 
 export function filterShops(list: ShopView[], f: Filters, shops: Record<string, ShopState>): ShopView[] {
   const q = norm(f.query);
-  return list.filter((v) => {
+  const out = list.filter((v) => {
+    const c = v.candidate;
     if (q) {
-      const hay = norm([v.name, v.curated?.keywords.join(" ") ?? "", v.poi?.district ?? "", v.poi?.businessArea ?? "", v.poi?.address ?? "", v.ports[0]?.port.name ?? "", v.curated?.branch ?? ""].join(" "));
-      if (!hay.includes(q)) return false;
+      const hay = norm([v.name, c.name, c.keywords.join(" "), c.branchNote ?? "", v.poi?.district ?? "", v.poi?.businessArea ?? "", v.poi?.address ?? "", c.profile?.headline.text ?? "", c.profile?.cuisine?.text ?? "", c.profile?.ingredients?.text ?? ""].join(" "));
+      if (!hay.includes(q) && !nameHasAny(hay, [f.query])) return false;
     }
-    if (f.parents && v.axes.parents.level !== "高") return false;
-    if (f.crossing && v.axes.crossing.level !== "高") return false;
-    if (f.stable && v.axes.stability.level !== "高") return false;
-    if (f.price !== "any") {
-      const n = v.priceNum;
-      if (n === undefined) return false;
-      if (f.price === "lt300" && !(n < 300)) return false;
-      if (f.price === "300-600" && !(n >= 300 && n <= 600)) return false;
-      if (f.price === "gt600" && !(n > 600)) return false;
-    }
-    if (f.port !== "any" && v.ports[0]?.port.id !== f.port) return false;
+    const p = v.priceMin;
+    if (f.price === "300-499" && !(p >= 300 && p < 500)) return false;
+    if (f.price === "500-799" && !(p >= 500 && p < 800)) return false;
+    if (f.price === "800+" && !(p >= 800)) return false;
+    if (f.kind !== "any" && c.category !== f.kind) return false;
+    if (f.district !== "any" && v.district !== f.district) return false;
+    if (f.confidence !== "any" && c.confidence?.level !== f.confidence) return false;
     if (f.mine) {
       const st = stateOf(shops, v);
       if (!st.favorite && !st.visited) return false;
     }
     return true;
   });
+  const by: Record<SortKey, (a: ShopView, b: ShopView) => number> = {
+    name: (a, b) => a.name.localeCompare(b.name, "zh"),
+    "price-asc": (a, b) => a.priceMin - b.priceMin,
+    "price-desc": (a, b) => b.priceMin - a.priceMin,
+    confidence: (a, b) => RANK[a.candidate.confidence?.level ?? "低"] - RANK[b.candidate.confidence?.level ?? "低"],
+  };
+  return out.sort(by[f.sort] ?? by.name);
 }
+
+/** 可选的行政区（来自当前通过规则的店）。 */
+export const districtsOf = (list: ShopView[]): string[] => [...new Set(list.map((v) => v.district).filter((d): d is string => Boolean(d)))].sort((a, b) => a.localeCompare(b, "zh"));
