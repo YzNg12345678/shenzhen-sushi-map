@@ -18,7 +18,7 @@
 ## 4. 命令与真实结果
 | 命令 | 结果 |
 | --- | --- |
-| `node scripts/validate-data.mjs` | 通过（58 候选、include=2；atlas 60 条） |
+| `node scripts/validate-data.mjs` | 通过（58 候选、include=2；atlas 57 条） |
 | `node scripts/build-report.mjs` | 通过，生成 omakase-audit.md / atlas-sources.md |
 | `pnpm lint` | 0 error / 0 warning |
 | `pnpm typecheck` | 通过 |
