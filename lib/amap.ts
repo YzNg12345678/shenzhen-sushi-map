@@ -115,12 +115,16 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** 高德对并发有限流；失败时等一会儿重试一次。 */
 async function searchKeyword(AMap: any, keyword: string, pages: number): Promise<Poi[]> {
-  try {
-    return await searchKeywordOnce(AMap, keyword, pages);
-  } catch {
-    await sleep(800);
-    return searchKeywordOnce(AMap, keyword, pages);
+  let last: unknown;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      return await searchKeywordOnce(AMap, keyword, pages);
+    } catch (e) {
+      last = e;
+      await sleep(800 * (attempt + 1));
+    }
   }
+  throw last;
 }
 
 async function searchKeywordOnce(AMap: any, keyword: string, pages: number): Promise<Poi[]> {

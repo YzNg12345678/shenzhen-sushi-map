@@ -296,3 +296,5 @@ dialog.settings label.btn { display: inline-grid; place-items: center; }
 .nav a { min-width: 44px; justify-content: center; }
 .shop-name button { display: inline-flex; align-items: center; min-height: 44px; }
 a.src { min-height: 44px; align-items: center; padding: 6px 12px; }
+.price-stale { border-left: 3px solid var(--accent); }
+.stale-flag { color: var(--accent); }

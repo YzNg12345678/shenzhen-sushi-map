@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
-  "dataVersion": "2026-11-20.1",
-  "updatedAt": "2026-11-20",
+  "dataVersion": "2026-11-21.1",
+  "updatedAt": "2026-11-21",
   "priceFloor": 300,
   "characteristics": [
     {
@@ -3678,9 +3678,11 @@
         },
         {
           "rule": "R8",
-          "result": "unknown",
-          "note": "仅记录大成基金总部 3 楼一址，高德 POI「穗 · Sushi Minoru(大成基金总部大厦店)」已核对，高德人均 1445",
-          "sources": []
+          "result": "pass",
+          "note": "高德 POI「穗 · Sushi Minoru(大成基金总部大厦店)」与报道地址（大成基金总部 3 楼）一致；匹配须同时命中全名与“大成基金”",
+          "sources": [
+            "amap:probe-20261120"
+          ]
         }
       ],
       "identity": {

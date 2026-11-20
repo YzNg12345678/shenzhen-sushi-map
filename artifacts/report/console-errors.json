@@ -1,134 +1,134 @@
 {
-  "generatedAt": "2026-11-20T12:14:46.037Z",
-  "total": 54,
+  "generatedAt": "2026-11-20T12:52:19.588Z",
+  "total": 39,
   "product": 2,
   "thirdPartyUnexpected": 2,
-  "navigationAbort": 50,
+  "navigationAbort": 35,
   "entries": [
     {
       "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
-      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
-      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
-      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-main",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
-      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "desktop-detail",
       "kind": "requestfailed",
       "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
       "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
-      "test": "desktop-detail",
+      "test": "desktop-main",
       "kind": "requestfailed",
       "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
       "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
-      "test": "desktop-detail",
+      "test": "desktop-main",
       "kind": "requestfailed",
       "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
       "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
-      "test": "desktop-detail",
+      "test": "desktop-main",
       "kind": "requestfailed",
       "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
       "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
-      "test": "desktop-detail",
+      "test": "desktop-main",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-main",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-main",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-main",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-main",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
+      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-main",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
+      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3346_1533_12?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "desktop-detail",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
+      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "desktop-detail",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
+      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "desktop-detail",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
+      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-detail",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
+      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-detail",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-detail",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-detail",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "desktop-detail",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
       "class": "navigation-abort"
     },
     {
@@ -162,29 +162,29 @@
     {
       "test": "desktop-detail",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "desktop-detail",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/building_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "desktop-detail",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
+      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3345_1537_12?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "desktop-detail",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
       "class": "navigation-abort"
     },
     {
@@ -196,118 +196,6 @@
     },
     {
       "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_1?[REDACTED]",
-      "url": "https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_1?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_4?[REDACTED]",
-      "url": "https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_4?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_9?[REDACTED]",
-      "url": "https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_9?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_64?[REDACTED]",
-      "url": "https://o4.amap.com/icon/2.0.2.45/v1/1_0_s/icons_64?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_384_10?[REDACTED]",
-      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_384_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_383_10?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_383_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_384_10?[REDACTED]",
-      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_384_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_383_10?[REDACTED]",
-      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_383_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_384_10?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_384_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_383_10?[REDACTED]",
-      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_383_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_385_10?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_385_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_382_10?[REDACTED]",
-      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/836_382_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_385_10?[REDACTED]",
-      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_385_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_382_10?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/837_382_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_385_10?[REDACTED]",
-      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_385_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
-      "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_382_10?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/0/835_382_10?[REDACTED]",
-      "class": "navigation-abort"
-    },
-    {
-      "test": "error-state",
       "kind": "console.error",
       "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
       "url": "http://127.0.0.1:3617/atlas/%E4%B8%8D%E5%AD%98%E5%9C%A8-xyz",
@@ -316,29 +204,29 @@
     {
       "test": "corrupt-storage",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
-      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
+      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_384_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "corrupt-storage",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
-      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
+      "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/836_383_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "corrupt-storage",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
-      "url": "https://jsapi-data4.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
+      "url": "https://jsapi-data2.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_384_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
       "test": "corrupt-storage",
       "kind": "requestfailed",
-      "text": "net::ERR_ABORTED https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
-      "url": "https://jsapi-data5.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
+      "text": "net::ERR_ABORTED https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
+      "url": "https://jsapi-data3.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/1/835_383_10?[REDACTED]",
       "class": "navigation-abort"
     },
     {
@@ -367,6 +255,13 @@
       "kind": "requestfailed",
       "text": "net::ERR_ABORTED https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
       "url": "https://jsapi-data1.amap.com/tile/26_10_26_00/v2/poi_region_road_transit/pbf/2/3344_1537_12?[REDACTED]",
+      "class": "navigation-abort"
+    },
+    {
+      "test": "mobile-atlas",
+      "kind": "requestfailed",
+      "text": "net::ERR_ABORTED https://webapi.amap.com/maps?[REDACTED]",
+      "url": "https://webapi.amap.com/maps?[REDACTED]",
       "class": "navigation-abort"
     },
     {

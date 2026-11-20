@@ -35,6 +35,22 @@ describe("图鉴数据", () => {
   });
 });
 
+describe("图鉴来源质量", () => {
+  it("每个条目至少有一个非百科/二手的来源（政府/权威出版物），且官方来源排在前面", () => {
+    for (const it of atlas.items) {
+      const tiers = it.sources.map((s) => dataset.sources.get(s)!.tier);
+      expect(tiers.some((t) => t !== "百科/二手整理"), it.id).toBe(true);
+      const firstWiki = tiers.findIndex((t) => t === "百科/二手整理");
+      if (firstWiki >= 0) expect(tiers.slice(firstWiki).every((t) => t === "百科/二手整理"), `${it.id} 排序`).toBe(true);
+    }
+  });
+  it("不以旬论的条目不得同时声称具体月份；有月份的条目说明里不含“不给出月份”", () => {
+    for (const it of atlas.items) {
+      if (it.season.months.length > 0) expect(it.season.note).not.toMatch(/不给出月份/);
+    }
+  });
+});
+
 describe("图鉴检索与筛选", () => {
   const first = atlas.items[0];
   it("按中文名、日文名、别名检索", () => {

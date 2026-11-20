@@ -6,6 +6,7 @@ import { classifyPoi, matchedPatterns, splitPois } from "@/lib/rules";
 import { buildShops, includedCandidates } from "@/lib/shops";
 import type { Claim, Profile } from "@/lib/schema";
 import type { Poi } from "@/lib/types";
+import { priceFreshness } from "@/lib/ui/format";
 
 const poi = (id: string, name: string, o: Partial<Poi> = {}): Poi => ({ id, name, lng: 114.06, lat: 22.53, type: "餐饮服务;外国餐厅;日本料理", fetchedAt: "2026-11-20T00:00:00Z", ...o });
 const included = includedCandidates(audit);
@@ -161,6 +162,23 @@ describe("逐店评价：差异化、来源与未知字段", () => {
       expect(resolveSource(s.id).label.length).toBeGreaterThan(0);
       if (s.id.startsWith("web:")) expect(s.url).toMatch(/^https?:\/\//);
     }
+  });
+});
+
+describe("未知字段诚实 / 价格时效", () => {
+  it("没有来源的规则检查不得标 pass；一场制无来源必须是 unknown 且预约字段待核实或带来源", () => {
+    for (const c of audit.candidates) for (const k of c.checks) if (k.result === "pass") expect(k.sources.length, `${c.id}/${k.rule}`).toBeGreaterThan(0);
+    for (const c of included) {
+      const r3 = c.checks.find((k) => k.rule === "R3");
+      if (r3 && r3.sources.length === 0) expect(r3.result).toBe("unknown");
+      if (c.profile!.booking) for (const s of c.profile!.booking.sources) expect(dataset.sources.has(s)).toBe(true);
+    }
+  });
+  it("隐谷价格来源为 2021–2022 年，必须被判定为过期并给出最新来源日期", () => {
+    const c = included.find((x) => x.id === "yingu")!;
+    const f = priceFreshness(c, audit.updatedAt, resolveSource);
+    expect(f.newest).toBe("2022-04");
+    expect(f.stale).toBe(true);
   });
 });
 

@@ -18,7 +18,6 @@ const SettingsDialog = forwardRef<HTMLDialogElement, Props>(function SettingsDia
   const [confirmClear, setConfirmClear] = useState(false);
   const count = Object.keys(data.shops).length;
   const notes = dataset.notes;
-  const unmapped = notes.filter((n) => n.unmappedReason);
 
   const exportData = () => {
     const out = { ...data, exportedAt: new Date().toISOString() };
@@ -71,12 +70,6 @@ const SettingsDialog = forwardRef<HTMLDialogElement, Props>(function SettingsDia
         只收录通过 Omakase 身份与价位（每位 ¥{audit.priceFloor} 起）审核的店；证据不足的放在“待核实区”，不计入主清单。逐条规则、被排除的店与原因见
         {" "}<Link href="/audit/" onClick={onClose}>筛选依据</Link>。
       </p>
-      <h3>未能映射到门店的素材</h3>
-      <ul className="small" data-testid="unmapped">
-        {unmapped.length === 0 ? <li>无</li> : unmapped.map((n) => (
-          <li key={n.noteId}><a href={n.url} target="_blank" rel="noopener noreferrer">{n.title}</a>：{n.unmappedReason ?? "待核实"}</li>
-        ))}
-      </ul>
       <div className="row" style={{ marginTop: 12 }}>
         <button type="button" className="btn btn-primary" onClick={onClose}>关闭</button>
       </div>

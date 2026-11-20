@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { ClaimOrTbd, ClaimView, SourceChip, Tbd } from "@/components/Sources";
-import { resolveSource } from "@/lib/data";
+import { audit, resolveSource } from "@/lib/data";
 import { PROFILE_FIELDS } from "@/lib/schema";
 import type { ShopView } from "@/lib/shops";
 import type { ShopState } from "@/lib/types";
 import { trapTab } from "@/lib/ui/focus";
-import { CATEGORY_LABEL, CHECK_LABEL, XHS_NOTE, amapMarkerUrl, isXhs, nearestPortText, shopSourceIds } from "@/lib/ui/format";
+import { CATEGORY_LABEL, CHECK_LABEL, XHS_NOTE, amapMarkerUrl, isXhs, nearestPortText, priceFreshness, shopSourceIds } from "@/lib/ui/format";
 
 interface Props {
   v: ShopView;
@@ -19,6 +19,7 @@ interface Props {
 const Val = ({ s }: { s?: string | number | null }) => (s !== undefined && s !== null && String(s).trim() ? <>{s}</> : <Tbd />);
 
 export default function ShopSheet({ v, state, onPatch, onClose }: Props) {
+  const fresh = priceFreshness(v.candidate, audit.updatedAt, resolveSource);
   const ref = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const c = v.candidate;
@@ -137,6 +138,13 @@ export default function ShopSheet({ v, state, onPatch, onClose }: Props) {
           <section aria-labelledby="s-price">
             <h3 id="s-price">价位证据</h3>
             <p className="strong">{c.price.label}</p>
+            {fresh.newest && (
+              <p className={fresh.stale ? "notice price-stale" : "small muted"} role={fresh.stale ? "note" : undefined} data-testid="price-freshness">
+                {fresh.stale ? "价格时效提醒：" : "价格来源日期："}已标注日期的价格来源中最新为 {fresh.newest}
+                {fresh.stale ? `，距今约 ${fresh.months} 个月，报价和出品可能已调整，请以预约时店家报价为准` : ""}
+                {fresh.undated > 0 ? `；另有 ${fresh.undated} 个来源未标注日期` : ""}。高德人均为 {c.amapFacts?.checkedAt ?? "未核对"} 的平台口径。
+              </p>
+            )}
             {c.price.basis.length ? (
               <ul className="claims">
                 {c.price.basis.map((b, i) => (

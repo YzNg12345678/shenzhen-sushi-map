@@ -110,12 +110,17 @@ test("桌面：首页只含合格 Omakase + 真实高德 + 搜索/筛选/空状�
   await page.getByRole("button", { name: /^筛选/ }).click();
   const drawer = page.getByRole("dialog", { name: "筛选与排序" });
   await expect(drawer).toBeVisible();
+  await drawer.getByRole("button", { name: "¥300–499" }).click();
+  await drawer.getByRole("button", { name: /^查看/ }).click();
+  const mid = included.filter((c) => (c.price.perPersonMin ?? 0) >= 300 && (c.price.perPersonMin ?? 0) < 500).length;
+  await expect(cards(page)).toHaveCount(mid);
+  await expect(page.getByLabel("当前筛选条件")).toContainText("300");
+  await shot(page, "desktop-02-filter");
+  // 价位 ¥800 以上：与审计数据一致（没有则为诚实的空状态）
+  await page.getByRole("button", { name: /^筛选/ }).click();
   await drawer.getByRole("button", { name: "¥800 以上" }).click();
   await drawer.getByRole("button", { name: /^查看/ }).click();
-  const hi = included.filter((c) => (c.price.perPersonMin ?? 0) >= 800).length;
-  await expect(cards(page)).toHaveCount(hi);
-  await expect(page.getByLabel("当前筛选条件")).toContainText("800");
-  await shot(page, "desktop-02-filter");
+  await expect(cards(page)).toHaveCount(included.filter((c) => (c.price.perPersonMin ?? 0) >= 800).length);
   await page.getByLabel("当前筛选条件").getByRole("button", { name: "清除全部" }).click();
   await expect(cards(page)).toHaveCount(total);
   // 无结果
@@ -142,6 +147,7 @@ test("桌面：详情逐店评价 + 来源 + 收藏/备注 + 导出/非法导入
       await expect(f).toBeVisible();
       expect(((await f.innerText()) ?? "").trim().length).toBeGreaterThan(4);
     }
+    await expect(s.getByTestId("price-freshness")).toBeVisible();
     await expect(s.getByTestId("strengths")).toBeVisible();
     await expect(s.getByTestId("risks")).toBeVisible();
     await expect(s.getByTestId("confidence")).toContainText(/高|中|低/);

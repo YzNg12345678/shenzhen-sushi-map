@@ -1,6 +1,7 @@
 import type { ShopView } from "@/lib/shops";
 import type { ShopState } from "@/lib/types";
-import { CATEGORY_LABEL, TBD, nearestPortText } from "@/lib/ui/format";
+import { audit, resolveSource } from "@/lib/data";
+import { CATEGORY_LABEL, TBD, nearestPortText, priceFreshness } from "@/lib/ui/format";
 
 interface Props {
   v: ShopView;
@@ -18,6 +19,7 @@ export default function ShopCard({ v, index, state, selected, onOpen }: Props) {
   const style = p?.cuisine?.text ?? p?.ingredients?.text;
   const risk = p?.risks[0]?.text;
   const port = nearestPortText(v);
+  const fresh = priceFreshness(c, audit.updatedAt, resolveSource);
   return (
     <article className="shop" data-selected={selected} data-testid="shop-card" data-shop-key={v.key} aria-label={v.name}>
       <p className="shop-eyebrow">
@@ -52,6 +54,7 @@ export default function ShopCard({ v, index, state, selected, onOpen }: Props) {
       <p className="shop-foot">
         <span>资料置信度 {c.confidence?.level ?? TBD}</span>
         <span>更新 {c.updatedAt}</span>
+        {fresh.stale && <span className="stale-flag" data-testid="card-price-stale">价格来源 {fresh.newest}，可能已调整</span>}
         {port ? <span>{port}</span> : !v.poi && <span>位置{TBD}</span>}
       </p>
     </article>

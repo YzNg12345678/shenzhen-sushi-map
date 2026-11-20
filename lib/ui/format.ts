@@ -66,3 +66,29 @@ export function shopSourceIds(c: Candidate): string[] {
 
 export const isXhs = (id: string): boolean => id.startsWith("xhs:");
 export const XHS_NOTE = "小红书用户笔记，仅作一手体验参考";
+
+/** 价格来源时效：只依据来源登记的日期（xhs 为发布日、web 为 publishedAt）；无日期的来源不参与，也不猜测。 */
+export interface PriceFreshness {
+  newest: string | null;
+  months: number | null;
+  stale: boolean;
+  undated: number;
+}
+export function priceFreshness(c: Candidate, asOf: string, resolve: (id: string) => { date?: string }): PriceFreshness {
+  const dates: string[] = [];
+  let undated = 0;
+  for (const b of c.price.basis) {
+    for (const s of b.sources) {
+      if (s.startsWith("amap:")) continue; // 高德核对日是检索日，不是价格发生日
+      const d = b.asOf ?? resolve(s).date;
+      if (d && /^\d{4}-\d{2}/.test(d)) dates.push(d.slice(0, 7));
+      else undated++;
+    }
+  }
+  const newest = dates.sort().at(-1) ?? null;
+  if (!newest) return { newest, months: null, stale: false, undated };
+  const [y, m] = newest.split("-").map(Number);
+  const [ay, am] = asOf.split("-").map(Number);
+  const months = (ay - y) * 12 + (am - m);
+  return { newest, months, stale: months > 12, undated };
+}
