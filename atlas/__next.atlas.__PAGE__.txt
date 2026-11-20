@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-2:"/shenzhen-sushi-map/_next/static/chunks/1nixwvt3ef98j.js"
-3:"/shenzhen-sushi-map/_next/static/chunks/31zsjuvcvy9p7.js"
+2:"/shenzhen-sushi-map/_next/static/chunks/1_xwgxknr1r5r.js"
+3:"/shenzhen-sushi-map/_next/static/chunks/2k0x60-b99px5.js"
 4:I[18589,["$2","$3"],"StoreProvider"]
 5:I[94682,["$2","$3"],"default"]
 6:I[7705,["$2","$3"],"default"]
@@ -14,13 +14,13 @@ f:"/shenzhen-sushi-map/_next/static/chunks/10ha2eao3j0oh.js"
 16:I[66072,["$2","$3"],"$15"]
 17:"MetadataBoundary"
 18:I[66072,["$2","$3"],"$17"]
-:HL["/shenzhen-sushi-map/_next/static/chunks/2sdneptfaj8ke.css","style"]
+:HL["/shenzhen-sushi-map/_next/static/chunks/1odyay7is4l2r.css","style"]
 a:X
 d:X
 d:C
 e:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","$L10",null,{}],[["$","script","script-0",{"src":"/shenzhen-sushi-map/_next/static/chunks/10ha2eao3j0oh.js","async":true}]],["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]]}],"p":"$@14","v":null,"s":"$a"}}]]
 b:[["children",{"s":"atlas","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L6",null,{"parallelRouterKey":"children","template":["$","$L7",null,{}]}]]}],"p":"$@c","v":"$d","s":"$a"},"c":"$Qe"}]]
-0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/shenzhen-sushi-map/_next/static/chunks/2sdneptfaj8ke.css","precedence":"next"}],["$","script","script-0",{"src":"/shenzhen-sushi-map/_next/static/chunks/1nixwvt3ef98j.js","async":true}],["$","script","script-1",{"src":"/shenzhen-sushi-map/_next/static/chunks/31zsjuvcvy9p7.js","async":true}]],["$","html",null,{"lang":"zh-CN","children":["$","body",null,{"children":["$","$L4",null,{"children":["$","$L5",null,{"children":["$","$L6",null,{"parallelRouterKey":"children","template":["$","$L7",null,{}],"notFound":[["$","div",null,{"className":"page narrow","data-testid":"not-found","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"className":"page-title","children":"没有找到这个页面"}],["$","p",null,{"className":"muted","children":"图鉴条目或页面不存在，可能已被移除或地址有误。"}],["$","p",null,{"className":"row","children":[["$","$L8",null,{"className":"btn btn-primary","href":"/atlas/","children":"返回图鉴"}],["$","$L8",null,{"className":"btn","href":"/","children":"回到店铺"}]]}]]}],[]]}]}]}]}]}]]}],"p":"$@9","v":null,"s":"$a"},"c":"$Qb"},"h":{"r":["$","$1","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#f7f2e8"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$12",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"深圳 Omakase · 鱼种食材季节图鉴"}],["$","meta","1",{"name":"description","content":"仅收录经过身份与价位审核的深圳板前 Omakase（每位 ¥300 起），逐店整理风格、套餐、预约与风险，附来源；另有鱼种食材季节图鉴。"}]]}]}],null]}],null]}],"p":"$@19","v":null,"s":"$a"}},"a":"$@1a","u":"$@1b","b":"CVgjwGH0f_FbG4gcC9hPa"}
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/shenzhen-sushi-map/_next/static/chunks/1odyay7is4l2r.css","precedence":"next"}],["$","script","script-0",{"src":"/shenzhen-sushi-map/_next/static/chunks/1_xwgxknr1r5r.js","async":true}],["$","script","script-1",{"src":"/shenzhen-sushi-map/_next/static/chunks/2k0x60-b99px5.js","async":true}]],["$","html",null,{"lang":"zh-CN","children":["$","body",null,{"children":["$","$L4",null,{"children":["$","$L5",null,{"children":["$","$L6",null,{"parallelRouterKey":"children","template":["$","$L7",null,{}],"notFound":[["$","div",null,{"className":"page narrow","data-testid":"not-found","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"className":"page-title","children":"没有找到这个页面"}],["$","p",null,{"className":"muted","children":"图鉴条目或页面不存在，可能已被移除或地址有误。"}],["$","p",null,{"className":"row","children":[["$","$L8",null,{"className":"btn btn-primary","href":"/atlas/","children":"返回图鉴"}],["$","$L8",null,{"className":"btn","href":"/","children":"回到店铺"}]]}]]}],[]]}]}]}]}]}]]}],"p":"$@9","v":null,"s":"$a"},"c":"$Qb"},"h":{"r":["$","$1","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#f7f2e8"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$12",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"深圳 Omakase · 鱼种食材季节图鉴"}],["$","meta","1",{"name":"description","content":"仅收录经过身份与价位审核的深圳板前 Omakase（每位 ¥300 起），逐店整理风格、套餐、预约与风险，附来源；另有鱼种食材季节图鉴。"}]]}]}],null]}],null]}],"p":"$@19","v":null,"s":"$a"}},"a":"$@1a","u":"$@1b","b":"JJqMwqNW1ilbJvr-DlqXa"}
 13:null
 a:300
 1b:true
