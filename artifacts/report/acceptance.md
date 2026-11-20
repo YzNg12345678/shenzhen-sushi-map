@@ -36,3 +36,9 @@ source_verification_agent（店铺审计，2 轮）、bibliography_agent（图�
 
 ## 7. 限制
 见 README“已知限制”。
+
+## 8. 发布与公网验收（2026-11-21 读回）
+- 业务提交 `1ac30982bbf6364fcc8ea59a2157fa1335e2fa79` 已合入 canonical main 并推送 origin/main。
+- `GITHUB_ACTIONS=true` 静态导出的 `out/` 发布到 gh-pages：`6e0f3cb8efbddbb2191633a182a0968ae8f20129`；GitHub Pages 状态 `built`（该 commit）。
+- 公网 https://yzng12345678.github.io/shenzhen-sushi-map/ 用真实桌面（1360×900）与 390×844 浏览器验证（`scripts/public-verify.mjs`，结果 `artifacts/report/public-verify.json`，截图 `artifacts/screenshots/public-*.png`）：标题“深圳 Omakase · 精选板前清单”；主清单 2 家、价位 ¥480 / ¥400 起（均 ≥300）；真实高德地图 2 个标记；详情 8 个评价字段 + 优势/风险/置信度 + 来源链接；图鉴 60 种、搜索可用、详情含旬与供应差异说明；无横向溢出；无旧框架文案；页面错误 0。
+- 此验收记录本身随后以文档提交进入 main（不影响已发布的 gh-pages 内容）。

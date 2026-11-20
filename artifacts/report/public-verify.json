@@ -1,0 +1,84 @@
+{
+  "url": "https://yzng12345678.github.io/shenzhen-sushi-map/",
+  "checkedAt": "2026-11-20T12:17:43.199Z",
+  "runs": [
+    {
+      "name": "desktop",
+      "checks": {
+        "title": "深圳 Omakase · 精选板前清单",
+        "count": "共 2 家",
+        "pins": 2,
+        "amapCanvas": true,
+        "prices": [
+          "¥480 起",
+          "¥400 起"
+        ],
+        "allPricesAtLeast300": true,
+        "names": [
+          "穗 Sushi Minoru（海德三道大成基金总部）",
+          "隐谷 Omakase（福田财富店）"
+        ],
+        "noOldFramework": true,
+        "detailFields": {
+          "cuisine": "料理风格 / 流派 待核实",
+          "ingredients": "招牌食材与技法 该报道称它是深圳首家使用熟成柜的 omakase；具体鱼种与技法在公开来源中未列 网易号“柠檬美食”（自",
+          "chef": "主厨与出品节奏 主厨梓健，17 岁入行至今 18 年，曾在东京银座小野寺体系受训（来源原文表述），店内设一处 omaka",
+          "menu": "套餐与加点 午市四档 480/680/880/1880 元，最低档含一道前菜加 9 贯寿司；晚市 1180/1380/1",
+          "value": "价位与价值 午晚市价差约 2.5 倍；香港01把午市写成 680、晚市 1280 起，与 163 的 480 与 118",
+          "space": "座位 · 氛围 · 服务 20 席，一个大堂加一间包房，另有 omakase bar 网易号“柠檬美食”（自媒体探店推广",
+          "booking": "预约难度 通过电话与微信预约；预约难度、取消规则未见来源 网易号“柠檬美食”（自媒体探店推广） · 2024-04-23",
+          "scenes": "适合场景 待核实"
+        },
+        "hasStrengthsRisksConfidence": true,
+        "sourceLinks": 24,
+        "atlasTitle": "深圳 Omakase · 鱼种食材季节图鉴",
+        "atlasCount": "共 60 种",
+        "atlasSearch": "共 3 种\n清除筛选",
+        "atlasDetail": "真鲷",
+        "seasonNote": "来源分歧：JETRO 称天然鱼旬为春（桜鯛）与秋（紅葉鯛），且全年都有流通；长崎市旬魚表 3 月列‘",
+        "overflow": 0
+      },
+      "errors": [],
+      "errorsAll": 0
+    },
+    {
+      "name": "mobile-390x844",
+      "checks": {
+        "title": "深圳 Omakase · 精选板前清单",
+        "count": "共 2 家",
+        "pins": 2,
+        "amapCanvas": true,
+        "prices": [
+          "¥480 起",
+          "¥400 起"
+        ],
+        "allPricesAtLeast300": true,
+        "names": [
+          "穗 Sushi Minoru（海德三道大成基金总部）",
+          "隐谷 Omakase（福田财富店）"
+        ],
+        "noOldFramework": true,
+        "detailFields": {
+          "cuisine": "料理风格 / 流派 待核实",
+          "ingredients": "招牌食材与技法 该报道称它是深圳首家使用熟成柜的 omakase；具体鱼种与技法在公开来源中未列 网易号“柠檬美食”（自",
+          "chef": "主厨与出品节奏 主厨梓健，17 岁入行至今 18 年，曾在东京银座小野寺体系受训（来源原文表述），店内设一处 omaka",
+          "menu": "套餐与加点 午市四档 480/680/880/1880 元，最低档含一道前菜加 9 贯寿司；晚市 1180/1380/1",
+          "value": "价位与价值 午晚市价差约 2.5 倍；香港01把午市写成 680、晚市 1280 起，与 163 的 480 与 118",
+          "space": "座位 · 氛围 · 服务 20 席，一个大堂加一间包房，另有 omakase bar 网易号“柠檬美食”（自媒体探店推广",
+          "booking": "预约难度 通过电话与微信预约；预约难度、取消规则未见来源 网易号“柠檬美食”（自媒体探店推广） · 2024-04-23",
+          "scenes": "适合场景 待核实"
+        },
+        "hasStrengthsRisksConfidence": true,
+        "sourceLinks": 24,
+        "atlasTitle": "深圳 Omakase · 鱼种食材季节图鉴",
+        "atlasCount": "共 60 种",
+        "atlasSearch": "共 3 种\n清除筛选",
+        "atlasDetail": "真鲷",
+        "seasonNote": "来源分歧：JETRO 称天然鱼旬为春（桜鯛）与秋（紅葉鯛），且全年都有流通；长崎市旬魚表 3 月列‘",
+        "overflow": 0
+      },
+      "errors": [],
+      "errorsAll": 0
+    }
+  ]
+}
