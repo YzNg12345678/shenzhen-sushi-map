@@ -1,0 +1,27 @@
+1:"$Sreact.fragment"
+2:"/shenzhen-sushi-map/_next/static/chunks/1nixwvt3ef98j.js"
+3:"/shenzhen-sushi-map/_next/static/chunks/31zsjuvcvy9p7.js"
+4:"/shenzhen-sushi-map/_next/static/chunks/1n24sg2thvvqv.js"
+5:I[18589,["$2","$3","$4"],"StoreProvider"]
+6:I[94682,["$2","$3"],"default"]
+7:I[7705,["$2","$3"],"default"]
+8:I[58180,["$2","$3"],"default"]
+9:I[99435,["$2","$3"],""]
+d:I[18589,["$2","$3","$4"],"PoiProvider"]
+e:I[11585,["$2","$3","$4"],"default"]
+f:I[66072,["$2","$3"],"OutletBoundary"]
+10:"$Sreact.suspense"
+12:"ViewportBoundary"
+13:I[66072,["$2","$3"],"$12"]
+15:"MetadataBoundary"
+16:I[66072,["$2","$3"],"$15"]
+18:I[76751,["$2","$3"],"default",1]
+:HL["/shenzhen-sushi-map/_next/static/chunks/2sdneptfaj8ke.css","style"]
+b:X
+c:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[["$","$Ld",null,{"children":["$","$Le",null,{}]}],[["$","script","script-0",{"src":"/shenzhen-sushi-map/_next/static/chunks/1n24sg2thvvqv.js","async":true,"nonce":"$undefined"}]],["$","$Lf",null,{"children":["$","$10",null,{"name":"Next.MetadataOutlet","children":"$@11"}]}]]}],"p":false,"v":null}}]]
+a:[["children",{"s":"audit","h":512,"d":{"r":["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$b"},"c":"$Qc"}]]
+0:{"P":null,"c":["","audit",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/shenzhen-sushi-map/_next/static/chunks/2sdneptfaj8ke.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/shenzhen-sushi-map/_next/static/chunks/1nixwvt3ef98j.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/shenzhen-sushi-map/_next/static/chunks/31zsjuvcvy9p7.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","children":["$","body",null,{"children":["$","$L5",null,{"children":["$","$L6",null,{"children":["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","div",null,{"className":"page narrow","data-testid":"not-found","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"className":"page-title","children":"没有找到这个页面"}],["$","p",null,{"className":"muted","children":"图鉴条目或页面不存在，可能已被移除或地址有误。"}],["$","p",null,{"className":"row","children":[["$","$L9",null,{"className":"btn btn-primary","href":"/atlas/","children":"返回图鉴"}],["$","$L9",null,{"className":"btn","href":"/","children":"回到店铺"}]]}]]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]}]}]]}],"p":false,"v":null},"c":"$Qa"},"h":{"r":["$","$1","h",{"children":[null,["$","$L13",null,{"children":"$L14"}],["$","$L16",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$10",null,{"name":"Next.Metadata","children":"$L17"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$18",[["$","link","0",{"rel":"stylesheet","href":"/shenzhen-sushi-map/_next/static/chunks/2sdneptfaj8ke.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"CVgjwGH0f_FbG4gcC9hPa"}
+b:C
+14:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#f7f2e8"}]]
+11:null
+17:[["$","title","0",{"children":"深圳 Omakase · 筛选依据"}],["$","meta","1",{"name":"description","content":"仅收录经过身份与价位审核的深圳板前 Omakase（每位 ¥300 起），逐店整理风格、套餐、预约与风险，附来源；另有鱼种食材季节图鉴。"}]]
